@@ -23,10 +23,27 @@
         <div class="icons-basket">
           <img src="./assets/icons/корзина.png" alt="корзина" title="корзина">
         </div>
-        <div class="icons-user">
+        <div class="icons-user" *ngIf="isLogged">
           <img src="./assets/icons/пользователь.png" alt="пользователь" title="пользователь">
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="header-authentication">
+    <div class="cent">
+      <h3 *ngIf="authenticationService.userData | async" style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?.email }}</h3>
+
+      <div *ngIf="!(authenticationService.userData | async)">
+        <input type="text" [(ngModel)]="email" placeholder="email">
+        <input type="password" [(ngModel)]="password" placeholder="password">
+
+        <button (click)="signUp()" class="button-signUp">Зарегистрироваться</button>
+
+        <button (click)="signIn()" class="button-signIn">Войти</button>
+      </div>
+
+      <button (click)="signOut()" *ngIf="authenticationService.userData | async" class="button-signOut">Выйти</button>
     </div>
   </div>
 

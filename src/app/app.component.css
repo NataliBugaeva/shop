@@ -42,11 +42,25 @@
 
 .icons {
   display: flex;
-  justify-content: space-between;
-  width: 300px; }
+  justify-content: flex-end; }
   .icons-search, .icons-basket, .icons-compare, .icons-user {
     width: 50px;
     height: 50px; }
+
+.header-authentication {
+  width: 100%; }
+  .header-authentication h3 {
+    padding: 9px; }
+
+.button-signOut,
+.button-signIn,
+.button-signUp {
+  margin-left: 5px;
+  padding: 5px;
+  border: none;
+  background-color: #5f0877;
+  border-radius: 10px;
+  color: white; }
 
 .header-navigation {
   display: flex;

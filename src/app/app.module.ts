@@ -16,6 +16,9 @@ import {ChairModule} from './chair/chair.module';
 import {TableModule} from './tables/tablemodule';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {FormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeModule,
     SofaModule,
     ChairModule,
-    TableModule
+    TableModule,
+    AngularFireAuthModule,
+    FormsModule
   ],
   exports: [
   ],

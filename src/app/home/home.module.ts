@@ -3,18 +3,21 @@ import { CommonModule } from '@angular/common';
 import {HomeComponent} from './home.component';
 import {AppRoutingModule} from '../app-routing.module';
 
-
 @NgModule({
   declarations: [
     HomeComponent
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule/*,
+    AngularFireAuthModule,
+    FormsModule*/
   ],
   exports: [
     HomeComponent
   ],
-  providers: []
+  providers: [
+  /*  AuthenticationService*/
+  ]
 })
 export class HomeModule { }

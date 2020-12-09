@@ -1,7 +1,5 @@
 import { Component, OnInit , Input} from '@angular/core';
 
-import {CommonService} from '../shared/common.service';
-
 
 @Component({
   selector: 'app-home',
@@ -10,13 +8,8 @@ import {CommonService} from '../shared/common.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public service: CommonService ) {
+  constructor() {}
 
-  }
-
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 
 }
