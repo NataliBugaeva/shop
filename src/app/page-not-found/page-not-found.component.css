@@ -1,0 +1,12 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .page-not-found-cent {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; }
+  .page-not-found img {
+    display: block;
+    width: 100%; }

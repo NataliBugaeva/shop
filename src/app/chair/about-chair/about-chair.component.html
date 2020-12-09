@@ -1,0 +1,74 @@
+<ng-container *ngIf="chosenChair">
+
+  <div class="about-chair">
+    <div class="cent">
+
+      <div class="about-chair-links">
+        <span routerLink="../../">На главную</span>
+        <span> >> </span>
+        <span routerLink="../">Кресла</span>
+        <span> >> </span>
+        <span style="color: black">Кресло {{chosenChair.info.name}}</span>
+      </div>
+
+
+      <div class="about-chair-main-content">
+        <div class="about-chair-main-content-img">
+          <img [src]=chosenChair.info.imgLarge alt="" [title]=chosenChair.info.name>
+        </div>
+
+        <div class="about-chair-main-content-info">
+          <span>{{chosenChair.info.name}}</span>
+          <span>{{chosenChair.info.type}} кресло</span>
+          <span>{{chosenChair.info.price}} руб.</span>
+          <div class="about-chair-main-content-info-buttons">
+            <div class="button-switch">
+              <div class="minus" (click)="decreaseAmount()"> - </div>
+              <div>{{amount}}</div>
+              <div class="plus" (click)="enlargeAmount()"> + </div>
+            </div>
+            <button class="button-basket">Добавить в корзину</button>
+            <button class="button-compare" (click)="this.comparison = !this.comparison" *ngIf="!comparison">Добавить в сравнение</button>
+            <button class="button-compare" (click)="this.comparison = !this.comparison" *ngIf="comparison">Убрать из сравнения</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="about-chair-characteristics">
+        <div class="about-chair-characteristics-buttons">
+          <div class="button-characteristics" (click)="changeSwitch()" [ngClass]="{active: this.switch}">Характеристики</div>
+          <div class="button-comments" (click)="changeSwitch()" [ngClass]="{active: !this.switch}">Отзывы</div>
+        </div>
+
+        <div class="about-chair-characteristics-info" *ngIf="this.switch">
+          <div class="about-chair-characteristics-info-points">
+            <div>Тип:</div>
+            <div>Ширина:</div>
+            <div>Высота:</div>
+            <div>Глубина:</div>
+            <div>Материал обивки:</div>
+            <div>Механизм:</div>
+            <div>Длина спальног места:</div>
+            <div>Ширина спального места:</div>
+          </div>
+          <div class="about-chair-characteristics-info-values">
+            <div>{{chosenChair.info.type}}</div>
+            <div>{{chosenChair.info.width}} см</div>
+            <div>{{chosenChair.info.height}} см</div>
+            <div>{{chosenChair.info.depth}} см</div>
+            <div>{{chosenChair.info.material}}</div>
+            <div>{{chosenChair.info.mechanism}}</div>
+            <div>{{chosenChair.info.bedLength}} см</div>
+            <div>{{chosenChair.info.bedWidth}} см</div>
+          </div>
+        </div>
+
+        <div class="about-chair-characteristics-comments" *ngIf="!this.switch">
+          Отзывов на данное кресло пока нет
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

@@ -1,0 +1,52 @@
+@charset "UTF-8";
+.main {
+  display: flex;
+  flex-direction: column; }
+  .main-cent {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; }
+  .main-image {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    background-color: blanchedalmond;
+    height: 450px;
+    background-image: url("../../assets/home/диван.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; }
+  .main-caption {
+    width: 100%;
+    padding: 30px 0;
+    background-color: #e2dce2;
+    margin: 10px 0; }
+    .main-caption h2 {
+      color: #595359;
+      font-size: 30px; }
+  .main-categories {
+    width: 100%;
+    margin: 30px 0; }
+    .main-categories h3 {
+      color: #595359;
+      font-size: 20px;
+      padding: 5px 0 0 5px; }
+    .main-categories-sofa, .main-categories-chair, .main-categories-table {
+      width: 30%;
+      height: 300px;
+      background-position: bottom;
+      background-size: cover;
+      background-repeat: no-repeat; }
+      .main-categories-sofa:hover, .main-categories-chair:hover, .main-categories-table:hover {
+        transform: scale(1.01);
+        cursor: pointer; }
+    .main-categories-sofa {
+      background-image: url("../../assets/home/категория_диван.png"); }
+    .main-categories-chair {
+      background-image: url("../../assets/home/категория_кресло.jpg"); }
+    .main-categories-table {
+      background-image: url("../../assets/home/категория_стол.jpg"); }
+
+.js-content {
+  justify-content: space-between; }
