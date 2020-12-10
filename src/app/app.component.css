@@ -81,6 +81,9 @@
   transform: scale(0);
   /* display: none;*/ }
 
+[disabled] {
+  opacity: .5; }
+
 .active {
   outline: none; }
 

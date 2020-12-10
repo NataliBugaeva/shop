@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonService} from '../shared/common.service';
-import {Pagination, PaginationService} from '../pagination/pagination.service';
+import {Pagination, PaginationService} from '../shared/pagination.service';
 import {ActivatedRoute} from '@angular/router';
 import {Chair} from '../../model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-chair',
   templateUrl: './chair.component.html',
   styleUrls: ['./chair.component.css']
 })
-export class ChairComponent implements OnInit {
+export class ChairComponent implements OnInit, OnDestroy {
 
   public chairs: Chair[];
+
+  public subscriptions: Subscription[] = [];
 
   // это объект, который нам возвращает метод getPager из paginationService
   public pager: Pagination;
   // массив товаров с текущей страницы
-  public pagedItems: number[];
+  public pagedItems: Chair[];
 
   constructor(private service: CommonService, private activatedRoute: ActivatedRoute,
               private paginationService: PaginationService) { }
@@ -31,11 +34,18 @@ export class ChairComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.service.getAllChairs().subscribe( (result: Chair[]) => {
-      this.chairs = result;
-      this.setPage(1);
-    });
+   this.subscriptions.push(
+     this.service.getAllChairs().subscribe( (result: Chair[]) => {
+     this.chairs = result;
+     this.setPage(1);
+   })
+   );
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach( (subscription) => {
+      subscription.unsubscribe();
+    });
   }
 
 }

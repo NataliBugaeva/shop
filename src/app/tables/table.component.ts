@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonService} from '../shared/common.service';
 
-import {Pagination, PaginationService} from '../pagination/pagination.service';
+import {Pagination, PaginationService} from '../shared/pagination.service';
 import {ActivatedRoute} from '@angular/router';
 import {Table} from '../../model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
 
   public tables: Table[];
+  public subscriptions: Subscription[] = [];
 
   // это объект, который нам возвращает метод getPager из paginationService
   public pager: Pagination;
@@ -31,12 +33,18 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.service.getAllTables().subscribe( (result: Table[]) => {
+        this.tables = result;
+        this.setPage(1);
+      })
+    );
+  }
 
-    this.service.getAllTables().subscribe( (result: Table[]) => {
-      this.tables = result;
-      this.setPage(1);
+  ngOnDestroy(): void {
+    this.subscriptions.forEach( subscription => {
+      subscription.unsubscribe();
     });
-
   }
 
 }

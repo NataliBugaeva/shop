@@ -5,9 +5,6 @@ import {ItemComponent} from '../item/item.component';
 import {RouterModule} from '@angular/router';
 import { AboutSofaComponent } from './about-sofa/about-sofa.component';
 
-
-
-
 @NgModule({
   declarations: [
     SofaComponent,

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 
-
 export class Pagination {
   public totalItems: number;
   public currentPage: number;
@@ -26,7 +25,6 @@ export class Pagination {
     this.pages = pages;
   }
 }
-
 
 @Injectable({
   providedIn: 'root'

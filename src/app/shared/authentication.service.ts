@@ -7,47 +7,54 @@ import {Observable} from 'rxjs';
 })
 export class AuthenticationService {
 
-  /*public isLogedIn = false;*/
   public userData: any;
+  public err: string;
+  public isLogged: boolean;
 
   constructor(private angularFireAuth: AngularFireAuth) {
     this.userData = angularFireAuth.authState;
+    this.err = '';
   }
 
-  /* Sign up */
+  // метод "Зарегистрироваться"
   SignUp = (email: string, password: string) => {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-        /*this.isLogedIn = true;
-        localStorage.setItem('user', JSON.stringify(res.user));*/
+        /*localStorage.setItem('user', JSON.stringify(res.user));*/
+        this.isLogged = true;
+        this.err = '';
         console.log('Successfully signed up!', res);
       })
       .catch(error => {
         console.log('Something is wrong:', error.message);
+        this.err = error.message;
       });
   }
 
-  /* Sign in */
+  // Метод "Войти"
   SignIn = (email: string, password: string) => {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then(res  => {
-        /*this.isLogedIn = true;
-        localStorage.setItem('user', JSON.stringify(res.user));*/
+       /* localStorage.setItem('user', JSON.stringify(res.user));*/
+        this.isLogged = true;
+        this.err = '';
         console.log(res.user?.uid);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
+        this.err = err.message;
       });
   }
 
-  /* Sign out */
+  // Метод "Выйти"
   SignOut = () => {
     this.angularFireAuth
       .signOut()
       .then( res => {
         /*localStorage.removeItem('user');*/
+        this.isLogged = false;
         console.log('You have signed out!');
       });
   }

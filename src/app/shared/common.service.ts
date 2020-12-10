@@ -1,21 +1,12 @@
 import { Injectable } from '@angular/core';
-
 import { FormControl, FormGroup } from '@angular/forms';
-
 import { AngularFirestore } from '@angular/fire/firestore';
-
 import {AngularFireDatabase} from '@angular/fire/database';
-
 import {Inject} from '@angular/core';
-
 import {FirebaseApp} from '@angular/fire';
-
 import {take, filter, map} from 'rxjs/operators';
-
 import {Observable, Subscription} from 'rxjs';
-
 import {Chair, Sofa, Table} from '../../model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +14,7 @@ import {Chair, Sofa, Table} from '../../model';
 export class CommonService {
   form: any;
   allSofas: any;
+
 /*
   form = new FormGroup({
     name: new FormControl(''),

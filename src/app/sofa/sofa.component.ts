@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {CommonService} from '../shared/common.service';
 
@@ -7,9 +7,10 @@ import {Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 
-import {PaginationService} from '../pagination/pagination.service';
-import {Pagination} from '../pagination/pagination.service';
+import {PaginationService} from '../shared/pagination.service';
+import {Pagination} from '../shared/pagination.service';
 import {Sofa} from '../../model';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -18,27 +19,24 @@ import {Sofa} from '../../model';
   styleUrls: ['./sofa.component.css']
 })
 
-export class SofaComponent implements OnInit {
+export class SofaComponent implements OnInit, OnDestroy {
 
   @Input() name: string;
 
   public sofas: Sofa[];
+  public subscriptions: Subscription[] = [];
 
 
   // это объект, который нам возвращает метод getPager из paginationService
  public pager: Pagination;
   // массив товаров с текущей страницы
- public pagedItems: number[];
+ public pagedItems: Sofa[];
 
 
   constructor(public service: CommonService, private activatedRoute: ActivatedRoute,
-              private paginationService: PaginationService) {
+              private paginationService: PaginationService) {}
 
-  }
-
-  onSubmit(): void {
-
-  }
+  onSubmit(): void {}
 
   setPage = (page: number) => {
     // get pager object from service
@@ -49,15 +47,17 @@ export class SofaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.service.getAllSofas().subscribe( (result: Sofa[]) => {
+    this.subscriptions.push(
+      this.service.getAllSofas().subscribe( (result: Sofa[]) => {
       this.sofas = result;
       this.setPage(1);
-    });
-
+    }));
   }
 
-
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach( subscription => {
+      subscription.unsubscribe();
+    });
+  }
 
 }

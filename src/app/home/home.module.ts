@@ -9,15 +9,11 @@ import {AppRoutingModule} from '../app-routing.module';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule/*,
-    AngularFireAuthModule,
-    FormsModule*/
+    AppRoutingModule
   ],
   exports: [
     HomeComponent
   ],
-  providers: [
-  /*  AuthenticationService*/
-  ]
+  providers: []
 })
 export class HomeModule { }

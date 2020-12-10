@@ -1,41 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonService} from '../../shared/common.service';
-
 import {ActivatedRoute} from '@angular/router';
-
 import {Sofa} from '../../../model';
-
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-about-sofa',
   templateUrl: './about-sofa.component.html',
   styleUrls: ['./about-sofa.component.css']
 })
-export class AboutSofaComponent implements OnInit {
 
-  public sofaId: string;
+export class AboutSofaComponent implements OnInit, OnDestroy {
+
+  /*public sofaId: string;*/
   public chosenSofa: Sofa;
   public amount: number = 1;
   public comparison: boolean = false;
   public switch: boolean = true;
+  public subscriptions: Subscription[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private service: CommonService) {
 
   }
 
   // увеличиваем количество товара
-  enlargeAmount = () => {
+  enlargeAmount = (): void => {
     this.amount = this.amount + 1;
   }
 
   // уменьшаем количество товара
-  decreaseAmount = () => {
+  decreaseAmount = (): void => {
     this.amount === 1 ? this.amount = 1 : this.amount = this.amount - 1;
   }
 
   // переключаемся с отзывов на характеристики
-  changeSwitch = () => {
+  changeSwitch = (): void => {
     this.switch = !this.switch;
   }
 
@@ -43,10 +42,17 @@ export class AboutSofaComponent implements OnInit {
     // выцепили id из урла
     const sofaId: string = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.service.getSofaId(sofaId).subscribe( (result: Sofa) => {
-      this.chosenSofa = result;
-    });
-
-
+    this.subscriptions.push(
+      this.service.getSofaId(sofaId).subscribe( (result: Sofa) => {
+        this.chosenSofa = result;
+      })
+    );
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach( subscription => {
+      subscription.unsubscribe();
+    });
+  }
+
 }

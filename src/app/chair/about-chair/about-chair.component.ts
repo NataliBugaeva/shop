@@ -1,35 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Chair} from '../../../model';
 import {ActivatedRoute} from '@angular/router';
 import {CommonService} from '../../shared/common.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-about-chair',
   templateUrl: './about-chair.component.html',
   styleUrls: ['./about-chair.component.css']
 })
-export class AboutChairComponent implements OnInit {
+export class AboutChairComponent implements OnInit, OnDestroy {
 
   public chairId: string;
   public chosenChair: Chair;
   public amount: number = 1;
   public comparison: boolean = false;
   public switch: boolean = true;
+  public subscriptions: Subscription[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private service: CommonService) { }
 
   // увеличиваем количество товара
-  enlargeAmount = () => {
+  enlargeAmount = (): void => {
     this.amount = this.amount + 1;
   }
 
   // уменьшаем количество товара
-  decreaseAmount = () => {
+  decreaseAmount = (): void => {
     this.amount === 1 ? this.amount = 1 : this.amount = this.amount - 1;
   }
 
   // переключаемся с отзывов на характеристики
-  changeSwitch = () => {
+  changeSwitch = (): void => {
     this.switch = !this.switch;
   }
 
@@ -38,8 +40,16 @@ export class AboutChairComponent implements OnInit {
     // выцепили id из урла
     const chairId: string = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.service.getChairId(chairId).subscribe( (result: Chair) => {
-      this.chosenChair = result;
+    this.subscriptions.push(
+      this.service.getChairId(chairId).subscribe( (result: Chair) => {
+        this.chosenChair = result;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach( (subscription) => {
+      subscription.unsubscribe();
     });
   }
 

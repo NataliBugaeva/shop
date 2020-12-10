@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import {CommonService} from './shared/common.service';
 import {AuthenticationService} from './shared/authentication.service';
 
@@ -12,7 +11,6 @@ export class AppComponent {
 
   public email: string;
   public password: string;
-  public isLogged: boolean;
 
   public switch = true;
 
@@ -28,19 +26,16 @@ export class AppComponent {
     this.authenticationService.SignUp(this.email, this.password);
     this.email = '';
     this.password = '';
-    this.isLogged = true;
   }
 
   signIn = () => {
     this.authenticationService.SignIn(this.email, this.password);
-    (this.email && this.password) ? this.isLogged = true : this.isLogged = false;
     this.email = '';
     this.password = '';
   }
 
   signOut = () => {
     this.authenticationService.SignOut();
-    this.isLogged = false;
   }
 
 }

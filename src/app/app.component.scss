@@ -92,8 +92,6 @@
   color: white;
 }
 
-
-
 .header-navigation {
   display: flex;
   justify-content: center;
@@ -119,6 +117,10 @@
 [hidden] {
   transform: scale(0);
  /* display: none;*/
+}
+
+[disabled] {
+  opacity: .5;
 }
 
 .active {
