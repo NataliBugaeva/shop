@@ -15,24 +15,9 @@ export class CommonService {
   form: any;
   allSofas: any;
 
-/*
-  form = new FormGroup({
-    name: new FormControl(''),
-    color: new FormControl(''),
-    seat: new FormControl('')
-  });*/
-
   constructor(public fireStore: AngularFirestore,
               public fireDb: AngularFireDatabase, @Inject(FirebaseApp) public firebaseApp: any
-              ) {
-
-    this.form = new FormGroup({
-      name: new FormControl(''),
-      color: new FormControl(''),
-      seat: new FormControl('')
-    });
-
-  }
+              ) {}
 
   manySofas: {}[] = [
     {type: 'угловой', name: 'Мэдиссон', length: 250, imgLarge: 'https://firebasestorage.googleapis.com/v0/b/test-a829f.appspot.com/o/sofas%2F%D0%9C%D1%8D%D0%B4%D0%B8%D1%81%D1%81%D0%BE%D0%BD.jpeg?alt=media&token=1a2ed397-4cce-435b-aa02-db0af85dbfec', comments: [], mechanism: 'еврокнижка', bedLength: 200, bedWidth: 160, material: 'ткань', price: 1500, imgSmall: 'https://firebasestorage.googleapis.com/v0/b/test-a829f.appspot.com/o/sofas%2F%D0%9C%D1%8D%D0%B4%D0%B8%D1%81%D1%81%D0%BE%D0%BD_small.jpeg?alt=media&token=121a8ef0-82c7-4526-8092-3b4ecef48a33'},
@@ -105,28 +90,13 @@ export class CommonService {
     this.manyTables.forEach( (item) => {this.fireStore.collection('tables').add(item); });
   }
 
-  // один диван
+  // получаем диваны по заданному свойству
   getSof = () => {
-    const arr: {}[] = [];
-    const ss = this.fireStore.collection('sofas', ref => ref.where('name', '==', 'Атлантика'));
-    ss.get().subscribe( (querySnapshot) => {
-      querySnapshot.forEach( (doc) => {
-        arr.push({id: doc.id, sof: doc.data()});
-         });
-    });
-    return arr[0];
-  }
-
-
-  getS = () => {
-    const arr: unknown[] = [];
     this.fireStore.collection('sofas', ref => ref.where('name', '==', 'Атлантика'))
-      .get().subscribe( (q) => {
-        q.forEach((doc) => {
-          arr.push({id: doc.id, sof: doc.data()}); });
-      });
-    return arr;
+      .snapshotChanges()
+      .pipe(map( res => res.map( doc => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
   }
+
 
   // Добавить один диван с автоматической генерацией id
   addNewSofa = () => {
@@ -175,6 +145,19 @@ export class CommonService {
   getTableId = (id: string): Observable<Table> => {
     // @ts-ignore
     return this.fireStore.collection('tables').doc(id).snapshotChanges()
+      .pipe(map( (res) => ({id: res.payload.id, info: res.payload.data()})));
+  }
+
+  // получаем все продукты
+  getAllProducts = (path: string): Observable<{ id: string; info: unknown }[]> => {
+    return  this.fireStore.collection(path).snapshotChanges()
+      .pipe(map( (res) => res.map( (doc) => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
+  }
+
+  // получить продукт по Id
+  getProductId = (path: string, id: string): Observable<{id: string, info: {}}> => {
+    // @ts-ignore
+    return this.fireStore.collection(path).doc(id).snapshotChanges()
       .pipe(map( (res) => ({id: res.payload.id, info: res.payload.data()})));
   }
 

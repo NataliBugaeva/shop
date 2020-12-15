@@ -18,8 +18,9 @@
       cursor: pointer; }
 
 .home-link {
-  width: 50px;
-  height: 50px;
+  align-items: center;
+  width: 30px;
+  height: 30px;
   font-size: 20px; }
 
 .phones {
@@ -42,10 +43,12 @@
 
 .icons {
   display: flex;
-  justify-content: flex-end; }
+  justify-content: flex-end;
+  align-items: center; }
   .icons-search, .icons-basket, .icons-compare, .icons-user {
-    width: 50px;
-    height: 50px; }
+    width: 30px;
+    height: 30px;
+    margin: 0 3px; }
 
 .header-authentication {
   width: 100%; }
@@ -58,7 +61,7 @@
   margin-left: 5px;
   padding: 5px;
   border: none;
-  background-color: #5f0877;
+  background-color: #15004a;
   border-radius: 10px;
   color: white; }
 

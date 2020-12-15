@@ -19,6 +19,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
 
+import {AllProductsModule} from './all-products/all-products.module';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {FormsModule} from '@angular/forms';
     ChairModule,
     TableModule,
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    AllProductsModule
   ],
   exports: [
   ],
