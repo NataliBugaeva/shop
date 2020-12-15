@@ -1,0 +1,65 @@
+ <div [id]="item.id" class="product">
+    <div class="product-img">
+      <img [src]="item.info.imgSmall" alt=''>
+    </div>
+    <span>{{item.info.name}}</span>
+    <span>{{item.info.type}}</span>
+    <span>цена: {{item.info.price}} руб.</span>
+
+    <div class="product-cover">
+      <button *ngIf="path === 'sofas'" [routerLink]="['/sofas', item.id]">Подробнее</button>
+      <button *ngIf="path === 'chairs'" [routerLink]="['/chairs', item.id]">Подробнее</button>
+      <button *ngIf="path === 'tables'" [routerLink]="['/tables', item.id]">Подробнее</button>
+    </div>
+  </div>
+
+<!--<ng-container *ngIf="pagedSofas">
+  <div [id]="itemSofa.id" class="product">
+    <div class="product-img">
+      <img [src]="itemSofa.info.imgSmall" alt=''>
+    </div>
+    <span>{{itemSofa.info.name}}</span>
+    <span>{{itemSofa.info.type}} диван</span>
+    <span>цена: {{itemSofa.info.price}} руб.</span>
+
+    <div class="product-cover">
+      <button [routerLink]="['/sofas', itemSofa.id]">Подробнее</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="pagedChairs">
+  <div [id]="itemChair.id" class="product">
+    <div class="product-img">
+      <img [src]="itemChair.info.imgSmall" alt=''>
+    </div>
+    <span>{{itemChair.info.name}}</span>
+    <span>{{itemChair.info.type}}</span>
+    <span>цена: {{itemChair.info.price}} руб.</span>
+
+    <div class="product-cover">
+      <button [routerLink]="['/chairs', itemChair.id]">Подробнее</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="pagedTables">
+  <div [id]="itemTable.id" class="product">
+    <div class="product-img">
+      <img [src]="itemTable.info.imgSmall" alt=''>
+    </div>
+    <span>{{itemTable.info.name}}</span>
+    <span>{{itemTable.info.type}}</span>
+    <span>цена: {{itemTable.info.price}} руб.</span>
+
+    <div class="product-cover">
+      <button [routerLink]="['/tables', itemTable.id]">Подробнее</button>
+    </div>
+  </div>
+</ng-container>-->
+
+
+
+
+
+

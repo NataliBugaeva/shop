@@ -13,14 +13,18 @@
 
   &-image {
     display: flex;
-    align-items: flex-end;
+   /* align-items: flex-start;*/
     width: 100%;
     background-color: blanchedalmond;
     height: 450px;
-    background-image: url("../../assets/home/диван.jpg");
+    background-image: url("../../assets/home/главная.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
+    h1 {
+      margin: 10px 60px 0 auto;
+    }
   }
 
     &-caption {
