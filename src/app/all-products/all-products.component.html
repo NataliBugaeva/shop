@@ -4,21 +4,21 @@
       <div class="type">Тип:</div>
       <div class="point-type">
         <label for="straight">прямой:</label>
-        <input type="checkbox" id="straight" name="type" [(ngModel)]="straight">
+        <input type="checkbox" id="straight" name="type" [(ngModel)]="straight" value="прямой">
       </div>
       <div class="point-type">
         <label for="corner">угловой:</label>
-        <input type="checkbox" id="corner" name="type" [(ngModel)]="corner">
+        <input type="checkbox" id="corner" name="type" [(ngModel)]="corner" value="угловой">
       </div>
 
       <div class="mechanism">Механизм:</div>
       <div class="point-mechanism">
         <label for="eurobook">еврокнижка:</label>
-        <input type="checkbox" id="eurobook" name="mechanism" [(ngModel)]="euroBook">
+        <input type="checkbox" id="eurobook" name="mechanism" [(ngModel)]="euroBook" value="еврокнижка">
       </div>
       <div class="point-mechanism">
         <label for="rollOut">выкатной:</label>
-        <input type="checkbox" id="rollOut" name="mechanism" [(ngModel)]="rollOut">
+        <input type="checkbox" id="rollOut" name="mechanism" [(ngModel)]="rollOut" value="выкатной">
       </div>
 
       <div class="length">Длина, см:</div>
@@ -47,7 +47,7 @@
 
     </form>
 
-    <button (click)="check()">Показать</button>
+    <button>Показать</button>
   </div>
 
 
@@ -55,50 +55,25 @@
   <div class="block-with-pagination">
 
     <div class="all-products" *ngIf="products">
-      <app-product *ngFor="let item of pagedItems" [item]="item" [path]="path"></app-product>
+      <app-product *ngFor="let item of pagedItems" [item]="item"></app-product>
     </div>
-
-   <!-- <div class="all-products" *ngIf="sofas">
-      <app-product *ngFor="let item of pagedSofas" [itemSofa]="item" [pagedSofas]=pagedSofas></app-product>
-    </div>
-    <div class="all-products" *ngIf="chairs">
-      <app-product *ngFor="let item of pagedChairs" [itemChair]="item" [pagedChairs]=pagedChairs></app-product>
-    </div>
-    <div class="all-products" *ngIf="tables">
-      <app-product *ngFor="let item of pagedTables" [itemTable]="item" [pagedTables]="pagedTables"></app-product>
-    </div>-->
 
     <div class="pagination">
-      <ul *ngIf="pager.pages && pager.pages.length">
+      <ul *ngIf="pager.pages && pager.pages.length ">
         <li [ngClass]="{disabled:pager.currentPage === 1}">
           <a (click)="setPage(1, products)">First</a>
-          <!--<a *ngIf="sofas" (click)="setPage(1, sofas)">First</a>
-          <a *ngIf="chairs" (click)="setPage(1, chairs)">First</a>
-          <a *ngIf="tables" (click)="setPage(1, tables)">First</a>-->
         </li>
         <li [ngClass]="{disabled:pager.currentPage === 1}">
           <a (click)="setPage(pager.currentPage - 1, products)">Previous</a>
-          <!--<a *ngIf="sofas" (click)="setPage(pager.currentPage - 1, sofas)">Previous</a>
-          <a *ngIf="chairs" (click)="setPage(pager.currentPage - 1, chairs)">Previous</a>
-          <a *ngIf="tables" (click)="setPage(pager.currentPage - 1, tables)">Previous</a>-->
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
           <a (click)="setPage(page, products)">{{page}}</a>
-          <!--<a *ngIf="sofas" (click)="setPage(page, sofas)">{{page}}</a>
-          <a *ngIf="chairs" (click)="setPage(page, chairs)">{{page}}</a>
-          <a *ngIf="tables" (click)="setPage(page, tables)">{{page}}</a>-->
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
           <a (click)="setPage(pager.currentPage + 1, products)">Next</a>
-          <!--<a *ngIf="sofas" (click)="setPage(pager.currentPage + 1, sofas)">Next</a>
-          <a *ngIf="chairs" (click)="setPage(pager.currentPage + 1, chairs)">Next</a>
-          <a *ngIf="tables" (click)="setPage(pager.currentPage + 1, tables)">Next</a>-->
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
           <a (click)="setPage(pager.totalPages, products)">Last</a>
-         <!-- <a *ngIf="sofas" (click)="setPage(pager.totalPages, sofas)">Last</a>
-          <a *ngIf="chairs" (click)="setPage(pager.totalPages, chairs)">Last</a>
-          <a *ngIf="tables" (click)="setPage(pager.totalPages, tables)">Last</a>-->
         </li>
       </ul>
     </div>

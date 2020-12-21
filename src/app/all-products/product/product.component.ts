@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-import {Sofa, Table, Chair} from '../../../model';
-
+import {Product} from '../../../model';
 
 @Component({
   selector: 'app-product',
@@ -9,21 +7,21 @@ import {Sofa, Table, Chair} from '../../../model';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  @Input() item: Product;
 
-  @Input() item: any[];
-  @Input() path: string;
-
-  /*@Input() itemSofa: Sofa[];
-  @Input() itemTable: Table[];
-  @Input() itemChair: Chair[];
-
-  @Input() pagedSofas: Sofa[];
-  @Input() pagedChairs: Chair[];
-  @Input() pagedTables: Table[];*/
+  public productSmallImg: string;
+  public productName: string;
+  public productType: string;
+  public productPrice: number;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.productSmallImg = this.item.info.images.find(item => item.name === 'imgSmall').value;
+    this.productName = this.item.info.info.find(item => item.name === 'Наименование').value;
+    this.productType = this.item.info.info.find(item => item.name === 'Тип').value;
+    this.productPrice = this.item.info.info.find(item => item.name === 'Цена').value;
   }
+
 
 }

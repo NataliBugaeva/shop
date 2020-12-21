@@ -1,0 +1,22 @@
+.basket {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+
+  &-products {
+    width: 60%;
+    border: 1px solid green;
+    padding: 5px;
+
+  }
+
+  &-info {
+    width: 40%;
+    border: 1px solid green;
+    padding: 5px;
+
+  }
+}

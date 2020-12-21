@@ -1,0 +1,18 @@
+.basket-item {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid blue;
+  padding: 5px; }
+  .basket-item-info-name {
+    margin-bottom: 5px; }
+  .basket-item-info-img {
+    display: flex;
+    align-items: flex-end;
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+    border: 1px solid red; }
+    .basket-item-info-img img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%; }

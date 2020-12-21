@@ -20,7 +20,7 @@
         <div class="icons-compare">
           <img src="./assets/icons/сравнить.png" alt="страница сравнения" title="страница сравнения">
         </div>
-        <div class="icons-basket">
+        <div class="icons-basket" routerLink="basket" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">
           <img src="./assets/icons/корзина.png" alt="корзина" title="корзина">
         </div>
         <div class="icons-user" *ngIf="authenticationService.isLogged  && !authenticationService.err">
@@ -32,7 +32,7 @@
 
   <div class="header-authentication">
     <div class="cent">
-      <h3 *ngIf="authenticationService.userData | async" style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?.email }}</h3>
+      <h3 *ngIf="authenticationService.userData | async" style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>
 
       <div *ngIf="!(authenticationService.userData | async)">
         <input type="text" [(ngModel)]="email" placeholder="email">

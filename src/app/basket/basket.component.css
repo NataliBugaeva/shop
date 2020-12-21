@@ -1,0 +1,15 @@
+.basket {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red; }
+  .basket-products {
+    width: 60%;
+    border: 1px solid green;
+    padding: 5px; }
+  .basket-info {
+    width: 40%;
+    border: 1px solid green;
+    padding: 5px; }

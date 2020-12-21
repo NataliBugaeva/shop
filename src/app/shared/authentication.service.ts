@@ -10,6 +10,8 @@ export class AuthenticationService {
   public userData: any;
   public err: string;
   public isLogged: boolean;
+  public email: any;
+  public password: any;
 
   constructor(private angularFireAuth: AngularFireAuth) {
     this.userData = angularFireAuth.authState;
@@ -40,7 +42,8 @@ export class AuthenticationService {
        /* localStorage.setItem('user', JSON.stringify(res.user));*/
         this.isLogged = true;
         this.err = '';
-        console.log(res.user?.uid);
+        this.email = this.userData.email;
+        console.log(res.user?.uid, this.userData);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);

@@ -20,6 +20,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FormsModule} from '@angular/forms';
 
 import {AllProductsModule} from './all-products/all-products.module';
+import { BasketComponent } from './basket/basket.component';
+import {BasketModule} from './basket/basket.module';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {AllProductsModule} from './all-products/all-products.module';
     TableModule,
     AngularFireAuthModule,
     FormsModule,
-    AllProductsModule
+    AllProductsModule,
+    BasketModule
   ],
   exports: [
   ],
