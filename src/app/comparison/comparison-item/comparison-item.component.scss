@@ -1,0 +1,36 @@
+.comparison-item-point {
+  display: flex;
+  padding: 20px;
+
+  &:nth-child(2n) {
+    background-color: #eae0ee;
+  }
+
+/*
+
+  &-point-name {
+    padding: 10px;
+    border: 1px solid red;
+  }
+
+  &-point-value {
+  }*/
+
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.comparison-item-point-img {
+  display: flex;
+  padding: 20px;
+
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+  }
+}
+

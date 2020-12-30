@@ -1,0 +1,11 @@
+<div class="comparison">
+ <!-- <div class="comparison-buttons">
+    <button class="comparison-buttons-sofas" (click)="clickSofas()">Диваны</button>
+    <button class="comparison-buttons-chairs" (click)="clickChairs()">Кресла</button>
+    <button class="comparison-buttons-tables" (click)="clickTables()">Столы</button>
+  </div>-->
+
+  <div class="comparison-block">
+    <app-comparison-item *ngFor="let item of infoToShow" [item]="item"></app-comparison-item>
+  </div>
+</div>

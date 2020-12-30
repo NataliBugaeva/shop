@@ -1,0 +1,16 @@
+
+<ng-container *ngFor="let i of item"  >
+  <ng-container *ngIf="i.name === 'Изображение'">
+    <div [ngClass]="{'comparison-item-point-img': i.name === 'Изображение' }">
+      <img [src]="i.value" alt="" >
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngFor="let i of item" >
+  <ng-container *ngIf="i.name !== 'Изображение'">
+    <div [ngClass]="{'comparison-item-point': i.name !== 'Изображение' }">
+      <div class="comparison-item-point-value">{{i.value}}</div>
+    </div>
+  </ng-container>
+</ng-container>
