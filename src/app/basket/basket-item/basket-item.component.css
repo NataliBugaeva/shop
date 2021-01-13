@@ -1,8 +1,10 @@
 .basket-item {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid blue;
-  padding: 5px; }
+  margin-bottom: 35px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 40px; }
   .basket-item-info-name {
     margin-bottom: 5px; }
   .basket-item-info-img {
@@ -10,9 +12,36 @@
     align-items: flex-end;
     width: 150px;
     height: 150px;
-    margin-top: 15px;
-    border: 1px solid red; }
+    margin-top: 15px; }
     .basket-item-info-img img {
       display: block;
       max-width: 100%;
       max-height: 100%; }
+  .basket-item-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .basket-item-control-remove {
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+      .basket-item-control-remove:hover {
+        cursor: pointer; }
+    .basket-item-control-price {
+      line-height: 1.5em; }
+    .basket-item-control-amount {
+      display: flex; }
+      .basket-item-control-amount-minus, .basket-item-control-amount-plus {
+        background-color: #15004a;
+        color: white;
+        font-weight: bold; }
+        .basket-item-control-amount-minus:hover, .basket-item-control-amount-plus:hover {
+          cursor: pointer; }
+      .basket-item-control-amount input {
+        max-width: 50px;
+        width: 100%;
+        text-align: center; }
+      .basket-item-control-amount div {
+        border: 1px solid #15004a;
+        padding: 5px 10px;
+        font-size: 20px; }

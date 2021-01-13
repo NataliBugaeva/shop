@@ -131,7 +131,6 @@
 
 }
 
-
 //стили для кнопок вынесла отдельно
 .button-switch {
   display: flex;
@@ -148,14 +147,18 @@
     }
   }
 
-  div {
+  input {
+    width: 100px;
+  }
+
+  div,
+  input {
     border: 1px solid #15004a;
     padding: 5px 10px;
-    margin-top: 0;
     font-size: 20px;
+    text-align: center;
   }
 }
-
 
 .button-basket {
   margin-bottom: 20px;
@@ -186,6 +189,14 @@
   color: white;
 }
 
+.link-to-comparison {
+  margin-top: 10px;
+  padding: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 @media screen and (max-width: 971px){
   .about-product-main-content-img {
@@ -216,8 +227,6 @@
     justify-content: center;
   }
 }
-
-
 
 @media screen and (max-width: 650px) {
   .about-product-main-content {

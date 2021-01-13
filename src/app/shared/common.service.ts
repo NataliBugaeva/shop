@@ -391,6 +391,20 @@ export class CommonService {
     );
   }
 
+/*  // получить массив продуктов из коллекции сравнения по конкретному пути (sofas/tables/chairs)
+  getProductsFromComparison(name: string): Observable<any> {
+    return this.fireStore.collection('comparison', ref => ref.where('name', '==', name))
+      .snapshotChanges()
+      .pipe(map( res => res.map( doc => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
+  }
+
+  // добавить продукт в документ для сравнение
+  addProductToComparison(id: string, path: string, products: Product[]): void {
+    this.fireStore.collection('comparison').doc(id).set({name: path, value: products});
+  }*/
+
+
+
   // получаем все продукты
   getAllProducts = (path: string): Observable<any> => {
     return  this.fireStore.collection(path).snapshotChanges()

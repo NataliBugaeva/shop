@@ -91,11 +91,14 @@
     font-weight: bold; }
     .button-switch-plus:hover, .button-switch-minus:hover {
       cursor: pointer; }
-  .button-switch div {
+  .button-switch input {
+    width: 100px; }
+  .button-switch div,
+  .button-switch input {
     border: 1px solid #15004a;
     padding: 5px 10px;
-    margin-top: 0;
-    font-size: 20px; }
+    font-size: 20px;
+    text-align: center; }
 
 .button-basket {
   margin-bottom: 20px; }
@@ -119,6 +122,12 @@
 .active {
   background-color: #15004a;
   color: white; }
+
+.link-to-comparison {
+  margin-top: 10px;
+  padding: 10px; }
+  .link-to-comparison:hover {
+    cursor: pointer; }
 
 @media screen and (max-width: 971px) {
   .about-product-main-content-img {

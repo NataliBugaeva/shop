@@ -5,8 +5,6 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { BasketItemComponent } from './basket-item/basket-item.component';
 
-
-
 @NgModule({
   declarations: [
     BasketComponent,

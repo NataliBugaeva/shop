@@ -4,47 +4,66 @@
       <div class="type">Тип:</div>
       <div class="point-type">
         <label for="straight">прямой:</label>
-        <input type="checkbox" id="straight" name="type" [(ngModel)]="straight" value="прямой">
+        <input type="checkbox"
+               id="straight"
+               name="type"
+               value="прямой"
+               [(ngModel)]="straight">
       </div>
       <div class="point-type">
         <label for="corner">угловой:</label>
-        <input type="checkbox" id="corner" name="type" [(ngModel)]="corner" value="угловой">
+        <input type="checkbox"
+               id="corner"
+               name="type"
+               value="угловой"
+               [(ngModel)]="corner">
       </div>
 
       <div class="mechanism">Механизм:</div>
       <div class="point-mechanism">
         <label for="eurobook">еврокнижка:</label>
-        <input type="checkbox" id="eurobook" name="mechanism" [(ngModel)]="euroBook" value="еврокнижка">
+        <input type="checkbox"
+               id="eurobook"
+               name="mechanism"
+               value="еврокнижка"
+               [(ngModel)]="euroBook">
       </div>
       <div class="point-mechanism">
         <label for="rollOut">выкатной:</label>
-        <input type="checkbox" id="rollOut" name="mechanism" [(ngModel)]="rollOut" value="выкатной">
+        <input type="checkbox"
+               id="rollOut"
+               name="mechanism"
+               value="выкатной"
+               [(ngModel)]="rollOut">
       </div>
 
       <div class="length">Длина, см:</div>
       <div class="point-length">
-        <input type="text" id="minLength" name="minLength" [(ngModel)]="minLength" placeholder="от">
-        <input type="text" id="maxLength" name="maxLength" [(ngModel)]="maxLength" placeholder="до">
+        <input type="text"
+               id="minLength"
+               name="minLength"
+               placeholder="от"
+               [(ngModel)]="minLength">
+        <input type="text"
+               id="maxLength"
+               name="maxLength"
+               placeholder="до"
+               [(ngModel)]="maxLength">
       </div>
-
-    <!--  <div class="bedLength">Длина спального места, см:</div>
-      <div class="point-bedLength">
-        <input type="text" id="minBedLength" name="minBedLength" [(ngModel)]="minBedLength" placeholder="от">
-        <input type="text" id="maxBedLength" name="maxBedLength" [(ngModel)]="maxBedLength" placeholder="до">
-      </div>
-
-      <div class="bedWidth">Ширина спального места, см:</div>
-      <div class="point-bedWidth">
-        <input type="text" id="minBedWidth" name="minBedWidth" [(ngModel)]="minBedWidth" placeholder="от">
-        <input type="text" id="maxBedWidth" name="maxBedWidth" [(ngModel)]="maxBedWidth" placeholder="до">
-      </div>-->
 
       <div class="price">Цена:</div>
       <div class="point-price">
-        <input type="text" id="minPrice" name="minPrice" [(ngModel)]="minPrice" placeholder="от">
-        <input type="text" id="maxPrice" name="maxPrice" [(ngModel)]="maxPrice" placeholder="до">
+        <input type="text"
+               id="minPrice"
+               name="minPrice"
+               placeholder="от"
+               [(ngModel)]="minPrice">
+        <input type="text"
+               id="maxPrice"
+               name="maxPrice"
+               placeholder="до"
+               [(ngModel)]="maxPrice">
       </div>
-
     </form>
 
     <button>Показать</button>
@@ -55,7 +74,9 @@
   <div class="block-with-pagination">
 
     <div class="all-products" *ngIf="products">
-      <app-product *ngFor="let item of pagedItems" [item]="item"></app-product>
+      <app-product *ngFor="let item of pagedItems"
+                   [item]="item"
+                   [path]="path"></app-product>
     </div>
 
     <div class="pagination">
@@ -66,7 +87,8 @@
         <li [ngClass]="{disabled:pager.currentPage === 1}">
           <a (click)="setPage(pager.currentPage - 1, products)">Previous</a>
         </li>
-        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+        <li *ngFor="let page of pager.pages"
+            [ngClass]="{active:pager.currentPage === page}">
           <a (click)="setPage(page, products)">{{page}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">

@@ -23,7 +23,14 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
-    padding: 20px;
-    /* app-comparison-item:nth-child(1) {
-         background-color: #595359;
-    }*/ }
+    padding: 20px; }
+    .comparison-block-message {
+      font-weight: bold;
+      font-size: 15px; }
+    .comparison-block-characteristics-point {
+      padding: 20px;
+      text-align: right;
+      font-weight: bold; }
+      .comparison-block-characteristics-point:nth-child(1) {
+        height: 140px;
+        font-size: 0px; }

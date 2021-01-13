@@ -6,20 +6,26 @@
       <div class="about-product-links">
         <span routerLink="../../">На главную</span>
         <span> >> </span>
-        <span *ngIf="path === 'sofas'" routerLink="../">Диваны</span>
-        <span *ngIf="path === 'tables'" routerLink="../">Столы</span>
-        <span *ngIf="path === 'chairs'" routerLink="../">Кресла</span>
+        <span *ngIf="path === 'sofas'"
+              routerLink="../">Диваны</span>
+        <span *ngIf="path === 'tables'"
+              routerLink="../">Столы</span>
+        <span *ngIf="path === 'chairs'"
+              routerLink="../">Кресла</span>
         <span> >> </span>
-        <span *ngIf="path === 'sofas'" style="color: black">Диван {{chosenProductName}}</span>
-        <span *ngIf="path === 'tables'" style="color: black">Стол {{chosenProductName}}</span>
-        <span *ngIf="path === 'chairs'" style="color: black">Кресло {{chosenProductName}}</span>
+        <span *ngIf="path === 'sofas'"
+              style="color: black">Диван {{chosenProductName}}</span>
+        <span *ngIf="path === 'tables'"
+              style="color: black">Стол {{chosenProductName}}</span>
+        <span *ngIf="path === 'chairs'"
+              style="color: black">Кресло {{chosenProductName}}</span>
       </div>
-
-
 
       <div class="about-product-main-content">
         <div class="about-product-main-content-img">
-          <img [src]=chosenProductImgLarge alt="" [title]=chosenProductName>
+          <img [src]=chosenProductImgLarge
+               [title]=chosenProductName
+               alt="">
         </div>
 
         <div class="about-product-main-content-info">
@@ -28,32 +34,48 @@
           <span>{{chosenProductPrice}} руб.</span>
           <div class="about-product-main-content-info-buttons">
             <div class="button-switch">
-              <div class="button-switch-minus" (click)="decreaseAmount()"> - </div>
-              <div>{{amount}}</div>
-              <div class="button-switch-plus" (click)="enlargeAmount()"> + </div>
+              <div class="button-switch-minus"
+                   (click)="decreaseAmount()"> - </div>
+              <input [(ngModel)]="amount">
+              <div class="button-switch-plus"
+                   (click)="enlargeAmount()"> + </div>
             </div>
-            <button class="button-basket" (click)="addToBasket()">Добавить в корзину</button>
-            <button class="button-compare" (click)="this.comparison = !this.comparison" *ngIf="!comparison">Добавить в сравнение</button>
-            <button class="button-compare" (click)="this.comparison = !this.comparison" *ngIf="comparison">Убрать из сравнения</button>
+            <button class="button-basket"
+                    (click)="addToBasket()">Добавить в корзину</button>
+            <button class="button-compare"
+                    *ngIf="!comparison"
+                    (click)="addToComparison()">Добавить в сравнение</button>
+            <button class="button-compare"
+                    (click)="this.comparison = !this.comparison; removeFromComparison()"
+                    *ngIf="comparison">Убрать из сравнения</button>
+            <div class="link-to-comparison"
+                 (click)="goToComparison()"
+                 [hidden]="!amountInComparison">В сравнении {{amountInComparison}} продукт(ов)</div>
           </div>
         </div>
       </div>
 
-
       <div class="about-product-characteristics">
         <div class="about-product-characteristics-buttons">
-          <div class="button-characteristics" (click)="changeSwitch()" [ngClass]="{active: this.switch}">Характеристики</div>
-          <div class="button-comments" (click)="changeSwitch()" [ngClass]="{active: !this.switch}">Отзывы</div>
+          <div class="button-characteristics"
+               (click)="changeSwitch()"
+               [ngClass]="{active: this.switch}">Характеристики</div>
+          <div class="button-comments"
+               (click)="changeSwitch()"
+               [ngClass]="{active: !this.switch}">Отзывы</div>
         </div>
 
-        <div class="about-product-characteristics-info" *ngIf="this.switch">
-          <div class="about-product-characteristics-info-item" *ngFor="let item of chosenProductInfoToShow">
+        <div class="about-product-characteristics-info"
+             *ngIf="this.switch">
+          <div class="about-product-characteristics-info-item"
+               *ngFor="let item of chosenProductInfoToShow">
             <div class="about-product-characteristics-info-item-points">{{item.name}}</div>
             <div class="about-product-characteristics-info-item-values">{{item.value}}</div>
           </div>
         </div>
 
-        <div class="about-product-characteristics-comments" *ngIf="!this.switch">
+        <div class="about-product-characteristics-comments"
+             *ngIf="!this.switch">
           Отзывов пока нет
         </div>
       </div>

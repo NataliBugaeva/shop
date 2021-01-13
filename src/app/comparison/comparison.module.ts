@@ -5,8 +5,6 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { ComparisonItemComponent } from './comparison-item/comparison-item.component';
 
-
-
 @NgModule({
   declarations: [
     ComparisonComponent,

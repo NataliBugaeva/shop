@@ -1,0 +1,63 @@
+.order {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto; }
+  .order-customer-info-name, .order-customer-info-mail, .order-customer-info-phone {
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px; }
+    .order-customer-info-name label, .order-customer-info-mail label, .order-customer-info-phone label {
+      width: 80px;
+      display: inline-block;
+      padding: 5px;
+      margin-right: 10px;
+      text-align: right; }
+    .order-customer-info-name input, .order-customer-info-mail input, .order-customer-info-phone input {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      padding: 5px;
+      border: 1px solid grey; }
+  .order-customer-info-validation {
+    font-weight: bold;
+    margin: 10px 0;
+    color: #5f0877; }
+    .order-customer-info-validation span {
+      display: block;
+      margin-bottom: 5px; }
+  .order-delivery, .order-pay {
+    margin-bottom: 10px; }
+    .order-delivery-courier, .order-pay-courier {
+      margin-top: 10px; }
+      .order-delivery-courier input, .order-pay-courier input {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin: 15px 0;
+        padding: 5px;
+        border: 1px solid grey; }
+  .order-button {
+    display: block;
+    width: 200px;
+    background-color: #15004a;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0;
+    border: none;
+    margin: 0 auto; }
+
+form {
+  padding-bottom: 30px; }
+
+fieldset {
+  margin: 30px 0;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: grey; }
+
+legend {
+  margin: 0 20px;
+  font-size: 20px; }
+
+[disabled] {
+  opacity: .5; }

@@ -19,45 +19,30 @@ export class ComparisonComponent implements OnInit {
   public infoToShow: any[];
 
   // наименование характеристик продуктов, отображаемых в сравнении
-  public characteristics: string[];
+  public characteristics: Array<{name: string}>;
 
   constructor(private commonService: CommonService) { }
 
-/*  clickSofas(): void {
-    this.product = 'sofas';
-  }
-
-  clickChairs(): void {
-    this.product = 'chairs';
-  }
-
-  clickTables(): void {
-    this.product = 'tables';
-    alert('yf;fkf');
-  }*/
-
   ngOnInit(): void {
+    // определяет категорию продуктов для сравнения
     this.product = JSON.parse(localStorage.getItem('lastPath'));
+    // все продукты в сравнении
     this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
-    console.log(this.productsFromComparison);
+    // продукты определенной категории для сравнения
+    this.productsToCompare = this.productsFromComparison[this.product];
 
-    for (let key in this.productsFromComparison) {
-      if ((key === this.product) && (this.productsFromComparison[key].length >= 2)) {
-        this.productsToCompare = this.productsFromComparison[key];
-        this.infoToShow = this.productsToCompare.map( item => {
-          let img = {name: 'Изображение', value: item.info.images.find( i => i.name === 'imgSmall').value};
-          let info = item.info.info;
+    this.infoToShow = this.productsToCompare.map( item => {
+          const img = {name: 'Изображение', value: item.info.images.find( i => i.name === 'imgSmall').value};
+          const info = item.info.info;
+          const id = {name: 'id', value: item.id};
           info.unshift(img);
+          info.push(id);
           return info;
         });
-        console.log(this.infoToShow);
-        this.characteristics = this.infoToShow[0].map( item => ({name: item.name, value: item.name}));
-        this.infoToShow.unshift(this.characteristics);
-        console.log(this.infoToShow);
-      }
-    }
-
-
+    /*console.log(this.infoToShow);*/
+    console.log(this.productsToCompare);
+    // это массив из наименования характеристик
+    this.characteristics = this.infoToShow[0].map( item => ({name: item.name}));
   }
 
 }

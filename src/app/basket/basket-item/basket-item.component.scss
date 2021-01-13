@@ -1,8 +1,10 @@
 .basket-item {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid blue;
-  padding: 5px;
+  margin-bottom: 35px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  padding: 40px;
 
   &-info {
 
@@ -16,7 +18,6 @@
       width: 150px;
       height: 150px;
       margin-top: 15px;
-      border: 1px solid red;
 
       img {
         display: block;
@@ -27,6 +28,52 @@
   }
 
   &-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-remove {
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-price {
+      line-height: 1.5em;
+
+    }
+
+    &-amount{
+      display: flex;
+
+      &-minus,
+      &-plus {
+        background-color: #15004a;
+        color: white;
+        font-weight: bold;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      input {
+        max-width: 50px;
+        width: 100%;
+        text-align: center;
+      }
+
+      div {
+        border: 1px solid #15004a;
+        padding: 5px 10px;
+        font-size: 20px;
+      }
+
+    }
 
   }
 }

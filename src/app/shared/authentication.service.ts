@@ -19,7 +19,7 @@ export class AuthenticationService {
   }
 
   // метод "Зарегистрироваться"
-  SignUp = (email: string, password: string) => {
+  SignUp(email: string, password: string): void {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
@@ -35,7 +35,7 @@ export class AuthenticationService {
   }
 
   // Метод "Войти"
-  SignIn = (email: string, password: string) => {
+  SignIn(email: string, password: string): void {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then(res  => {
@@ -52,7 +52,7 @@ export class AuthenticationService {
   }
 
   // Метод "Выйти"
-  SignOut = () => {
+  SignOut(): void {
     this.angularFireAuth
       .signOut()
       .then( res => {

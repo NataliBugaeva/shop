@@ -1,4 +1,3 @@
-
 <ng-container *ngFor="let i of item"  >
   <ng-container *ngIf="i.name === 'Изображение'">
     <div [ngClass]="{'comparison-item-point-img': i.name === 'Изображение' }">
@@ -8,9 +7,20 @@
 </ng-container>
 
 <ng-container *ngFor="let i of item" >
-  <ng-container *ngIf="i.name !== 'Изображение'">
+  <ng-container *ngIf="i.name !== 'Изображение' && i.name !== 'id'">
     <div [ngClass]="{'comparison-item-point': i.name !== 'Изображение' }">
       <div class="comparison-item-point-value">{{i.value}}</div>
     </div>
   </ng-container>
 </ng-container>
+
+<ng-container *ngFor="let i of item" >
+  <ng-container *ngIf="i.name === 'id'">
+    <div [ngClass]="{'comparison-item-point': i.name === 'id' }">
+      <button class="comparison-item-point-value"
+              (click)="removeItem()">Удалить</button>
+    </div>
+  </ng-container>
+</ng-container>
+
+

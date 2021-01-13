@@ -24,7 +24,6 @@
         cursor: pointer;
       }
     }
-
   }
 
   &-block {
@@ -34,9 +33,24 @@
     margin-top: 30px;
     padding: 20px;
 
-    /* app-comparison-item:nth-child(1) {
-         background-color: #595359;
-    }*/
+    &-message {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    &-characteristics {
+
+      &-point {
+        padding: 20px;
+        text-align: right;
+        font-weight: bold;
+
+        &:nth-child(1) {
+          height: 140px;
+          font-size: 0px;
+        }
+      }
+    }
   }
 }
 

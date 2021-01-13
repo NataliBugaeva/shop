@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import {Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
 import {CommonService} from '../../shared/common.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Product} from '../../../model';
 
@@ -21,36 +20,93 @@ export class AboutProductComponent implements OnInit, OnDestroy {
   public chosenProductPrice: string;
   public chosenProductImgLarge: string;
 
-  public amount = 1;
+  public amount: number;
   public comparison = false;
   public switch = true;
   public subscriptions: Subscription[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private commonService: CommonService) { }
+  public docId: string;
+  // это я получаю обьект comparison из LS
+  public productsFromComparison: any;
+
+  // это высчитываем количество продуктов в сравнении
+  public amountInComparison: number;
+
+  // для контроля перехода на страницу сравнения
+  public rout: string;
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+              private commonService: CommonService) { }
 
   // увеличиваем количество товара
-  enlargeAmount = (): void => {
+  enlargeAmount(): void {
     this.amount = this.amount + 1;
+    console.log(this.amount);
   }
 
   // уменьшаем количество товара
-  decreaseAmount = (): void => {
+  decreaseAmount(): void {
     this.amount === 1 ? this.amount = 1 : this.amount = this.amount - 1;
+    console.log(this.amount);
   }
 
   // переключаемся с отзывов на характеристики
-  changeSwitch = (): void => {
+  changeSwitch(): void {
     this.switch = !this.switch;
+  }
+
+// добавить в сравнение
+  addToComparison(): void {
+    if (!localStorage.getItem('comparison')) {
+      localStorage.setItem('comparison', JSON.stringify({
+        sofas: [],
+        chairs: [],
+        tables: []
+      }));
+    }
+    this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
+    if ((!this.productsFromComparison[this.path].some( item => item.id === this.chosenProduct.id)) &&
+      (this.productsFromComparison[this.path].length <= 2)) {
+        this.productsFromComparison[this.path].push(this.chosenProduct);
+        this.amountInComparison = this.productsFromComparison[this.path].length;
+        localStorage.setItem('comparison', JSON.stringify(this.productsFromComparison));
+        this.comparison = !this.comparison;
+        console.log(this.amountInComparison);
+      } else {
+      alert('количество продуктов не больше трех');
+    }
+  }
+
+  // удалить продукт из сравнения
+  removeFromComparison(): void {
+    console.log(this.productsFromComparison);
+    this.productsFromComparison[this.path] = this.productsFromComparison[this.path].filter(item => item.id !== this.chosenProduct.id);
+    this.amountInComparison = this.productsFromComparison[this.path].length;
+    console.log(this.amountInComparison);
+    localStorage.setItem('comparison', JSON.stringify(this.productsFromComparison));
+  }
+
+  // Переход на страницу сравнения
+  goToComparison(): void {
+    localStorage.setItem('lastPath', JSON.stringify(this.path));
+    if (this.amountInComparison < 2) {
+      alert('необходимо как минимум два продукта для сравнения');
+    } else {
+      this.rout = '/comparison';
+      this.router.navigateByUrl(this.rout);
+    }
   }
 
   // добавляем в LocalStorage массив с продуктами, которые будут отображаться в корзине
   addToLSProducts(): void {
     let arrProducts: Product[] = [];
     if (!JSON.parse(localStorage.getItem('productsInBasket'))) {
+      this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
       arrProducts.push(this.chosenProduct);
       localStorage.setItem('productsInBasket', JSON.stringify(arrProducts));
     } else {
       arrProducts = JSON.parse(localStorage.getItem('productsInBasket'));
+      this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
       arrProducts.push(this.chosenProduct);
       localStorage.setItem('productsInBasket', JSON.stringify(arrProducts));
     }
@@ -79,6 +135,7 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     // выцепили id и category из урла (это наши параметры)
     this.productId = this.activatedRoute.snapshot.paramMap.get('id');
     this.path = this.activatedRoute.snapshot.paramMap.get('category');
+    this.amount = 1;
 
     this.subscriptions.push(this.commonService.getProductId(this.path, this.productId).subscribe( (result: Product) => {
         this.chosenProduct = result;
@@ -87,7 +144,13 @@ export class AboutProductComponent implements OnInit, OnDestroy {
         this.chosenProductType = this.chosenProductInfoToShow.find(item => item.name === 'Тип').value;
         this.chosenProductPrice = this.chosenProductInfoToShow.find(item => item.name === 'Цена').value;
         this.chosenProductImgLarge = result.info.images.find(item => item.name === 'imgLarge').value;
-      }));
+
+        this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
+
+        this.comparison = this.productsFromComparison[this.path].some(item => item.id === this.chosenProduct.id);
+        this.amountInComparison = this.productsFromComparison[this.path].length;
+        console.log(this.amountInComparison);
+    }));
   }
 
   ngOnDestroy(): void {

@@ -45,6 +45,21 @@
   display: flex;
   justify-content: flex-end;
   align-items: center; }
+  .icons-basket {
+    position: relative; }
+    .icons-basket-amount {
+      position: absolute;
+      top: -2px;
+      right: -5px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50px;
+      background-color: red;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      padding-top: 2px; }
   .icons-search, .icons-basket, .icons-compare, .icons-user {
     width: 30px;
     height: 30px;
@@ -81,8 +96,7 @@
       cursor: pointer; }
 
 [hidden] {
-  transform: scale(0);
-  /* display: none;*/ }
+  transform: scale(0); }
 
 [disabled] {
   opacity: .5; }

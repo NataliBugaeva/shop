@@ -1,11 +1,19 @@
 <div class="comparison">
- <!-- <div class="comparison-buttons">
-    <button class="comparison-buttons-sofas" (click)="clickSofas()">Диваны</button>
-    <button class="comparison-buttons-chairs" (click)="clickChairs()">Кресла</button>
-    <button class="comparison-buttons-tables" (click)="clickTables()">Столы</button>
-  </div>-->
-
   <div class="comparison-block">
-    <app-comparison-item *ngFor="let item of infoToShow" [item]="item"></app-comparison-item>
+    <ng-container *ngIf="!infoToShow.length">
+      <div class="comparison-block-message">Добавьте продукты для сравнения!</div>
+    </ng-container>
+
+    <div class="comparison-block-characteristics">
+      <ng-container *ngFor="let i of characteristics">
+        <ng-container *ngIf="i.name !== 'id'">
+          <div class="comparison-block-characteristics-point"
+               *ngIf="infoToShow.length">{{i.name}}:</div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <app-comparison-item *ngFor="let item of infoToShow"
+                         [item]="item"
+                         [(info)]="infoToShow"></app-comparison-item>
   </div>
 </div>

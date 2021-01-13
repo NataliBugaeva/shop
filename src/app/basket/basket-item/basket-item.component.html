@@ -7,5 +7,19 @@
     </div>
   </div>
 
-  <div class="basket-item-control"></div>
+  <div class="basket-item-control">
+    <div class="basket-item-control-remove"
+         [id]=itemId
+         (click)="removeFromBasket()">Удалить</div>
+
+    <div class="basket-item-control-price">Цена:<br>{{itemPrice}} руб.</div>
+
+    <div class="basket-item-control-amount">
+      <div class="basket-item-control-amount-minus"
+           (click)="decreaseAmount()"> - </div>
+      <input [(ngModel)]="itemAmount">
+      <div class="basket-item-control-amount-plus"
+           (click)="enlargeAmount()"> + </div>
+    </div>
+  </div>
 </div>

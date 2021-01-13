@@ -1,25 +1,13 @@
 .comparison-item-point {
-  display: flex;
   padding: 20px;
-  /*
-
-  &-point-name {
-    padding: 10px;
-    border: 1px solid red;
-  }
-
-  &-point-value {
-  }*/ }
+  text-align: center; }
   .comparison-item-point:nth-child(2n) {
     background-color: #eae0ee; }
-  .comparison-item-point img {
-    display: block;
-    width: 100px;
-    height: 100px; }
 
 .comparison-item-point-img {
   display: flex;
-  padding: 20px; }
+  justify-content: center;
+  padding: 20px 0; }
   .comparison-item-point-img img {
     display: block;
     width: 100px;
