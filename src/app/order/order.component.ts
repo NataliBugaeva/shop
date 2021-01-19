@@ -4,6 +4,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
 
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -43,12 +44,27 @@ export class OrderComponent implements OnInit, OnDestroy {
       }),
       deliveryInfo: this.fb.group({
         userAddress: ['', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]],
-        delivery: '',
+        delivery: ['', Validators.required],
       }),
       paymentInfo: this.fb.group({
-        payment: ''
+        payment: ['', Validators.required]
       })
     });
+  }
+
+  changeK(): void {
+    this.deliveryChecked = 'курьер';
+    if (this.orderForm.controls['deliveryInfo'].get('userAddress')) {
+      return;
+    }
+    this.orderForm.addControl('deliveryInfo', ['', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]])
+    console.log(this.orderForm);
+  }
+
+  changeS(): void {
+    this.deliveryChecked = 'самовывоз';
+    this.orderForm.get('deliveryInfo').removeControl('userAddress');
+    console.log(this.orderForm);
   }
 
   get _userName() {
@@ -80,6 +96,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   getDisabled() {
+    console.log(this.orderForm.valid);
     return ( (!this._userName?.value.length || !this._userEmail?.value.length || !this._userPhone?.value.length
       || !this._payment?.value.length || !this._delivery?.value.length) ||
       (this._delivery?.value === 'курьер' && (!this._userName?.value.length || !this._userEmail?.value.length

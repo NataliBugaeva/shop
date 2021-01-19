@@ -9,8 +9,8 @@ import {Product} from '../../../model';
 })
 export class ComparisonItemComponent implements OnInit {
 
-  @Input() item: {name: string, value: any}[];
-  @Input() info: Array<{name: string, value: any}[]>;
+  @Input() item: { name: string, value: any }[];
+  @Input() info: Array<{ name: string, value: any }[]>;
 
   @Output() infoChange = new EventEmitter<any[]>();
 
@@ -23,20 +23,23 @@ export class ComparisonItemComponent implements OnInit {
   // продукты, которые отображаем в сравнении
   public productsToCompare: Product[];
 
-  constructor() { }
+  constructor() {
+  }
 
   removeItem(): void {
     this.productId = this.item.find(i => i.name === 'id')?.value;
+    // @ts-ignore
     this.path = JSON.parse(localStorage.getItem('lastPath'));
+    // @ts-ignore
     this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
     // продукты определенной категории для сравнения без продукта, который мы собираемся удалить
-    this.productsToCompare = this.productsFromComparison[this.path].filter( (item: {id: string, info: {}}) => item.id !== this.productId);
+    this.productsToCompare = this.productsFromComparison[this.path].filter((item: { id: string, info: {} }) => item.id !== this.productId);
     this.productsFromComparison[this.path] = this.productsToCompare;
     localStorage.setItem('comparison', JSON.stringify(this.productsFromComparison));
-    this.info = this.productsToCompare.map( item => {
-      let img = {name: 'Изображение', value: item.info.images.find( i => i.name === 'imgSmall').value};
-      let info = item.info.info;
-      let id = {name: 'id', value: item.id};
+    this.info = this.productsToCompare.map(item => {
+      const img = {name: 'Изображение', value: item.info.images.find(i => i.name === 'imgSmall').value};
+      const info = item.info.info;
+      const id = {name: 'id', value: item.id};
       info.unshift(img);
       info.push(id);
       return info;

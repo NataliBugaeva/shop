@@ -3,6 +3,7 @@ import {CommonService} from '../../shared/common.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Product} from '../../../model';
+import {AuthenticationService} from '../../shared/authentication.service';
 
 @Component({
   selector: 'app-about-product',
@@ -35,18 +36,25 @@ export class AboutProductComponent implements OnInit, OnDestroy {
   // для контроля перехода на страницу сравнения
   public rout: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private commonService: CommonService) { }
+  // это почта пользователя, который сейчас вошел на сайт
+  public email: string;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private commonService: CommonService,
+              private authenticationService: AuthenticationService) { }
 
   // увеличиваем количество товара
   enlargeAmount(): void {
-    this.amount = this.amount + 1;
+    /*this.amount = this.amount + 1;*/
+    this.amount += 1;
     console.log(this.amount);
   }
 
   // уменьшаем количество товара
   decreaseAmount(): void {
-    this.amount === 1 ? this.amount = 1 : this.amount = this.amount - 1;
+    /*this.amount === 1 ? this.amount = 1 : this.amount = this.amount - 1;*/
+    this.amount === 1 ? this.amount = 1 : this.amount -= 1;
     console.log(this.amount);
   }
 
@@ -97,41 +105,52 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  // добавляем в LocalStorage массив с продуктами, которые будут отображаться в корзине
-  addToLSProducts(): void {
+  // Добавляем в LS массив с продуктами, которые будут в корзине
+ /* addToBasket(): void {
+    let bbb = this.commonService.getAllUsers().subscribe(res => console.log(res));
     let arrProducts: Product[] = [];
-    if (!JSON.parse(localStorage.getItem('productsInBasket'))) {
-      this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
-      arrProducts.push(this.chosenProduct);
-      localStorage.setItem('productsInBasket', JSON.stringify(arrProducts));
-    } else {
+    if (JSON.parse(localStorage.getItem('productsInBasket'))) {
       arrProducts = JSON.parse(localStorage.getItem('productsInBasket'));
-      this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
-      arrProducts.push(this.chosenProduct);
-      localStorage.setItem('productsInBasket', JSON.stringify(arrProducts));
+      if (arrProducts.some(item => item.id === this.productId)) {
+        alert('Данный товар уже в корзине!');
+        return;
+      }
     }
-  }
+    this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
+    arrProducts.push(this.chosenProduct);
+    localStorage.setItem('productsInBasket', JSON.stringify(arrProducts));
+  }*/
 
-  // Добавить в localStorage массив с id-шками продуктов, которые будут в корзине, и массив с самими продуктами
   addToBasket(): void {
-    let arrId: string[] = [];
-    if (!JSON.parse(localStorage.getItem('productsId'))) {
-      arrId.push(this.productId);
-      localStorage.setItem('productsId', JSON.stringify(arrId));
-      this.addToLSProducts();
-    } else if (!(JSON.parse(localStorage.getItem('productsId')).some( (item: string) => item === this.productId) )) {
-      arrId = JSON.parse(localStorage.getItem('productsId'));
-      arrId.push(this.productId);
-      localStorage.setItem('productsId', JSON.stringify(arrId));
-      this.addToLSProducts();
-    } else {
-      alert('Данный товар уже в корзине!');
-      console.log(JSON.parse(localStorage.getItem('productsId')));
-      console.log(JSON.parse(localStorage.getItem('productsInBasket')));
-    }
+
+    this.subscriptions.push(
+      this.commonService.getUser(this.email).subscribe(res => {
+        let arrProducts = res[0].info.basket;
+        let userId = res[0].id;
+        let userInfo = res[0].info;
+        console.log(arrProducts, userId, userInfo);
+        if (arrProducts.length && arrProducts.some(item => item.id === this.productId)) {
+            alert('Данный товар уже в корзине!');
+            return;
+        }
+        this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
+        arrProducts.push(this.chosenProduct);
+        userInfo.basket = arrProducts;
+        console.log(userInfo);
+        this.commonService.addToUserBasket(userId, userInfo);
+      })
+    );
   }
 
   ngOnInit(): void {
+
+    this.subscriptions.push(
+      this.authenticationService.user().subscribe(res => {
+        this.email = res?.email;
+        console.log(this.email);
+      })
+    );
+
     // выцепили id и category из урла (это наши параметры)
     this.productId = this.activatedRoute.snapshot.paramMap.get('id');
     this.path = this.activatedRoute.snapshot.paramMap.get('category');
@@ -139,6 +158,7 @@ export class AboutProductComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.commonService.getProductId(this.path, this.productId).subscribe( (result: Product) => {
         this.chosenProduct = result;
+        console.log(this.chosenProduct);
         this.chosenProductInfoToShow = result.info.info;
         this.chosenProductName = this.chosenProductInfoToShow.find( item => item.name === 'Наименование').value;
         this.chosenProductType = this.chosenProductInfoToShow.find(item => item.name === 'Тип').value;

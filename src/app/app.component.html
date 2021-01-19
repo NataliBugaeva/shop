@@ -31,8 +31,13 @@
                title="корзина">
 
         </div>
+        <!--<div class="icons-user"
+             *ngIf="authenticationService.isLogged  && !authenticationService.err">-->
         <div class="icons-user"
-             *ngIf="authenticationService.isLogged  && !authenticationService.err">
+             routerLink="account"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active"
+             *ngIf="userEmail">
           <img src="./assets/icons/пользователь.png"
                alt="пользователь"
                title="пользователь">
@@ -43,8 +48,10 @@
 
   <div class="header-authentication">
     <div class="cent">
+      <!--<h3 *ngIf="authenticationService.userData | async"
+          style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>-->
       <h3 *ngIf="authenticationService.userData | async"
-          style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>
+          style="color: #5f0877">Добро пожаловать, {{ userEmail }}</h3>
 
       <div *ngIf="!(authenticationService.userData | async)">
         <input type="text"

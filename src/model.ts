@@ -14,3 +14,17 @@ export class Product {
   }
 }
 
+export class User {
+  public id: string;
+  public email: string;
+  public orders: any[];
+  public basket: Product[];
+
+  constructor(id: string, email: string, orders: any[], basket: Product[]) {
+    this.id = id;
+    this.email = email;
+    this.orders = orders;
+    this.basket = basket;
+  }
+}
+

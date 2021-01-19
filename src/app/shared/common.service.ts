@@ -6,7 +6,7 @@ import {Inject} from '@angular/core';
 import {FirebaseApp} from '@angular/fire';
 import {take, filter, map} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
-import {Product} from '../../model';
+import {Product, User} from '../../model';
 
 
 
@@ -15,10 +15,12 @@ import {Product} from '../../model';
 })
 export class CommonService {
   form: any;
+  user: User;
 
   constructor(public fireStore: AngularFirestore,
               public fireDb: AngularFireDatabase, @Inject(FirebaseApp) public firebaseApp: any
               ) {}
+
 
 
   manySofas: {}[] = [
@@ -390,6 +392,34 @@ export class CommonService {
       }
     );
   }
+
+  // добавляем в базу в коллекцию users документ с новым зарегистрировавшимся пользователем
+  addNewUser(id: string, email: string): void {
+    this.fireStore.collection('users').add({
+      id: id,
+      email: email,
+      basket: [],
+      orders: []
+    });
+  }
+
+
+  getAllUsers(): Observable<{}> {
+    return this.fireStore.collection('users').snapshotChanges()
+      .pipe(map( (res) => res.map( (doc) => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
+  }
+
+  // получаем юзера , который сейчас вошел на сайт, по его почте
+  getUser(email: string): Observable<any> {
+   return  this.fireStore.collection('users', ref => ref.where('email', '==', email))
+      .snapshotChanges()
+      .pipe(map( res => res.map( doc => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
+  }
+
+  // обновим корзину пользователя в базе
+  addToUserBasket(userId: string, userInfo: any): void {
+    this.fireStore.collection('users').doc(userId).set(userInfo);
+}
 
 /*  // получить массив продуктов из коллекции сравнения по конкретному пути (sofas/tables/chairs)
   getProductsFromComparison(name: string): Observable<any> {

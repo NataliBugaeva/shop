@@ -7,12 +7,14 @@ import {AboutProductComponent} from './all-products/about-product/about-product.
 import {BasketComponent} from './basket/basket.component';
 import {ComparisonComponent} from './comparison/comparison.component';
 import {OrderComponent} from './order/order.component';
+import {UserAccountComponent} from './user-account/user-account.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'order', component: OrderComponent},
   {path: 'basket', component: BasketComponent},
   {path: 'comparison', component: ComparisonComponent},
+  {path: 'account', component: UserAccountComponent},
   {path: ':category', component: AllProductsComponent},
   {path: ':category/:id', component: AboutProductComponent},
   {path: '**', component: PageNotFoundComponent}

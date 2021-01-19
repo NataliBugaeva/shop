@@ -28,3 +28,6 @@
         border: none; }
         .basket-info-container-place-an-order:hover {
           cursor: pointer; }
+
+[disabled] {
+  opacity: .5; }

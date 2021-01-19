@@ -15,6 +15,7 @@ import {AllProductsModule} from './all-products/all-products.module';
 import {BasketModule} from './basket/basket.module';
 import {ComparisonModule} from './comparison/comparison.module';
 import {OrderModule} from './order/order.module';
+import {UserAccountModule} from './user-account/user-account.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {OrderModule} from './order/order.module';
     AllProductsModule,
     BasketModule,
     ComparisonModule,
-    OrderModule
+    OrderModule,
+    UserAccountModule
   ],
   exports: [
   ],
