@@ -128,16 +128,19 @@ export class AboutProductComponent implements OnInit, OnDestroy {
         let arrProducts = res[0].info.basket;
         let userId = res[0].id;
         let userInfo = res[0].info;
-        console.log(arrProducts, userId, userInfo);
+        console.log(userInfo);
         if (arrProducts.length && arrProducts.some(item => item.id === this.productId)) {
-            alert('Данный товар уже в корзине!');
-            return;
+          console.log('корзина не пуста и такой товар уже есть');
+          alert('Данный товар уже в корзине!');
+          return;
         }
+        console.log('корзина была пуста или без данного товара');
         this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
         arrProducts.push(this.chosenProduct);
         userInfo.basket = arrProducts;
-        console.log(userInfo);
-        this.commonService.addToUserBasket(userId, userInfo);
+        console.log(arrProducts, userInfo);
+        /*this.commonService.addToUserBasket(userId, arrProducts)
+          .then(() => console.log('добавили'));*/
       })
     );
   }

@@ -417,8 +417,26 @@ export class CommonService {
   }
 
   // обновим корзину пользователя в базе
-  addToUserBasket(userId: string, userInfo: any): void {
-    this.fireStore.collection('users').doc(userId).set(userInfo);
+  addToUserBasket(userId: string, arrProducts: any): Promise<any> {
+    let ref = this.fireStore.collection('users').doc(userId);
+    return ref.update({
+      basket: arrProducts
+    })/*
+      .then(() => {
+        console.log('Document successfully updated!');
+      })
+      .catch(error => {
+        // The document probably doesn't exist.
+        console.error('Error updating document: ', error);
+      })*/;
+
+   /* this.fireStore.collection('users').doc(userId).set(userInfo)
+      .then(() => {
+      console.log('Document successfully written!');
+    })
+      .catch(error => {
+        console.error('Error writing document: ', error);
+      });*/
 }
 
 /*  // получить массив продуктов из коллекции сравнения по конкретному пути (sofas/tables/chairs)

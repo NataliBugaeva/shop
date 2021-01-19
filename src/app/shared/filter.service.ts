@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Sofa} from '../../model';
 import {map} from 'rxjs/operators';
 import {AngularFirestore, fromDocRef} from '@angular/fire/firestore';
-import {mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
