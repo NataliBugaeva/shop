@@ -4,6 +4,8 @@
     <app-basket-item *ngFor="let item of basketProducts"
                      [(productsInBasket)]="basketProducts"
                      [item]="item"
+                     [email]="email"
+                     [userId]="userId"
                      [(total)]="totalCost" ></app-basket-item>
   </div>
 

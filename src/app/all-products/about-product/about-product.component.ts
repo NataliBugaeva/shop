@@ -39,6 +39,11 @@ export class AboutProductComponent implements OnInit, OnDestroy {
   // это почта пользователя, который сейчас вошел на сайт
   public email: string;
 
+  public arrProducts: Product[];
+  //это Id не из документа в базе, а это id самого документа конкретного пользователя
+  public userId: string;
+  public userInfo: any;
+
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private commonService: CommonService,
@@ -125,22 +130,25 @@ export class AboutProductComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       this.commonService.getUser(this.email).subscribe(res => {
-        let arrProducts = res[0].info.basket;
-        let userId = res[0].id;
-        let userInfo = res[0].info;
-        console.log(userInfo);
-        if (arrProducts.length && arrProducts.some(item => item.id === this.productId)) {
+        this.arrProducts = res[0].info.basket;
+        this.userId = res[0].id;
+        this.userInfo = res[0].info;
+        console.log(this.userInfo);
+        if (this.arrProducts.length && this.arrProducts.some(item => item.id === this.productId)) {
           console.log('корзина не пуста и такой товар уже есть');
           alert('Данный товар уже в корзине!');
           return;
         }
         console.log('корзина была пуста или без данного товара');
         this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
-        arrProducts.push(this.chosenProduct);
-        userInfo.basket = arrProducts;
-        console.log(arrProducts, userInfo);
-        /*this.commonService.addToUserBasket(userId, arrProducts)
-          .then(() => console.log('добавили'));*/
+        this.arrProducts.push(this.chosenProduct);
+        this.userInfo.basket = this.arrProducts;
+        console.log(this.arrProducts, this.userInfo);
+        console.log('конец');
+        this.commonService.addToUserBasket(this.userId, this.arrProducts)
+          .then( () => {
+            console.log('продукт добавлен в корзину');
+          });
       })
     );
   }

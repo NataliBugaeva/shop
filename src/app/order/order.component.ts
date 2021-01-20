@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
-
-
 
 @Component({
   selector: 'app-order',
@@ -44,7 +41,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       }),
       deliveryInfo: this.fb.group({
         userAddress: ['', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]],
-        delivery: ['', Validators.required],
+        delivery: ['', Validators.required]
       }),
       paymentInfo: this.fb.group({
         payment: ['', Validators.required]
@@ -57,13 +54,13 @@ export class OrderComponent implements OnInit, OnDestroy {
     if (this.orderForm.controls['deliveryInfo'].get('userAddress')) {
       return;
     }
-    this.orderForm.addControl('deliveryInfo', ['', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]])
+    this.orderForm.controls['deliveryInfo'].addControl('userAddress', this.fb.control('', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)] ));
     console.log(this.orderForm);
   }
 
   changeS(): void {
     this.deliveryChecked = 'самовывоз';
-    this.orderForm.get('deliveryInfo').removeControl('userAddress');
+    this.orderForm.controls['deliveryInfo'].removeControl('userAddress');
     console.log(this.orderForm);
   }
 
@@ -95,7 +92,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     return document.getElementsByClassName('order-customer-info-validation').length;
   }
 
-  getDisabled() {
+  /*getDisabled() {
     console.log(this.orderForm.valid);
     return ( (!this._userName?.value.length || !this._userEmail?.value.length || !this._userPhone?.value.length
       || !this._payment?.value.length || !this._delivery?.value.length) ||
@@ -104,26 +101,10 @@ export class OrderComponent implements OnInit, OnDestroy {
       (this._delivery?.value === 'самовывоз' && (!this._userName?.value.length || !this._userEmail?.value.length
         || !this._userPhone?.value.length || !this._payment?.value.length)) ||
       (this._incorrectFields > 0) );
-  }
+  }*/
 
   ngOnInit(): void {
-   /* this.paymentChecked = 'наличные';
-    this.deliveryChecked = 'курьер';*/
     this.initOrderForm();
-
-
-  /*  this.disable = ( (!this._userName?.value.length || !this._userEmail?.value.length || !this._userPhone?.value.length
-      || !this._payment?.value.length || !this._delivery?.value.length) ||
-      (this._delivery?.value === 'курьер' && (!this._userName?.value.length && !this._userEmail?.value.length
-      && !this._userPhone?.value.length && !this._userAddress?.value.length && !this._payment?.value.length)) ||
-      (this._delivery?.value === 'самовывоз' && (!this._userName?.value.length && !this._userEmail?.value.length
-      && !this._userPhone?.value.length && !this._payment?.value.length)) ||
-      (this._incorrectFields > 0) );*/
-
-
-
-    /*this.deliveryChecked = Array.from(document.querySelectorAll('input[name="delivery"]:checked'))[0].value;
-    this.paymentChecked = Array.from(document.querySelectorAll('input[name="payment"]:checked'))[0].value;*/
   }
 
   ngOnDestroy(): void {
