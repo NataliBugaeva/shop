@@ -8,120 +8,155 @@
 
 .about-product {
   width: 100%;
-}
 
-.about-product-links {
-  margin-bottom: 40px;
+  &-links {
+    margin-bottom: 40px;
 
-  span {
-    display: inline-block;
-    padding: 5px;
-    margin: 0 5px;
-    color: #15004a;
-    font-size: 20px;
+    span {
+      display: inline-block;
+      padding: 5px;
+      margin: 0 5px;
+      color: #15004a;
+      font-size: 20px;
 
-    &:hover,
-    &:active {
-      cursor: pointer;
-      outline: none;
-    }
-  }
-
-}
-
-
-.about-product-main-content {
-  max-width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-
-  &-img {
-    display: flex;
-    justify-content: center;
-    width: 700px;
-    height: 400px;
-    flex-shrink: 0;
-
-    img {
-      display: block;
-      max-width: 100%;
-      max-height: 100%;
-
-    }
-
-  }
-
-}
-
-
-.about-product-main-content-info {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px;
-
-  & span {
-    font-size: 40px;
-  }
-
-  & span + span {
-    font-size: 20px;
-    font-style: italic;
-    margin-top: 10px;
-  }
-
-  & span + span + span {
-    margin-top: 10px;
-    font-size: 30px;
-    text-decoration: none;
-    font-style: normal;
-  }
-
-
-  &-buttons {
-    margin-top: 30px;
-
-
-    button {
-      display: block;
-      width: 200px;
-      background-color: #15004a;
-      color: white;
-      font-weight: bold;
-      padding: 10px 0;
-      border: none;
-
-      &:active,
-      &:hover {
-        outline: 1px solid #15004a;
+      &:hover,
+      &:active {
         cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  &-main-content {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 50px;
+
+      & span {
+        font-size: 40px;
+      }
+
+      & span + span {
+        font-size: 20px;
+        font-style: italic;
+        margin-top: 10px;
+      }
+
+      & span + span + span {
+        margin-top: 10px;
+        font-size: 30px;
+        text-decoration: none;
+        font-style: normal;
+      }
+
+      &-buttons {
+        margin-top: 30px;
+
+        button {
+          display: block;
+          width: 200px;
+          background-color: #15004a;
+          color: white;
+          font-weight: bold;
+          padding: 10px 0;
+          border: none;
+
+          &:active,
+          &:hover {
+            outline: 1px solid #15004a;
+            cursor: pointer;
+          }
+        }
       }
     }
 
+    &-img {
+      display: flex;
+      justify-content: center;
+      width: 700px;
+      height: 400px;
+      flex-shrink: 0;
+
+      img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+
+  &-characteristics {
+    margin: 30px 0;
+
+    &-buttons {
+      display: flex;
+    }
+
+    &-info {
+      width: 100%;
+      border-top: 1px solid $borders-on-page-about-sofa;
+
+      &-item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        &-points {
+          width: 40%;
+          padding: 10px 0 10px 15px;
+          font-weight: bold;
+        }
+
+        &-values {
+          width: 60%;
+          padding: 10px 0 10px 15px;
+        }
+      }
+
+      &-item:nth-child(2n) {
+        background-color: #eae0ee;
+      }
+    }
+
+    &-comments {
+      padding: 30px;
+      border-top: 1px solid $borders-on-page-about-sofa;
+    }
   }
 
 }
 
-//стили для кнопок вынеслп отдельно
+//стили для кнопок вынесла отдельно
 .button-switch {
   display: flex;
   margin-bottom: 20px;
 
-  div {
+  &-plus,
+  &-minus {
+    background-color: #15004a;
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  input {
+    width: 100px;
+  }
+
+  div,
+  input {
     border: 1px solid #15004a;
     padding: 5px 10px;
-    margin-top: 0;
     font-size: 20px;
-  }
-}
-
-.plus,
-.minus {
-  background-color: #15004a;
-  color: white;
-  font-weight: bold;
-
-  &:hover {
-    cursor: pointer;
+    text-align: center;
   }
 }
 
@@ -130,46 +165,6 @@
 
   &:active {
     outline: #15004a;
-  }
-}
-
-
-.about-product-characteristics {
-  margin: 30px 0;
-
-  &-buttons {
-    display: flex;
-
-  }
-
-  &-info {
-    display: flex;
-    border-top: 1px solid $borders-on-page-about-sofa;
-
-    &-points,
-    &-values {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-
-      div {
-        width: 100%;
-        height: 60px;
-        border-bottom: 1px solid $borders-on-page-about-sofa;
-        margin: 5px 0;
-      }
-    }
-
-    &-points {
-      font-weight: bold;
-      max-width: 250px;
-    }
-
-  }
-
-  &-comments {
-    padding: 30px;
-    border-top: 1px solid $borders-on-page-about-sofa;
   }
 }
 
@@ -194,8 +189,14 @@
   color: white;
 }
 
+.link-to-comparison {
+  margin-top: 10px;
+  padding: 10px;
 
-
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 @media screen and (max-width: 971px){
   .about-product-main-content-img {
@@ -226,8 +227,6 @@
     justify-content: center;
   }
 }
-
-
 
 @media screen and (max-width: 650px) {
   .about-product-main-content {

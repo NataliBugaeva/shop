@@ -5,108 +5,105 @@
 
 .about-product {
   width: 100%; }
-
-.about-product-links {
-  margin-bottom: 40px; }
-  .about-product-links span {
-    display: inline-block;
-    padding: 5px;
-    margin: 0 5px;
-    color: #15004a;
-    font-size: 20px; }
-    .about-product-links span:hover, .about-product-links span:active {
-      cursor: pointer;
-      outline: none; }
-
-.about-product-main-content {
-  max-width: 100%;
-  display: flex;
-  flex-wrap: wrap; }
-  .about-product-main-content-img {
+  .about-product-links {
+    margin-bottom: 40px; }
+    .about-product-links span {
+      display: inline-block;
+      padding: 5px;
+      margin: 0 5px;
+      color: #15004a;
+      font-size: 20px; }
+      .about-product-links span:hover, .about-product-links span:active {
+        cursor: pointer;
+        outline: none; }
+  .about-product-main-content {
+    max-width: 100%;
     display: flex;
-    justify-content: center;
-    width: 700px;
-    height: 400px;
-    flex-shrink: 0; }
-    .about-product-main-content-img img {
-      display: block;
-      max-width: 100%;
-      max-height: 100%; }
-
-.about-product-main-content-info {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px; }
-  .about-product-main-content-info span {
-    font-size: 40px; }
-  .about-product-main-content-info span + span {
-    font-size: 20px;
-    font-style: italic;
-    margin-top: 10px; }
-  .about-product-main-content-info span + span + span {
-    margin-top: 10px;
-    font-size: 30px;
-    text-decoration: none;
-    font-style: normal; }
-  .about-product-main-content-info-buttons {
-    margin-top: 30px; }
-    .about-product-main-content-info-buttons button {
-      display: block;
-      width: 200px;
-      background-color: #15004a;
-      color: white;
-      font-weight: bold;
-      padding: 10px 0;
-      border: none; }
-      .about-product-main-content-info-buttons button:active, .about-product-main-content-info-buttons button:hover {
-        outline: 1px solid #15004a;
-        cursor: pointer; }
+    flex-wrap: wrap; }
+    .about-product-main-content-info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 50px; }
+      .about-product-main-content-info span {
+        font-size: 40px; }
+      .about-product-main-content-info span + span {
+        font-size: 20px;
+        font-style: italic;
+        margin-top: 10px; }
+      .about-product-main-content-info span + span + span {
+        margin-top: 10px;
+        font-size: 30px;
+        text-decoration: none;
+        font-style: normal; }
+      .about-product-main-content-info-buttons {
+        margin-top: 30px; }
+        .about-product-main-content-info-buttons button {
+          display: block;
+          width: 200px;
+          background-color: #15004a;
+          color: white;
+          font-weight: bold;
+          padding: 10px 0;
+          border: none; }
+          .about-product-main-content-info-buttons button:active, .about-product-main-content-info-buttons button:hover {
+            outline: 1px solid #15004a;
+            cursor: pointer; }
+    .about-product-main-content-img {
+      display: flex;
+      justify-content: center;
+      width: 700px;
+      height: 400px;
+      flex-shrink: 0; }
+      .about-product-main-content-img img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%; }
+  .about-product-characteristics {
+    margin: 30px 0; }
+    .about-product-characteristics-buttons {
+      display: flex; }
+    .about-product-characteristics-info {
+      width: 100%;
+      border-top: 1px solid silver; }
+      .about-product-characteristics-info-item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%; }
+        .about-product-characteristics-info-item-points {
+          width: 40%;
+          padding: 10px 0 10px 15px;
+          font-weight: bold; }
+        .about-product-characteristics-info-item-values {
+          width: 60%;
+          padding: 10px 0 10px 15px; }
+      .about-product-characteristics-info-item:nth-child(2n) {
+        background-color: #eae0ee; }
+    .about-product-characteristics-comments {
+      padding: 30px;
+      border-top: 1px solid silver; }
 
 .button-switch {
   display: flex;
   margin-bottom: 20px; }
-  .button-switch div {
+  .button-switch-plus, .button-switch-minus {
+    background-color: #15004a;
+    color: white;
+    font-weight: bold; }
+    .button-switch-plus:hover, .button-switch-minus:hover {
+      cursor: pointer; }
+  .button-switch input {
+    width: 100px; }
+  .button-switch div,
+  .button-switch input {
     border: 1px solid #15004a;
     padding: 5px 10px;
-    margin-top: 0;
-    font-size: 20px; }
-
-.plus,
-.minus {
-  background-color: #15004a;
-  color: white;
-  font-weight: bold; }
-  .plus:hover,
-  .minus:hover {
-    cursor: pointer; }
+    font-size: 20px;
+    text-align: center; }
 
 .button-basket {
   margin-bottom: 20px; }
   .button-basket:active {
     outline: #15004a; }
-
-.about-product-characteristics {
-  margin: 30px 0; }
-  .about-product-characteristics-buttons {
-    display: flex; }
-  .about-product-characteristics-info {
-    display: flex;
-    border-top: 1px solid silver; }
-    .about-product-characteristics-info-points, .about-product-characteristics-info-values {
-      width: 100%;
-      display: flex;
-      flex-direction: column; }
-      .about-product-characteristics-info-points div, .about-product-characteristics-info-values div {
-        width: 100%;
-        height: 60px;
-        border-bottom: 1px solid silver;
-        margin: 5px 0; }
-    .about-product-characteristics-info-points {
-      font-weight: bold;
-      max-width: 250px; }
-  .about-product-characteristics-comments {
-    padding: 30px;
-    border-top: 1px solid silver; }
 
 .button-characteristics,
 .button-comments {
@@ -125,6 +122,12 @@
 .active {
   background-color: #15004a;
   color: white; }
+
+.link-to-comparison {
+  margin-top: 10px;
+  padding: 10px; }
+  .link-to-comparison:hover {
+    cursor: pointer; }
 
 @media screen and (max-width: 971px) {
   .about-product-main-content-img {

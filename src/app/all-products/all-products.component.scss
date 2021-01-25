@@ -7,8 +7,8 @@
     max-width: 250px;
     min-width: 150px;
     padding: 10px;
-  margin-bottom: 80px;
-  border-right: 1px solid grey;
+    margin-bottom: 80px;
+    border-right: 1px solid grey;
 
   button {
     margin-top: 15px;
@@ -18,7 +18,7 @@
     border-radius: 10px;
     color: white;
   }
-  }
+}
 
 .point-type {
   display: flex;
@@ -53,14 +53,12 @@
   justify-content: space-between;
 }
 
-
-
 .all-products {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-  }
+}
 
 app-product {
   width: 32%;
@@ -103,10 +101,6 @@ app-product {
   background-color: silver;
   color: white;
   opacity: .5;
-}
-
-.all-products app-item:nth-child(3n + 2) {
-  margin: 0 5px;
 }
 
 @media screen and (max-width: 800px) {

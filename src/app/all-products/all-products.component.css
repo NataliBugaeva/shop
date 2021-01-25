@@ -80,9 +80,6 @@ app-product {
   color: white;
   opacity: .5; }
 
-.all-products app-item:nth-child(3n + 2) {
-  margin: 0 5px; }
-
 @media screen and (max-width: 800px) {
   app-product {
     width: 47%; }

@@ -1,0 +1,36 @@
+.comparison {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto; }
+  .comparison-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px; }
+    .comparison-buttons button {
+      display: block;
+      width: 200px;
+      background-color: #15004a;
+      color: white;
+      font-weight: bold;
+      padding: 10px 0;
+      border: none;
+      margin: 0 20px; }
+      .comparison-buttons button:hover {
+        cursor: pointer; }
+  .comparison-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 20px; }
+    .comparison-block-message {
+      font-weight: bold;
+      font-size: 15px; }
+    .comparison-block-characteristics-point {
+      padding: 20px;
+      text-align: right;
+      font-weight: bold; }
+      .comparison-block-characteristics-point:nth-child(1) {
+        height: 140px;
+        font-size: 0px; }

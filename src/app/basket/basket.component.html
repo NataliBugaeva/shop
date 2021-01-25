@@ -1,0 +1,28 @@
+<ng-container *ngIf="basketProducts?.length">
+<div class="basket">
+  <div class="basket-products">
+    <app-basket-item *ngFor="let item of basketProducts"
+                     [(productsInBasket)]="basketProducts"
+                     [item]="item"
+                     [email]="email"
+                     [userId]="userId"
+                     [(total)]="totalCost" ></app-basket-item>
+  </div>
+
+  <div class="basket-info" [hidden]="!basketProducts.length">
+    <div class="basket-info-container">
+      <div>Общая стоимость товаров:</div>
+      <div class="basket-info-container-total-cost">{{totalCost}} руб.</div>
+      <button class="basket-info-container-place-an-order"
+              routerLink="/order"
+              [routerLinkActiveOptions]="{exact:true}"
+              routerLinkActive="active"
+              [disabled]="!email">Оформить заказ</button>
+    </div>
+  </div>
+</div>
+</ng-container>
+
+<ng-container *ngIf="!basketProducts?.length">
+  <div style="text-align: center; font-size: 20px">Ваша корзина пуста!!!</div>
+</ng-container>

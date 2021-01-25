@@ -1,0 +1,21 @@
+.comparison-item-point {
+  padding: 20px;
+  text-align: center;
+
+  &:nth-child(2n) {
+    background-color: #eae0ee;
+  }
+}
+
+.comparison-item-point-img {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+  }
+}
+

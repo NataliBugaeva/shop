@@ -9,7 +9,6 @@
     display: flex; }
   .main-image {
     display: flex;
-    /* align-items: flex-start;*/
     width: 100%;
     background-color: blanchedalmond;
     height: 450px;

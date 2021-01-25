@@ -42,7 +42,6 @@
     align-self: center;
     line-height: 1.3em;
     margin-left: 20px;
-
   }
 
   input {
@@ -63,6 +62,25 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  &-basket {
+    position: relative;
+
+    &-amount {
+      position: absolute;
+      top: -2px;
+      right: -5px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50px;
+      background-color: red;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      padding-top: 2px;
+    }
+  }
 
 
   &-search,
@@ -119,7 +137,6 @@
 
 [hidden] {
   transform: scale(0);
- /* display: none;*/
 }
 
 [disabled] {
@@ -129,9 +146,6 @@
 .active {
   outline: none;
 }
-
-//для основного блока main
-
 
 //для footer
 

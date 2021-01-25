@@ -1,0 +1,25 @@
+<div class="basket-item">
+  <div class="basket-item-info">
+    <div class="basket-item-info-name">{{itemName}}</div>
+    <div class="basket-item-info-type">{{itemType}}</div>
+    <div class="basket-item-info-img">
+      <img [src]=itemImg alt="">
+    </div>
+  </div>
+
+  <div class="basket-item-control">
+    <div class="basket-item-control-remove"
+         [id]=itemId
+         (click)="removeFromBasket()">Удалить</div>
+
+    <div class="basket-item-control-price">Цена:<br>{{itemPrice}} руб.</div>
+
+    <div class="basket-item-control-amount">
+      <div class="basket-item-control-amount-minus"
+           (click)="decreaseAmount()"> - </div>
+      <input [(ngModel)]="itemAmount">
+      <div class="basket-item-control-amount-plus"
+           (click)="enlargeAmount()"> + </div>
+    </div>
+  </div>
+</div>
