@@ -449,5 +449,4 @@ export class CommonService {
     return this.fireStore.collection(path).doc(id).snapshotChanges()
       .pipe(map( (res) => ({id: res.payload.id, info: res.payload.data()})));
   }
-
 }
