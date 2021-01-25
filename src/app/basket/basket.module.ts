@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BasketComponent} from './basket.component';
-import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { BasketItemComponent } from './basket-item/basket-item.component';
+import {AppRoutingModule} from '../app-routing.module';
+import {BasketRoutingModule} from './basket-routing.module';
+
+
 
 @NgModule({
   declarations: [
@@ -12,12 +15,14 @@ import { BasketItemComponent } from './basket-item/basket-item.component';
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule
+    FormsModule,
+    /*AppRoutingModule,*/
+    BasketRoutingModule
   ],
-  exports: [
+  /*exports: [
     BasketComponent,
     BasketItemComponent
-  ]
+  ]*/
+  providers: []
 })
 export class BasketModule { }

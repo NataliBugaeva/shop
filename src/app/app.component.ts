@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthenticationService} from './shared/authentication.service';
 import {Subscription} from 'rxjs';
 
@@ -7,27 +7,27 @@ import {Subscription} from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent  {
 
 //этот email связан с инпутом
-  public email: string;
+ /* public email: string;
   public password: string;
   public path: string;
 
   public isLogged: boolean;
   public err: string;
-  public userData: any;
+  public userData: any;*/
   //этот userEmail для хранения почты
-  public userEmail: string;
-  public userId: string;
+ /* public userEmail: string;
+  public userId: string;*/
 
-  public switch = true;
+  /*public switch = true;*/
 
-  public subscriptions: Subscription[] = [];
+ /* public subscriptions: Subscription[] = [];*/
 
   constructor(public authenticationService: AuthenticationService) {}
 
-  switchSearch(): void {
+/*  switchSearch(): void {
     this.switch = !this.switch;
   }
 
@@ -46,9 +46,9 @@ export class AppComponent implements OnInit, OnDestroy {
   signOut(): void {
     this.authenticationService.SignOut();
     this.userEmail = '';
-  }
+  }*/
 
-  ngOnInit(): void {
+/*  ngOnInit(): void {
     this.subscriptions.push(
       this.authenticationService.userData.subscribe(res => {
         this.userEmail = res?.email;
@@ -62,6 +62,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
-  }
+  }*/
 
 }

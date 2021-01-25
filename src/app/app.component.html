@@ -1,4 +1,4 @@
-<header class="header">
+<!--<header class="header">
   <div class="header-with-icons">
     <div class="cent">
       <div class="home-link" routerLink="">
@@ -31,8 +31,8 @@
                title="корзина">
 
         </div>
-        <!--<div class="icons-user"
-             *ngIf="authenticationService.isLogged  && !authenticationService.err">-->
+        &lt;!&ndash;<div class="icons-user"
+             *ngIf="authenticationService.isLogged  && !authenticationService.err">&ndash;&gt;
         <div class="icons-user"
              routerLink="account"
              [routerLinkActiveOptions]="{exact:true}"
@@ -48,8 +48,8 @@
 
   <div class="header-authentication">
     <div class="cent">
-      <!--<h3 *ngIf="authenticationService.userData | async"
-          style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>-->
+      &lt;!&ndash;<h3 *ngIf="authenticationService.userData | async"
+          style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>&ndash;&gt;
       <h3 *ngIf="authenticationService.userData | async"
           style="color: #5f0877">Добро пожаловать, {{ userEmail }}</h3>
 
@@ -90,11 +90,13 @@
           [routerLinkActiveOptions]="{exact:true}"
           routerLinkActive="active">Столы</span>
   </nav>
-</header>
+</header>-->
+<app-header></app-header>
 
 <main>
   <router-outlet></router-outlet>
 </main>
 
 <footer class="footer"></footer>
+
 

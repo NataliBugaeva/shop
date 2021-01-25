@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-account',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserAccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router,
+              public route: ActivatedRoute) { }
+
+
+
+  goToOrders() {
+    this.router.navigate(['orders'], {relativeTo: this.route} );
+  }
+
+  goToUser() {
+    this.router.navigate(['user'], {relativeTo: this.route} );
+  }
 
   ngOnInit(): void {
   }

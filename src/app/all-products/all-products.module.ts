@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule} from '@angular/router';
+
 
 import { ProductComponent } from './product/product.component';
 import { AboutProductComponent } from './about-product/about-product.component';
 import {AllProductsComponent} from './all-products.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from '../app-routing.module';
+import {AllProductsRoutingModule} from './all-products-routing.module';
+
 
 
 @NgModule({
@@ -16,14 +19,16 @@ import {FormsModule} from '@angular/forms';
   ],
     imports: [
         CommonModule,
-        RouterModule,
-        FormsModule
+        FormsModule,
+        /*AppRoutingModule,*/
+        AllProductsRoutingModule,
+        ReactiveFormsModule
     ],
-  exports: [
+/*  exports: [
     AllProductsComponent,
     ProductComponent,
     AboutProductComponent
-  ],
+  ],*/
   providers: []
 })
 export class AllProductsModule { }

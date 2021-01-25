@@ -1,6 +1,6 @@
 <div class="products">
   <div class="products-filter">
-    <form action="">
+   <!-- <form action="">
       <div class="type">Тип:</div>
       <div class="point-type">
         <label for="straight">прямой:</label>
@@ -64,9 +64,84 @@
                placeholder="до"
                [(ngModel)]="maxPrice">
       </div>
-    </form>
+    </form>-->
 
-    <button>Показать</button>
+    <form [formGroup]="filterSofasForm"
+          (ngSubmit)="filter()">
+      <fieldset formGroupName="typeInfo">
+        <legend>Тип:</legend>
+        <div class="point-type">
+          <label for="straight">прямой:</label>
+          <input type="checkbox"
+                 id="straight"
+                 name="type"
+                 value="прямой"
+                 formControlName="type1">
+        </div>
+        <div class="point-type">
+          <label for="corner">угловой:</label>
+          <input type="checkbox"
+                 id="corner"
+                 name="type"
+                 value="угловой"
+                 formControlName="type2">
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="mechanismInfo">
+        <legend>Механизм:</legend>
+        <div class="point-mechanism">
+          <label for="eurobook">еврокнижка:</label>
+          <input type="checkbox"
+                 id="eurobook"
+                 name="mechanism"
+                 value="еврокнижка"
+                 formControlName="mechanism1">
+        </div>
+        <div class="point-mechanism">
+          <label for="rollOut">выкатной:</label>
+          <input type="checkbox"
+                 id="rollOut"
+                 name="mechanism"
+                 value="выкатной"
+                 formControlName="mechanism2">
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="lengthInfo">
+        <legend>Длина, см:</legend>
+        <div class="point-length">
+          <input type="text"
+                 id="minLength"
+                 name="minLength"
+                 placeholder="от"
+                 formControlName="minLength">
+          <input type="text"
+                 id="maxLength"
+                 name="maxLength"
+                 placeholder="до"
+                 formControlName="maxLength">
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="priceInfo">
+        <legend>Цена, руб:</legend>
+        <div class="point-price">
+          <input type="text"
+                 id="minPrice"
+                 name="minPrice"
+                 placeholder="от"
+                 formControlName="minPrice">
+          <input type="text"
+                 id="maxPrice"
+                 name="maxPrice"
+                 placeholder="до"
+                 formControlName="maxPrice">
+        </div>
+      </fieldset>
+
+      <button type="submit">Показать</button>
+    </form>
   </div>
 
 
@@ -82,20 +157,20 @@
     <div class="pagination">
       <ul *ngIf="pager?.pages && pager?.pages.length ">
         <li [ngClass]="{disabled:pager?.currentPage === 1}">
-          <a (click)="setPage(1, products)">First</a>
+          <a (click)="setPage(1, filteredProducts)">First</a>
         </li>
         <li [ngClass]="{disabled:pager?.currentPage === 1}">
-          <a (click)="setPage(pager?.currentPage - 1, products)">Previous</a>
+          <a (click)="setPage(pager?.currentPage - 1, filteredProducts)">Previous</a>
         </li>
         <li *ngFor="let page of pager?.pages"
             [ngClass]="{active:pager?.currentPage === page}">
-          <a (click)="setPage(page, products)">{{page}}</a>
+          <a (click)="setPage(page, filteredProducts)">{{page}}</a>
         </li>
         <li [ngClass]="{disabled:pager?.currentPage === pager?.totalPages}">
-          <a (click)="setPage(pager?.currentPage + 1, products)">Next</a>
+          <a (click)="setPage(pager?.currentPage + 1, filteredProducts)">Next</a>
         </li>
         <li [ngClass]="{disabled:pager?.currentPage === pager?.totalPages}">
-          <a (click)="setPage(pager?.totalPages, products)">Last</a>
+          <a (click)="setPage(pager?.totalPages, filteredProducts)">Last</a>
         </li>
       </ul>
     </div>

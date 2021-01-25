@@ -16,6 +16,7 @@ export class BasketItemComponent implements OnInit, OnDestroy {
   @Input() item: Product;
   @Input() email: string;
   @Input() userId: string;
+  @Input() docId: string;
 
   @Output() totalChange = new EventEmitter<number>();
   @Output() productsInBasketChange = new EventEmitter<Product[]>();
@@ -36,10 +37,11 @@ export class BasketItemComponent implements OnInit, OnDestroy {
 
   removeFromBasket(): void {
     this.subscriptions.push(
-      this.commonService.getUser(this.email).subscribe(res => {
+      this.commonService.getUser(this.userId).subscribe(res => {
         this.productsInBasket = res[0].info.basket.filter((i: Product) => i.id !== this.itemId);
         this.productsInBasketChange.emit(this.productsInBasket);
-        this.commonService.addToUserBasket(this.userId, this.productsInBasket)
+        console.log(this.productsInBasket, this.userId, this.docId);
+        this.commonService.addToUserBasket(this.docId, this.productsInBasket)
           .then( () => {
             console.log('продукты обновлены в корзине после удаления');
           });
@@ -51,7 +53,7 @@ export class BasketItemComponent implements OnInit, OnDestroy {
   // функция меняет количество товара в корзине при нажатии на плюс или минус
   changeAmountInBasket(amount: number): void {
     this.subscriptions.push(
-      this.commonService.getUser(this.email).subscribe( res => {
+      this.commonService.getUser(this.userId).subscribe( res => {
         this.productsInBasket = res[0].info.basket;
         this.productsInBasket.map(item => {
           if (item.id === this.itemId) {
@@ -62,7 +64,7 @@ export class BasketItemComponent implements OnInit, OnDestroy {
             });
           }
         });
-        this.commonService.addToUserBasket(this.userId, this.productsInBasket)
+        this.commonService.addToUserBasket(this.docId, this.productsInBasket)
           .then( () => {
             console.log('продукты обновлены в корзине после увеличения количества товаров');
             console.log(this.productsInBasket);
@@ -75,7 +77,7 @@ export class BasketItemComponent implements OnInit, OnDestroy {
   // фунция пересчитывает общую стоимость всех товаров в корзине в случае изменения количества товаров
   changeTotalCost(): void {
     this.subscriptions.push(
-      this.commonService.getUser(this.email).subscribe(res => {
+      this.commonService.getUser(this.userId).subscribe(res => {
         this.total = res[0].info.basket
           .map( (item: Product) => item.info.info.find(i => i.name === 'Цена').value *
             item.info.info.find(i => i.name === 'Количество').value )

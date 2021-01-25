@@ -1,0 +1,37 @@
+.account {
+  display: flex;
+  flex-direction: column;
+
+  &-cent {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+
+    &-buttons {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-info {
+    }
+  }
+
+  button {
+    display: block;
+    width: 200px;
+    margin: 10px;
+    background-color: #15004a;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0;
+    border: none;
+
+    &:active,
+    &:hover {
+      outline: 1px solid #15004a;
+      cursor: pointer;
+    }
+  }
+}
+
+

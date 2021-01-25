@@ -80,6 +80,12 @@ app-product {
   color: white;
   opacity: .5; }
 
+fieldset {
+  margin-bottom: 20px; }
+
+legend {
+  font-weight: bold; }
+
 @media screen and (max-width: 800px) {
   app-product {
     width: 47%; }

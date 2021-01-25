@@ -41,7 +41,8 @@
                    (click)="enlargeAmount()"> + </div>
             </div>
             <button class="button-basket"
-                    (click)="addToBasket()">Добавить в корзину</button>
+                    (click)="addToBasket()"
+            [disabled]="!(authenticationService.userData | async)">Добавить в корзину</button>
             <button class="button-compare"
                     *ngIf="!comparison"
                     (click)="addToComparison()">Добавить в сравнение</button>

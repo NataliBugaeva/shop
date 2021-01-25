@@ -1,1 +1,13 @@
-<p>user-account works!</p>
+<div class="account">
+  <div class="account-cent">
+
+    <div class="account-cent-buttons">
+      <button (click)="goToUser()">о пользователе</button>
+      <button (click)="goToOrders()">заказы</button>
+    </div>
+
+    <div class="account-cent-info">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

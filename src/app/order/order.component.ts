@@ -1,12 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {AuthenticationService} from '../shared/authentication.service';
+import {CommonService} from '../shared/common.service';
+import {take} from 'rxjs/operators';
+import {Product} from '../../model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
+
 export class OrderComponent implements OnInit, OnDestroy {
 
   public deliveryChecked: string;
@@ -19,17 +25,59 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   public orderForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  public basketProducts: [];
+  public basketDocId: string;
+  public userId: string;
+  public userInfo: {
+    infoName: '',
+    infoSurname: '',
+    infoEmail: '',
+    infoPhone: ''
+  };
+
+  public totalCost: number;
+
+  constructor(private fb: FormBuilder,
+              private authenticationService: AuthenticationService,
+              private commonService: CommonService,
+              public router: Router) { }
 
   makeOrder(): void {
-    /*this.orderForm.controls.userInfo.patchValue({userName: 'Натахич'});*/
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = day + '/' + month + '/' + year;
 
-    console.log('Спасибо за заказ!!!');
+    let orderInfo = {
+      customerName: this.orderForm.get('userInfo.userName').value,
+      customerEmail: this.orderForm.get('userInfo.userEmail').value,
+      customerPhone: this.orderForm.get('userInfo.userPhone').value,
+      customerAddress: this.orderForm.get('deliveryInfo.userAddress')?.value || '-',
+      delivery: this.orderForm.get('deliveryInfo.delivery').value,
+      payment: this.orderForm.get('paymentInfo.payment').value,
+      date: currentDate,
+      totalCost: this.totalCost
+    }
 
-    /*console.log(this.orderForm.get('deliveryInfo.delivery'));*/
-    /*console.log(this.orderForm.controls['userInfo'].get('userEmail')?.errors);*/
-    /*console.log(this.orderForm.controls['userInfo'].get('userPhone')?.invalid);*/
-
+    this.subscriptions.push(
+      this.commonService.getOrders(this.userId).pipe(take(1)).subscribe(res => {
+        let orders = res[0].info.orders;
+        let orderIndex = orders.length + 1;
+        let docId = res[0].id;
+        orders.push({
+          orderIndex: orderIndex,
+          orderInfo: orderInfo,
+          orderProducts: this.basketProducts
+        });
+        this.commonService.addToOrders(docId, orders).then(() => console.log('добавили новый заказ в базу'));
+        this.commonService.addToUserBasket(this.basketDocId, [])
+          .then(() => console.log('корзина очищена'));
+        this.orderForm.reset();
+        let rout = '/thanks';
+        this.router.navigateByUrl(rout);
+      })
+    )
   }
 
   initOrderForm(): void {
@@ -54,13 +102,16 @@ export class OrderComponent implements OnInit, OnDestroy {
     if (this.orderForm.controls['deliveryInfo'].get('userAddress')) {
       return;
     }
-    this.orderForm.controls['deliveryInfo'].addControl('userAddress', this.fb.control('', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)] ));
+    const deliveryInfo: AbstractControl = this.orderForm.get('deliveryInfo');
+    const userAddress: AbstractControl = this.fb.control('', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]);
+    (<FormGroup>deliveryInfo).addControl('userAddress', userAddress);
     console.log(this.orderForm);
   }
 
   changeS(): void {
     this.deliveryChecked = 'самовывоз';
-    this.orderForm.controls['deliveryInfo'].removeControl('userAddress');
+    const deliveryInfo: AbstractControl = this.orderForm.get('deliveryInfo');
+    (<FormGroup>deliveryInfo).removeControl('userAddress')
     console.log(this.orderForm);
   }
 
@@ -92,19 +143,26 @@ export class OrderComponent implements OnInit, OnDestroy {
     return document.getElementsByClassName('order-customer-info-validation').length;
   }
 
-  /*getDisabled() {
-    console.log(this.orderForm.valid);
-    return ( (!this._userName?.value.length || !this._userEmail?.value.length || !this._userPhone?.value.length
-      || !this._payment?.value.length || !this._delivery?.value.length) ||
-      (this._delivery?.value === 'курьер' && (!this._userName?.value.length || !this._userEmail?.value.length
-        || !this._userPhone?.value.length || !this._userAddress?.value.length || !this._payment?.value.length)) ||
-      (this._delivery?.value === 'самовывоз' && (!this._userName?.value.length || !this._userEmail?.value.length
-        || !this._userPhone?.value.length || !this._payment?.value.length)) ||
-      (this._incorrectFields > 0) );
-  }*/
-
   ngOnInit(): void {
+
     this.initOrderForm();
+
+    this.subscriptions.push(
+      this.authenticationService.userData.subscribe(res => {
+        this.userId = res?.uid;
+        this.subscriptions.push(
+          this.commonService.getUser(this.userId).subscribe(res => {
+            this.basketProducts = res[0].info.basket;
+            this.basketDocId = res[0].id;
+            this.userInfo = res[0].info.info;
+            this.totalCost = this.basketProducts.map( (item: Product) => item.info.info.find(i => i.name === 'Цена').value *
+              item.info.info.find(i => i.name === 'Количество').value)
+              .reduce( (sum: number, item: number) => sum + item);
+            console.log(this.userInfo);
+          })
+        )
+      })
+    )
   }
 
   ngOnDestroy(): void {

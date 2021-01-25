@@ -16,11 +16,16 @@ import {BasketModule} from './basket/basket.module';
 import {ComparisonModule} from './comparison/comparison.module';
 import {OrderModule} from './order/order.module';
 import {UserAccountModule} from './user-account/user-account.module';
+import { HeaderComponent } from './header/header.component';
+import {LoginModule} from './login/login.module';
+import { ThanksForOrderComponent } from './thanks-for-order/thanks-for-order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderComponent,
+    ThanksForOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,8 @@ import {UserAccountModule} from './user-account/user-account.module';
     BasketModule,
     ComparisonModule,
     OrderModule,
-    UserAccountModule
+    UserAccountModule,
+    LoginModule
   ],
   exports: [
   ],

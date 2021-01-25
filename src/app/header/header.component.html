@@ -1,0 +1,106 @@
+<header class="header">
+  <div class="header-with-icons">
+    <div class="cent">
+      <div class="home-link" routerLink=""
+           [hidden]="authenticationService.getUrl() === '/login'">
+        <img src="./assets/icons/домашняя.png"
+             alt="вернуться на главную"
+             title="вернуться на главную">
+      </div>
+
+      <div class="search">
+        <!--<div class="phones-number">
+          +375(25)686-51-81 (life) <br>
+          +375(29)686-51-81 (mts)
+        </div>-->
+        <input type="search" [hidden]="switch">
+      </div>
+
+      <div class="icons" [hidden]="authenticationService.getUrl() === '/login'">
+        <div class="icons-search" (click)="switchSearch()">
+          <img src="./assets/icons/поиск.png"
+               alt="поиск"
+               title="поиск">
+        </div>
+
+        <div class="icons-basket"
+             routerLink="basket"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active"
+             *ngIf="userEmail">
+          <img src="./assets/icons/корзина.png"
+               alt="корзина"
+               title="корзина">
+
+        </div>
+        <!--<div class="icons-user"
+             *ngIf="authenticationService.isLogged  && !authenticationService.err">-->
+        <div class="icons-user"
+             routerLink="account/user"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active"
+             *ngIf="userEmail">
+          <img src="./assets/icons/пользователь.png"
+               alt="пользователь"
+               title="пользователь">
+        </div>
+
+        <!--<div class="icons-login"
+             routerLink="login"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active"
+             *ngIf="!userEmail">Войти</div>-->
+
+      </div>
+    </div>
+  </div>
+
+  <div class="header-authentication" [hidden]="authenticationService.getUrl() === '/login'">
+    <div class="cent">
+      <!--<h3 *ngIf="authenticationService.userData | async"
+          style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>-->
+      <h3 *ngIf="authenticationService.userData | async"
+          style="color: #5f0877">Добро пожаловать, {{ userEmail }}</h3>
+
+      <div *ngIf="!(authenticationService.userData | async)">
+        <input type="text"
+               [(ngModel)]="email"
+               placeholder="email">
+        <input type="password"
+               [(ngModel)]="password"
+               placeholder="пароль">
+
+        <button (click)="signUp()"
+                class="button-signUp"
+                routerLink="/login"
+                [routerLinkActiveOptions]="{exact:true}"
+                routerLinkActive="active"
+                [disabled]="!email || !password">Зарегистрироваться</button>
+
+        <button (click)="signIn()"
+                class="button-signIn"
+                [disabled]="!email || !password">Войти</button>
+      </div>
+
+      <button (click)="signOut()"
+              *ngIf="authenticationService.userData | async"
+              class="button-signOut"
+              routerLink="">Выйти</button>
+
+      <h3 class="text-danger"
+          *ngIf="authenticationService.err">{{ authenticationService.err }}</h3>
+    </div>
+  </div>
+
+  <nav class="header-navigation cent" [hidden]="authenticationService.getUrl() === '/login'">
+    <span routerLink="sofas"
+          [routerLinkActiveOptions]="{exact:true}"
+          routerLinkActive="active">Диваны</span>
+    <span routerLink="chairs"
+          [routerLinkActiveOptions]="{exact:true}"
+          routerLinkActive="active">Кресла</span>
+    <span routerLink="tables"
+          [routerLinkActiveOptions]="{exact:true}"
+          routerLinkActive="active">Столы</span>
+  </nav>
+</header>

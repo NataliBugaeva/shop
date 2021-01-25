@@ -1,0 +1,71 @@
+<div class="sign-up">
+  <form [formGroup]="signupForm"
+        (ngSubmit)="done()">
+
+    <fieldset formGroupName="info" class="sign-up-info">
+      <legend>Заполните информацию о себе</legend>
+      <div class="sign-up-info-name">
+        <label for="infoName">Имя: </label>
+        <input id="infoName"
+               type="text"
+               name="infoName"
+               formControlName="infoName">
+      </div>
+
+      <div *ngIf="_infoName.invalid && (_infoName.touched || _infoName.dirty)"
+           class="sign-up-info-validation">
+        <span *ngIf="_infoName?.errors.required">Обязательное поле!!!</span>
+        <span *ngIf="_infoName?.errors.minlength">Минимальная длина имени равна {{_infoName?.errors.minlength.requiredLength}} символам!!!</span>
+        <span *ngIf="_infoName?.errors.pattern">Разрешаются только буквы!!!</span>
+      </div>
+
+      <div class="sign-up-info-surname">
+        <label for="infoSurname">Фамилия: </label>
+        <input id="infoSurname"
+               type="text"
+               name="infoSurname"
+               formControlName="infoSurname">
+      </div>
+
+      <div *ngIf="_infoSurname.invalid && (_infoSurname.touched || _infoSurname.dirty)"
+           class="sign-up-info-validation">
+        <span *ngIf="_infoSurname?.errors.required">Обязательное поле!!!</span>
+        <span *ngIf="_infoSurname?.errors.minlength">Минимальная длина фамилии равна {{_infoSurname?.errors.minlength.requiredLength}} символам!!!</span>
+        <span *ngIf="_infoSurname?.errors.pattern">Разрешаются только буквы!!!</span>
+      </div>
+
+      <div class="sign-up-info-mail">
+        <label for="infoEmail">E-mail: </label>
+        <input id="infoEmail"
+               type="email"
+               name="infoEmail"
+               formControlName="infoEmail">
+      </div>
+
+      <div *ngIf="_infoEmail.invalid && (_infoEmail.touched || _infoEmail.dirty)"
+           class="sign-up-info-validation">
+        <span *ngIf="_infoEmail?.errors.required">Обязательное поле!!!</span>
+        <span *ngIf="_infoEmail?.errors.email">Почтовый ящик введен не верно!!!</span>
+      </div>
+
+      <div class="sign-up-info-phone">
+        <label for="infoPhone">Телефон: </label>
+        <input id="infoPhone"
+               type="tel"
+               name="infoPhone"
+               formControlName="infoPhone">
+      </div>
+
+      <div *ngIf="_infoPhone.invalid && (_infoPhone.touched || _infoPhone.dirty)"
+           class="sign-up-info-validation">
+        <span *ngIf="_infoPhone?.errors.required">Обязательное поле!!!</span>
+        <span *ngIf="_infoPhone?.errors.pattern">Формат телефона (пробелы могут быть в следующих местах):<br>+375 __ _______!!!</span>
+      </div>
+    </fieldset>
+
+
+    <button class="sign-up-button"
+            type="submit"
+            [disabled]="signupForm.invalid">Зарегистрироваться</button>
+  </form>
+</div>

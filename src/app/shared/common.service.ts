@@ -7,8 +7,7 @@ import {FirebaseApp} from '@angular/fire';
 import {take, filter, map} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 import {Product, User} from '../../model';
-
-
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +15,14 @@ import {Product, User} from '../../model';
 export class CommonService {
   form: any;
   user: User;
+  url: string;
 
   constructor(public fireStore: AngularFirestore,
-              public fireDb: AngularFireDatabase, @Inject(FirebaseApp) public firebaseApp: any) {}
-
-
+              public fireDb: AngularFireDatabase,
+              public router: Router,
+              public activatedRoute: ActivatedRoute,
+              @Inject(FirebaseApp) public firebaseApp: any) {
+  }
 
   manySofas: {}[] = [
     { id: 'id' + Math.random().toString().slice(3, 10),
@@ -114,8 +116,6 @@ export class CommonService {
       comments: []
     },
   ];
-
-
   manyChairs: {}[] = [
     { id: 'id' + Math.random().toString().slice(3, 10),
       info: [
@@ -229,7 +229,6 @@ export class CommonService {
       comments: []
     }
 ];
-
   manyTables: {}[] = [
     { id: 'id' + Math.random().toString().slice(3, 10),
       info: [
@@ -393,13 +392,21 @@ export class CommonService {
   }
 
   // добавляем в базу в коллекцию users документ с новым зарегистрировавшимся пользователем
-  addNewUser(id: string, email: string): void {
+  addNewUser(id: string, email: string, info: {}): void {
     this.fireStore.collection('users').add({
       id: id,
       email: email,
-      basket: [],
+      info: info,
+      basket: []
+    }).then(() => console.log('добавили пользователя'));
+  }
+
+  // добавляем в базу в коллекцию orders документ с новым зарегистрировавшимся пользователем
+  addNewOrderDocument(id: string): void {
+    this.fireStore.collection('orders').add({
+      id: id,
       orders: []
-    });
+    }).then(() => console.log('добавили заказы'));
   }
 
 
@@ -408,34 +415,33 @@ export class CommonService {
       .pipe(map( (res) => res.map( (doc) => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
   }
 
+  // получаем orders юзера , который сейчас вошел на сайт, по его почте
+  getOrders(userId: string): Observable<any> {
+    return  this.fireStore.collection('orders', ref => ref.where('id', '==', userId))
+      .snapshotChanges()
+      .pipe(map( res => res.map( doc => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
+  }
+
   // получаем юзера , который сейчас вошел на сайт, по его почте
-  getUser(email: string): Observable<any> {
-   return  this.fireStore.collection('users', ref => ref.where('email', '==', email))
+  getUser(id: string): Observable<any> {
+   return  this.fireStore.collection('users', ref => ref.where('id', '==', id))
       .snapshotChanges()
       .pipe(map( res => res.map( doc => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
   }
 
   // обновим корзину пользователя в базе
-  addToUserBasket(userId: string, arrProducts: any) {
-    return this.fireStore.collection('users').doc(userId).update({
+  addToUserBasket(docId: string, arrProducts: any) {
+    return this.fireStore.collection('users').doc(docId).update({
       basket: arrProducts
     });
 }
 
-
-
-/*  // получить массив продуктов из коллекции сравнения по конкретному пути (sofas/tables/chairs)
-  getProductsFromComparison(name: string): Observable<any> {
-    return this.fireStore.collection('comparison', ref => ref.where('name', '==', name))
-      .snapshotChanges()
-      .pipe(map( res => res.map( doc => ({id: doc.payload.doc.id, info: doc.payload.doc.data()}))));
+// обновим orders пользователя в базе
+  addToOrders(docId: string, orders: any) {
+    return this.fireStore.collection('orders').doc(docId).update({
+      orders: orders
+    });
   }
-
-  // добавить продукт в документ для сравнение
-  addProductToComparison(id: string, path: string, products: Product[]): void {
-    this.fireStore.collection('comparison').doc(id).set({name: path, value: products});
-  }*/
-
 
 
   // получаем все продукты
@@ -449,4 +455,9 @@ export class CommonService {
     return this.fireStore.collection(path).doc(id).snapshotChanges()
       .pipe(map( (res) => ({id: res.payload.id, info: res.payload.data()})));
   }
+
+  getUrl() {
+    return this.activatedRoute.snapshot.params;
+  }
+
 }

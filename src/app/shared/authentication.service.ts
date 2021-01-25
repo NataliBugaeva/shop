@@ -3,6 +3,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Observable} from 'rxjs';
 
 import {CommonService} from './common.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +20,27 @@ export class AuthenticationService {
 
 
   constructor(private angularFireAuth: AngularFireAuth,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              public router: Router) {
     this.userData = angularFireAuth.authState;
     this.err = '';
   }
 
+  getUrl() {
+    return this.router.url;
+  }
+
   // метод "Зарегистрироваться"
-  SignUp(email: string, password: string): void {
+  SignUp(email, password): void {
+    console.log(email,password);
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         this.isLogged = true;
         this.err = '';
-        this.commonService.addNewUser(res.user?.uid, res.user?.email);
+        console.log(res.user);
+        /*this.commonService.addNewUser(res.user?.uid, res.user?.email);
+        this.commonService.addNewOrderDocument(res.user?.uid);*/
         console.log('Successfully signed up!', res);
       })
       .catch(error => {

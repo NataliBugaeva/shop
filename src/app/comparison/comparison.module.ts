@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ComparisonComponent} from './comparison.component';
-import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { ComparisonItemComponent } from './comparison-item/comparison-item.component';
+import {AppRoutingModule} from '../app-routing.module';
+import {ComparisonRoutingModule} from './comparison-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,12 +13,14 @@ import { ComparisonItemComponent } from './comparison-item/comparison-item.compo
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule
+    FormsModule,
+   /* AppRoutingModule,*/
+    ComparisonRoutingModule
   ],
-  exports: [
+/*  exports: [
     ComparisonComponent,
     ComparisonItemComponent
-  ]
+  ]*/
+  providers: []
 })
 export class ComparisonModule { }

@@ -5,6 +5,8 @@ import {Subscription} from 'rxjs';
 import {Product} from '../../../model';
 import {AuthenticationService} from '../../shared/authentication.service';
 
+import {take} from 'rxjs/operators';
+
 @Component({
   selector: 'app-about-product',
   templateUrl: './about-product.component.html',
@@ -26,7 +28,6 @@ export class AboutProductComponent implements OnInit, OnDestroy {
   public switch = true;
   public subscriptions: Subscription[] = [];
 
-  public docId: string;
   // это я получаю обьект comparison из LS
   public productsFromComparison: any;
 
@@ -40,14 +41,15 @@ export class AboutProductComponent implements OnInit, OnDestroy {
   public email: string;
 
   public arrProducts: Product[];
-  //это Id не из документа в базе, а это id самого документа конкретного пользователя
-  public userId: string;
+  //это id самого документа конкретного пользователя
+  public docId: string;
   public userInfo: any;
+  public userId: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private commonService: CommonService,
-              private authenticationService: AuthenticationService) { }
+              public authenticationService: AuthenticationService) { }
 
   // увеличиваем количество товара
   enlargeAmount(): void {
@@ -70,6 +72,7 @@ export class AboutProductComponent implements OnInit, OnDestroy {
 
 // добавить в сравнение
   addToComparison(): void {
+    console.log(this.chosenProduct);
     if (!localStorage.getItem('comparison')) {
       localStorage.setItem('comparison', JSON.stringify({
         sofas: [],
@@ -78,8 +81,10 @@ export class AboutProductComponent implements OnInit, OnDestroy {
       }));
     }
     this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
+    console.log(this.productsFromComparison);
     if ((!this.productsFromComparison[this.path].some( item => item.id === this.chosenProduct.id)) &&
       (this.productsFromComparison[this.path].length <= 2)) {
+        console.log(this.chosenProduct);
         this.productsFromComparison[this.path].push(this.chosenProduct);
         this.amountInComparison = this.productsFromComparison[this.path].length;
         localStorage.setItem('comparison', JSON.stringify(this.productsFromComparison));
@@ -110,42 +115,19 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Добавляем в LS массив с продуктами, которые будут в корзине
- /* addToBasket(): void {
-    let bbb = this.commonService.getAllUsers().subscribe(res => console.log(res));
-    let arrProducts: Product[] = [];
-    if (JSON.parse(localStorage.getItem('productsInBasket'))) {
-      arrProducts = JSON.parse(localStorage.getItem('productsInBasket'));
-      if (arrProducts.some(item => item.id === this.productId)) {
-        alert('Данный товар уже в корзине!');
-        return;
-      }
-    }
-    this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
-    arrProducts.push(this.chosenProduct);
-    localStorage.setItem('productsInBasket', JSON.stringify(arrProducts));
-  }*/
-
   addToBasket(): void {
-
     this.subscriptions.push(
-      this.commonService.getUser(this.email).subscribe(res => {
+      this.commonService.getUser(this.userId).pipe(take(1)).subscribe(res => {
         this.arrProducts = res[0].info.basket;
-        this.userId = res[0].id;
-        this.userInfo = res[0].info;
-        console.log(this.userInfo);
+        this.docId = res[0].id;
         if (this.arrProducts.length && this.arrProducts.some(item => item.id === this.productId)) {
-          console.log('корзина не пуста и такой товар уже есть');
           alert('Данный товар уже в корзине!');
           return;
         }
-        console.log('корзина была пуста или без данного товара');
-        this.chosenProduct.info.info.push({name: 'Количество', value: this.amount});
-        this.arrProducts.push(this.chosenProduct);
-        this.userInfo.basket = this.arrProducts;
-        console.log(this.arrProducts, this.userInfo);
-        console.log('конец');
-        this.commonService.addToUserBasket(this.userId, this.arrProducts)
+        let product = JSON.parse(JSON.stringify(this.chosenProduct));
+        product.info.info.push({name: 'Количество', value: this.amount});
+        this.arrProducts.push(product);
+        this.commonService.addToUserBasket(this.docId, this.arrProducts)
           .then( () => {
             console.log('продукт добавлен в корзину');
           });
@@ -158,6 +140,7 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authenticationService.user().subscribe(res => {
         this.email = res?.email;
+        this.userId = res?.uid;
         console.log(this.email);
       })
     );
@@ -167,7 +150,8 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     this.path = this.activatedRoute.snapshot.paramMap.get('category');
     this.amount = 1;
 
-    this.subscriptions.push(this.commonService.getProductId(this.path, this.productId).subscribe( (result: Product) => {
+    this.subscriptions.push(
+      this.commonService.getProductId(this.path, this.productId).subscribe( (result: Product) => {
         this.chosenProduct = result;
         console.log(this.chosenProduct);
         this.chosenProductInfoToShow = result.info.info;
@@ -175,9 +159,7 @@ export class AboutProductComponent implements OnInit, OnDestroy {
         this.chosenProductType = this.chosenProductInfoToShow.find(item => item.name === 'Тип').value;
         this.chosenProductPrice = this.chosenProductInfoToShow.find(item => item.name === 'Цена').value;
         this.chosenProductImgLarge = result.info.images.find(item => item.name === 'imgLarge').value;
-
         this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
-
         this.comparison = this.productsFromComparison[this.path].some(item => item.id === this.chosenProduct.id);
         this.amountInComparison = this.productsFromComparison[this.path].length;
         console.log(this.amountInComparison);
@@ -189,5 +171,5 @@ export class AboutProductComponent implements OnInit, OnDestroy {
       subscription.unsubscribe();
     });
   }
-
 }
+//ts-ignore

@@ -166,3 +166,6 @@
   .about-sofa-characteristics-info-points {
     flex-shrink: 1;
     min-width: 210px; } }
+
+[disabled] {
+  opacity: .5; }
