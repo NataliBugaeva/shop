@@ -20,7 +20,7 @@
   }
 }
 
-.point-type {
+/*.point-type {
   display: flex;
   width: 80px;
   justify-content: space-between;
@@ -53,12 +53,22 @@
   justify-content: space-between;
 }
 
+fieldset {
+  margin-bottom: 20px;
+}
+
+legend {
+  font-weight: bold;
+}*/
+
 .all-products {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+
+
 
 app-product {
   width: 32%;
@@ -92,6 +102,8 @@ app-product {
   }
 }
 
+
+
 .active {
   background-color: #15004a;
   color: white;
@@ -103,13 +115,6 @@ app-product {
   opacity: .5;
 }
 
-fieldset {
-  margin-bottom: 20px;
-}
-
-legend {
-  font-weight: bold;
-}
 
 @media screen and (max-width: 800px) {
   app-product {

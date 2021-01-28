@@ -1,0 +1,40 @@
+.point-type {
+  display: flex;
+  width: 80px;
+  justify-content: space-between;
+}
+
+.type,
+.mechanism,
+.length,
+.bedLength,
+.bedWidth,
+.price {
+  margin: 30px 0 10px;
+  font-weight: bold;
+}
+
+.point-length,
+.point-bedLength,
+.point-bedWidth,
+.point-price {
+
+  input {
+    display: inline-block;
+    width: 100px;
+  }
+}
+
+.point-mechanism {
+  display: flex;
+  width: 110px;
+  justify-content: space-between;
+}
+
+fieldset {
+  margin-bottom: 20px;
+}
+
+legend {
+  font-weight: bold;
+}

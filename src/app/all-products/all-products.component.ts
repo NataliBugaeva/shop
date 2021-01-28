@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+/*import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';*/
 import {PaginationService, Pagination} from '../shared/pagination.service';
 import {CommonService} from '../shared/common.service';
 import {Product} from '../../model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {distinct, filter, groupBy, map} from 'rxjs/operators';
+/*import {distinct, filter, groupBy, map} from 'rxjs/operators';*/
 import {FilterService} from '../shared/filter.service';
 
 
@@ -25,41 +25,40 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   // массив товаров с текущей страницы (для пагинации)
   public pagedItems: Product[];
 
-  public straight: string;
+/*  public straight: string;
   public corner: string;
   public euroBook: boolean;
-  public rollOut: boolean;
+  public rollOut: boolean;*/
 
-  public minLength: string;
+ /* public minLength: string;
   public maxLength: string;
   public minPrice: number;
-  public maxPrice: number;
+  public maxPrice: number;*/
 
 // массивы для выбранных чекбоксов
-  public arrTypeChecked: string[];
-  public arrMechanismChecked: string[];
+  /*public arrTypeChecked: string[];
+  public arrMechanismChecked: string[];*/
 
   // массивы для значений типов и механизмов, их будем получать из базы при загрузке страницы в ngOnInit
-  public arrTypeUnique: string[];
-  public arrMechanismUnique: string[];
+  /*public arrTypeUnique: string[];
+  public arrMechanismUnique: string[];*/
 
 // Это для объединения результатов запросов для фильтрации
-  public result1: [];
+/*  public result1: [];
   public result2: [];
-  public resultItog: [];
+  public resultItog: [];*/
 
 
   public filteredProducts: [];
 
-  public arr: string[];
+ /* public arr: string[];
 
-  public filterSofasForm: FormGroup;
+  public filterSofasForm: FormGroup;*/
 
   constructor(private commonService: CommonService,
               private paginationService: PaginationService,
               private filterService: FilterService,
-              private activatedRoute: ActivatedRoute,
-              public fb: FormBuilder) { }
+              private activatedRoute: ActivatedRoute) { }
 
   // в этот метод в качестве параметров передаем номер страницы текущей и массив продуктов
   // (столы, либо диваны, либо стулья)
@@ -72,7 +71,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
 
-initFilterSofasForm(): void {
+/*initFilterSofasForm(): void {
     this.filterSofasForm = this.fb.group({
       typeInfo: this.fb.group({
         type1: '',
@@ -91,7 +90,7 @@ initFilterSofasForm(): void {
         maxPrice: ['', Validators.pattern(/[0-9]/)]
       })
     });
-  }
+  }*/
 
 
 /*
@@ -139,12 +138,12 @@ ch = (): void => {
 
 }*/
 
-  filter(): void {
-   /* this.subscriptions.push(
+/*  filter(): void {
+   /!* this.subscriptions.push(
       this.commonService.getAllProducts(this.path).subscribe( (result: any[]) => {
         this.products = result;
       })
-    );*/
+    );*!/
 
     let type1 = this.filterSofasForm.get('typeInfo.type1').value;
     let type2 = this.filterSofasForm.get('typeInfo.type2').value;
@@ -196,20 +195,12 @@ ch = (): void => {
     this.setPage(1, filteredProducts);
     this.filteredProducts = filteredProducts;
 
-    /*this.products = this.products.filter(item => item.info.info.find(i => {
-      if((i.name === 'Тип' && (i.value === type1 || i.value === type2)) ||
-        (i.name === 'Механизм' && (i.value === mechanism1 || i.value === mechanism2))/!* &&
-        (i.name === 'Цена' && (i.value >= minPrice && i.value <= maxPrice)) &&
-        (i.name === 'Длина' && (i.value >= minLength && i.value <= maxLength))*!/) {
-        return i;
-      }
-    }))*/
-
     console.log(this.products, filteredProducts);
-  }
+  }*/
 
   ngOnInit(): void {
-    this.initFilterSofasForm();
+   /* this.initFilterSofasForm();*/
+
    // это переменная указывает, на какую страницу перешли (диванов, столов или стульев), выцепили из урла
     /*this.path = this.activatedRoute.snapshot.routeConfig?.path;*/
     /*this.path = this.activatedRoute.snapshot.params.category;*/

@@ -8,6 +8,9 @@ import {AllProductsComponent} from './all-products.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import {AllProductsRoutingModule} from './all-products-routing.module';
+import { SofasFilterComponent } from './filter/sofas-filter/sofas-filter.component';
+import { TablesFilterComponent } from './filter/tables-filter/tables-filter.component';
+import { ChairsFilterComponent } from './filter/chairs-filter/chairs-filter.component';
 
 
 
@@ -15,7 +18,10 @@ import {AllProductsRoutingModule} from './all-products-routing.module';
   declarations: [
     ProductComponent,
     AboutProductComponent,
-    AllProductsComponent
+    AllProductsComponent,
+    SofasFilterComponent,
+    TablesFilterComponent,
+    ChairsFilterComponent
   ],
     imports: [
         CommonModule,
@@ -27,7 +33,10 @@ import {AllProductsRoutingModule} from './all-products-routing.module';
 /*  exports: [
     AllProductsComponent,
     ProductComponent,
-    AboutProductComponent
+    AboutProductComponent,
+    SofasFilterComponent,
+    TablesFilterComponent,
+    ChairsFilterComponent
   ],*/
   providers: []
 })
