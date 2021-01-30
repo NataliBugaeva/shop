@@ -8,7 +8,9 @@
       <ng-container *ngFor="let i of characteristics">
         <ng-container *ngIf="i.name !== 'id'">
           <div class="comparison-block-characteristics-point"
-               *ngIf="infoToShow.length">{{i.name}}:</div>
+               *ngIf="infoToShow.length">
+            <span>{{i.name}}:</span>
+          </div>
         </ng-container>
       </ng-container>
     </div>

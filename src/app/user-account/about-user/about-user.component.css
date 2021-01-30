@@ -3,13 +3,9 @@
   display: flex;
   flex-direction: column; }
   .about-user-cent {
-    width: 100%;
+    max-width: 100%;
     margin: 30px auto;
     padding: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
     .about-user-cent-info p {
       margin-bottom: 15px; }
-
-@media screen and (max-width: 620px) {
-  .about-user-cent {
-    margin: 0 5px; } }
