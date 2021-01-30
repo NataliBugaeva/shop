@@ -1,1 +1,72 @@
-<p>chairs-filter works!</p>
+<form [formGroup]="filterChairsForm"
+      (ngSubmit)="filterChairs()">
+  <fieldset formGroupName="chairsTypeInfo">
+    <legend>Type:</legend>
+    <div class="point-type">
+      <label for="chair-bed">chair-bed:</label>
+      <input type="checkbox"
+             id="chair-bed"
+             name="type"
+             value="chair-bed"
+             formControlName="chairsType1">
+    </div>
+    <div class="point-type">
+      <label for="interior">interior:</label>
+      <input type="checkbox"
+             id="interior"
+             name="type"
+             value="interior"
+             formControlName="chairsType2">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="chairsWidthInfo">
+    <legend>Width, cm:</legend>
+    <div class="point-width">
+      <input type="text"
+             id="minChairsWidth"
+             name="minChairsWidth"
+             placeholder="from"
+             formControlName="minChairsWidth">
+      <input type="text"
+             id="maxChairsWidth"
+             name="maxChairsWidth"
+             placeholder="to"
+             formControlName="maxChairsWidth">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="chairsDepthInfo">
+    <legend>Depth, cm:</legend>
+    <div class="point-depth">
+      <input type="text"
+             id="minChairsDepth"
+             name="minChairsDepth"
+             placeholder="from"
+             formControlName="minChairsDepth">
+      <input type="text"
+             id="maxChairsDepth"
+             name="maxChairsDepth"
+             placeholder="from"
+             formControlName="maxChairsDepth">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="chairsPriceInfo">
+    <legend>Price:</legend>
+    <div class="point-price">
+      <input type="text"
+             id="minChairsPrice"
+             name="minChairsPrice"
+             placeholder="from"
+             formControlName="minChairsPrice">
+      <input type="text"
+             id="maxChairsPrice"
+             name="maxChairsPrice"
+             placeholder="to"
+             formControlName="maxChairsPrice">
+    </div>
+  </fieldset>
+
+  <button type="submit">Show</button>
+</form>

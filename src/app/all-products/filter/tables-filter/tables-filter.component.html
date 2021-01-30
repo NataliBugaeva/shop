@@ -1,1 +1,92 @@
-<p>tables-filter works!</p>
+<form [formGroup]="filterTablesForm"
+      (ngSubmit)="filterTables()">
+  <fieldset formGroupName="tablesTypeInfo">
+    <legend>Type:</legend>
+    <div class="point-type">
+      <label for="table-book">table-book:</label>
+      <input type="checkbox"
+             id="table-book"
+             name="type"
+             value="table-book"
+             formControlName="tablesType1">
+    </div>
+    <div class="point-type">
+      <label for="coffee-table">coffee-table:</label>
+      <input type="checkbox"
+             id="coffee-table"
+             name="type"
+             value="coffee-table"
+             formControlName="tablesType2">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="tablesShapeInfo">
+    <legend>Shape:</legend>
+    <div class="point-shape">
+      <label for="square">square:</label>
+      <input type="checkbox"
+             id="square"
+             name="shape"
+             value="square"
+             formControlName="tablesShape1">
+    </div>
+    <div class="point-shape">
+      <label for="round">round:</label>
+      <input type="checkbox"
+             id="round"
+             name="shape"
+             value="round"
+             formControlName="tablesShape2">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="tablesWidthInfo">
+    <legend>Width, cm:</legend>
+    <div class="point-width">
+      <input type="text"
+             id="minTablesWidth"
+             name="minTablesWidth"
+             placeholder="from"
+             formControlName="minTablesWidth">
+      <input type="text"
+             id="maxTablesWidth"
+             name="maxTablesWidth"
+             placeholder="to"
+             formControlName="maxTablesWidth">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="tablesHeightInfo">
+    <legend>Height, cm:</legend>
+    <div class="point-height">
+      <input type="text"
+             id="minTablesHeight"
+             name="minTablesHeight"
+             placeholder="from"
+             formControlName="minTablesHeight">
+      <input type="text"
+             id="maxTablesHeight"
+             name="maxTablesHeight"
+             placeholder="from"
+             formControlName="maxTablesHeight">
+    </div>
+  </fieldset>
+
+  <fieldset formGroupName="tablesPriceInfo">
+    <legend>Price:</legend>
+    <div class="point-price">
+      <input type="text"
+             id="minTablesPrice"
+             name="minTablesPrice"
+             placeholder="from"
+             formControlName="minTablesPrice">
+      <input type="text"
+             id="maxTablesPrice"
+             name="maxTablesPrice"
+             placeholder="to"
+             formControlName="maxTablesPrice">
+    </div>
+  </fieldset>
+
+  <button type="submit">Show</button>
+</form>

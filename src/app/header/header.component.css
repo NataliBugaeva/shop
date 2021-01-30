@@ -1,3 +1,6 @@
+.header {
+  width: 100%; }
+
 .cent {
   width: 100%;
   max-width: 1200px;
@@ -9,34 +12,32 @@
   width: 100%;
   background-color: #e2dce2;
   padding: 20px 0; }
-  .header-with-icons img {
-    display: block;
-    width: 100%;
-    height: 100%; }
-    .header-with-icons img:hover {
-      transform: scale(1.2);
-      cursor: pointer; }
 
 .home-link {
-  align-items: center;
+  flex-shrink: 0;
   width: 30px;
   height: 30px;
   font-size: 20px; }
+  .home-link img {
+    display: block;
+    width: 100%;
+    height: 100%; }
+
+.company-name {
+  margin: 0 5px;
+  border: 1px solid green;
+  font-size: 20px;
+  line-height: 25px; }
 
 .search {
   display: flex;
   justify-content: flex-end;
   flex-grow: 1;
-  /*  &-number {
-    align-self: center;
-    line-height: 1.3em;
-    margin-left: 20px;
-  }*/ }
+  margin-left: 5px; }
   .search input {
     display: block;
     width: 100%;
     max-width: 300px;
-    /*  margin-right: 10px;*/
     border: none;
     border-radius: 50px; }
     .search input:focus {
@@ -50,26 +51,25 @@
     position: relative; }
     .icons-basket-amount {
       position: absolute;
-      top: -2px;
-      right: -5px;
-      width: 13px;
-      height: 13px;
+      top: -5px;
+      right: -6px;
+      width: 16px;
+      height: 15px;
       border-radius: 50px;
       background-color: red;
       color: white;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: bold;
       text-align: center;
-      padding-top: 2px; }
-  .icons-login {
-    color: #5f0877;
-    font-weight: bold; }
-    .icons-login:hover {
-      cursor: pointer; }
+      padding: 1px 0; }
   .icons-search, .icons-basket, .icons-compare, .icons-user {
     width: 30px;
     height: 30px;
     margin: 0 3px; }
+    .icons-search img, .icons-basket img, .icons-compare img, .icons-user img {
+      display: block;
+      width: 100%;
+      height: 100%; }
 
 .header-authentication {
   width: 100%; }

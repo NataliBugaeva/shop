@@ -3,9 +3,9 @@
         (ngSubmit)="makeOrder()">
 
     <fieldset formGroupName="userInfo" class="order-customer-info">
-      <legend>Заполните информацию о себе</legend>
+      <legend>Add information about yourself</legend>
       <div class="order-customer-info-name">
-        <label for="name">Имя: </label>
+        <label for="name">Name: </label>
         <input id="name"
                type="text"
                name="name"
@@ -14,9 +14,9 @@
 
       <div *ngIf="_userName.invalid && (_userName.touched || _userName.dirty)"
            class="order-customer-info-validation">
-        <span *ngIf="_userName?.errors.required">Обязательное поле!!!</span>
-        <span *ngIf="_userName?.errors.minlength">Минимальная длина имени равна {{_userName?.errors.minlength.requiredLength}} символам!!!</span>
-        <span *ngIf="_userName?.errors.pattern">Разрешаются только буквы!!!</span>
+        <span *ngIf="_userName?.errors.required">Required field!!!</span>
+        <span *ngIf="_userName?.errors.minlength">The minimum name length is {{_userName?.errors.minlength.requiredLength}} symbols!!!</span>
+        <span *ngIf="_userName?.errors.pattern">Only letters are allowed !!!</span>
       </div>
 
       <div class="order-customer-info-mail">
@@ -29,12 +29,12 @@
 
       <div *ngIf="_userEmail.invalid && (_userEmail.touched || _userEmail.dirty)"
            class="order-customer-info-validation">
-        <span *ngIf="_userEmail?.errors.required">Обязательное поле!!!</span>
-        <span *ngIf="_userEmail?.errors.email">Почтовый ящик введен не верно!!!</span>
+        <span *ngIf="_userEmail?.errors.required">Required field!!!</span>
+        <span *ngIf="_userEmail?.errors.email">Email is incorrect!!!</span>
       </div>
 
       <div class="order-customer-info-phone">
-        <label for="phone">Телефон: </label>
+        <label for="phone">Phone: </label>
         <input id="phone"
                type="tel"
                name="phone"
@@ -43,13 +43,13 @@
 
       <div *ngIf="_userPhone.invalid && (_userPhone.touched || _userPhone.dirty)"
            class="order-customer-info-validation">
-        <span *ngIf="_userPhone?.errors.required">Обязательное поле!!!</span>
-        <span *ngIf="_userPhone?.errors.pattern">Формат телефона (пробелы могут быть в следующих местах):<br>+375 __ _______!!!</span>
+        <span *ngIf="_userPhone?.errors.required">Required field!!!</span>
+        <span *ngIf="_userPhone?.errors.pattern">Phone format (spaces can be in the following places):<br>+375 __ _______!!!</span>
       </div>
     </fieldset>
 
     <fieldset formGroupName="deliveryInfo">
-      <legend>Выберите способ доставки</legend>
+      <legend>Choose delivery method</legend>
       <div class="order-delivery">
         <input id="courier"
                type="radio"
@@ -57,22 +57,21 @@
                value="курьер"
                formControlName="delivery"
                (click)="changeK()">
-        <label for="courier">Курьер</label>
+        <label for="courier">Courier</label>
       </div>
 
       <ng-container  *ngIf="deliveryChecked === 'курьер'">
         <div class="order-delivery-courier">
-          <p>Курьер доставляет вам товар, а вы тщательно осматриваете заказ, после чего производите оплату. Курьер предоставит вам товарный и кассовый чек.</p>
+          <p>The courier delivers the goods to you, and you carefully check it. After that you can make the payment. The courier will give you a receipt.</p>
           <input type="text"
-                 placeholder="введите адрес"
+                 placeholder="enter your address"
                  name="address"
                  formControlName="userAddress">
         </div>
 
         <div *ngIf="_userAddress.invalid && (_userAddress.touched || _userAddress.dirty)"
              class="order-customer-info-validation">
-          <span *ngIf="_userAddress?.errors.required">Обязательное поле!!!</span>
-          <span *ngIf="_userAddress?.errors.pattern">Введите улицу и номер дома</span>
+          <span *ngIf="_userAddress?.errors.required">Enter street and house number</span>
 
         </div>
       </ng-container>
@@ -84,16 +83,16 @@
                value="самовывоз"
                formControlName="delivery"
                (click)="changeS()">
-        <label for="pickup">Самовывоз</label>
+        <label for="pickup">Pickup</label>
       </div>
 
       <ng-container *ngIf="deliveryChecked === 'самовывоз'">
-          <p>г.Минск, ул.Железнодорожная, 35</p>
+          <p>Minsk, Zheleznodorozhnaya street, 35</p>
       </ng-container>
     </fieldset>
 
     <fieldset formGroupName="paymentInfo">
-      <legend>Выберите способ оплаты</legend>
+      <legend>Сhoose payment method</legend>
       <div class="order-pay">
         <input id="cash"
                type="radio"
@@ -101,7 +100,7 @@
                value="наличные"
                formControlName="payment"
                (click)="paymentChecked = 'наличные'">
-        <label for="cash">Наличные</label>
+        <label for="cash">Cash</label>
       </div>
       <div class="order-pay">
         <input id="card"
@@ -110,13 +109,13 @@
                value="карта"
                formControlName="payment"
                (click)="paymentChecked = 'карта'">
-        <label for="card">Карта</label>
+        <label for="card">Card</label>
       </div>
     </fieldset>
 
     <button class="order-button"
             type="submit"
-            [disabled]="orderForm.invalid" >Подтверждаю заказ</button>
+            [disabled]="orderForm.invalid" >Make an order</button>
   </form>
 </div>
 

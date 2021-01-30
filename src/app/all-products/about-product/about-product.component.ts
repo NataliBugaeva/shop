@@ -120,16 +120,19 @@ export class AboutProductComponent implements OnInit, OnDestroy {
       this.commonService.getUser(this.userId).pipe(take(1)).subscribe(res => {
         this.arrProducts = res[0].info.basket;
         this.docId = res[0].id;
+        let amount = 0;
         if (this.arrProducts.length && this.arrProducts.some(item => item.id === this.productId)) {
-          alert('Данный товар уже в корзине!');
-          return;
+          amount = this.arrProducts.find(i => i.id === this.chosenProduct.id).info.info
+            .find(i => i.name === 'Количество').value;
         }
+        let arrProductsNew = this.arrProducts.filter(i => i.id !== this.chosenProduct.id);
         let product = JSON.parse(JSON.stringify(this.chosenProduct));
-        product.info.info.push({name: 'Количество', value: this.amount});
-        this.arrProducts.push(product);
-        this.commonService.addToUserBasket(this.docId, this.arrProducts)
+        product.info.info.push({name: 'Количество', value: amount + this.amount});
+        arrProductsNew.push(product);
+        console.log(arrProductsNew);
+        this.commonService.addToUserBasket(this.docId, arrProductsNew)
           .then( () => {
-            console.log('продукт добавлен в корзину');
+            return;
           });
       })
     );
@@ -162,7 +165,7 @@ export class AboutProductComponent implements OnInit, OnDestroy {
         this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));
         this.comparison = this.productsFromComparison[this.path].some(item => item.id === this.chosenProduct.id);
         this.amountInComparison = this.productsFromComparison[this.path].length;
-        console.log(this.amountInComparison);
+        /*console.log(this.amountInComparison);*/
     }));
   }
 
@@ -172,4 +175,3 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     });
   }
 }
-//ts-ignore

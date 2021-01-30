@@ -11,15 +11,18 @@ import {PaginationService} from '../../../shared/pagination.service';
 })
 export class SofasFilterComponent implements OnInit {
 
-  /*@Input() setPage: any;*/
   @Input() products: any;
   @Input() filteredProducts: any;
   @Input() pager: any;
   @Input() pagedItems: any;
+  @Input() show: any;
+  @Input() close: any;
 
   @Output() filteredProductsChange = new EventEmitter<any>();
   @Output() pagedItemsChange = new EventEmitter<any>();
   @Output() pagerChange = new EventEmitter<any>();
+  @Output() showChange = new EventEmitter<any>();
+  @Output() closeChange = new EventEmitter<any>();
 
   public filterSofasForm: FormGroup;
 
@@ -58,12 +61,6 @@ export class SofasFilterComponent implements OnInit {
   }
 
   filter(): void {
-    /* this.subscriptions.push(
-       this.commonService.getAllProducts(this.path).subscribe( (result: any[]) => {
-         this.products = result;
-       })
-     );*/
-
     let type1 = this.filterSofasForm.get('typeInfo.type1').value;
     let type2 = this.filterSofasForm.get('typeInfo.type2').value;
     type1 = (type1) ? 'прямой' : '';
@@ -117,6 +114,12 @@ export class SofasFilterComponent implements OnInit {
     this.filteredProductsChange.emit(this.filteredProducts);
 
     console.log(this.products, filteredProducts);
+    this.filterSofasForm.reset();
+    this.show = 'products-filter';
+    this.showChange.emit(this.show);
+    this.close = !this.close;
+    this.closeChange.emit(this.close);
+    console.log(this.show);
   }
 
   ngOnInit(): void {

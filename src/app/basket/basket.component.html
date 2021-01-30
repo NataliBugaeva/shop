@@ -12,13 +12,13 @@
 
   <div class="basket-info" [hidden]="!basketProducts.length">
     <div class="basket-info-container">
-      <div>Общая стоимость товаров:</div>
-      <div class="basket-info-container-total-cost">{{totalCost}} руб.</div>
+      <div>Total cost:</div>
+      <div class="basket-info-container-total-cost">{{totalCost}} byn.</div>
       <button class="basket-info-container-place-an-order"
               routerLink="/order"
               [routerLinkActiveOptions]="{exact:true}"
               routerLinkActive="active"
-              [disabled]="!email">Оформить заказ</button>
+              [disabled]="!email">Order</button>
     </div>
   </div>
 </div>

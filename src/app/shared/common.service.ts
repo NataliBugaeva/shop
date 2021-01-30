@@ -436,6 +436,13 @@ export class CommonService {
     });
 }
 
+//продукты из корзины
+  basketProducts(id: string) {
+   return this.fireStore.collection('users', ref => ref.where('id', '==', id))
+     .snapshotChanges()
+     .pipe(map( res => res.map( doc => doc.payload.doc.data())))
+  }
+
 // обновим orders пользователя в базе
   addToOrders(docId: string, orders: any) {
     return this.fireStore.collection('orders').doc(docId).update({

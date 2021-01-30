@@ -1,0 +1,17 @@
+.point-type {
+  display: flex;
+  width: 130px;
+  justify-content: space-between; }
+
+.point-width input,
+.point-depth input,
+.point-price input {
+  display: inline-block;
+  width: 100px; }
+
+fieldset {
+  margin-bottom: 20px; }
+
+legend {
+  font-weight: bold;
+  margin-bottom: 5px; }

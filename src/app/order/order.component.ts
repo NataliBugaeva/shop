@@ -88,7 +88,7 @@ export class OrderComponent implements OnInit, OnDestroy {
         userPhone: ['', [Validators.required, Validators.pattern(/^\+375(\s+)?(17|25|29|33|44)(\s+)?[0-9]{3}[0-9]{2}[0-9]{2}$/)]],
       }),
       deliveryInfo: this.fb.group({
-        userAddress: ['', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]],
+        userAddress: ['', [Validators.required, Validators.pattern(/^[a-zA-Zа-яА-Я\s.]+?\d+/i)]],
         delivery: ['', Validators.required]
       }),
       paymentInfo: this.fb.group({

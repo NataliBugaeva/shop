@@ -4,6 +4,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 5px;
 }
 
 .about-product {
@@ -56,6 +57,9 @@
 
       &-buttons {
         margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         button {
           display: block;
@@ -138,6 +142,7 @@
 
   &-plus,
   &-minus {
+    width: 40px;
     background-color: #15004a;
     color: white;
     font-weight: bold;
@@ -234,6 +239,16 @@
       width: 500px;
     }
   }
+
+  .about-product-characteristics-info-item-points {
+    width: 60%;
+
+  }
+
+  .about-product-characteristics-info-item-values {
+    width: 40%;
+
+  }
 }
 
 @media screen and (max-width: 520px) {
@@ -250,16 +265,16 @@
     }
   }
 
-  .about-sofa-characteristics-info-points {
+ /* .about-sofa-characteristics-info-points {
     flex-shrink: 0;
-  }
+  }*/
 }
 
 @media screen and (max-width: 365px) {
-  .about-sofa-characteristics-info-points {
+ /* .about-sofa-characteristics-info-points {
     flex-shrink: 1;
     min-width: 210px;
-  }
+  }*/
 }
 
 [disabled] {

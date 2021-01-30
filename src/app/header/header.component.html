@@ -8,6 +8,10 @@
              title="вернуться на главную">
       </div>
 
+      <div class="company-name">
+        homeComfort
+      </div>
+
       <div class="search">
         <!--<div class="phones-number">
           +375(25)686-51-81 (life) <br>
@@ -17,6 +21,7 @@
       </div>
 
       <div class="icons" [hidden]="authenticationService.getUrl() === '/login'">
+
         <div class="icons-search" (click)="switchSearch()">
           <img src="./assets/icons/поиск.png"
                alt="поиск"
@@ -28,13 +33,15 @@
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active"
              *ngIf="userEmail">
+          <div class="icons-basket-amount"
+               *ngIf="productsInBasket">{{productsInBasket}}</div>
+
           <img src="./assets/icons/корзина.png"
                alt="корзина"
                title="корзина">
 
         </div>
-        <!--<div class="icons-user"
-             *ngIf="authenticationService.isLogged  && !authenticationService.err">-->
+
         <div class="icons-user"
              routerLink="account/user"
              [routerLinkActiveOptions]="{exact:true}"
@@ -44,12 +51,6 @@
                alt="пользователь"
                title="пользователь">
         </div>
-
-        <!--<div class="icons-login"
-             routerLink="login"
-             [routerLinkActiveOptions]="{exact:true}"
-             routerLinkActive="active"
-             *ngIf="!userEmail">Войти</div>-->
 
       </div>
     </div>
@@ -75,17 +76,20 @@
                 routerLink="/login"
                 [routerLinkActiveOptions]="{exact:true}"
                 routerLinkActive="active"
-                [disabled]="!email || !password">Зарегистрироваться</button>
+                [disabled]="!email || !password">Зарегистрироваться
+        </button>
 
         <button (click)="signIn()"
                 class="button-signIn"
-                [disabled]="!email || !password">Войти</button>
+                [disabled]="!email || !password">Войти
+        </button>
       </div>
 
       <button (click)="signOut()"
               *ngIf="authenticationService.userData | async"
               class="button-signOut"
-              routerLink="">Выйти</button>
+              routerLink="">Выйти
+      </button>
 
       <h3 class="text-danger"
           *ngIf="authenticationService.err">{{ authenticationService.err }}</h3>

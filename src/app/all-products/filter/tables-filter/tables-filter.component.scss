@@ -1,24 +1,18 @@
-.point-type {
+.point-type,
+.point-shape {
   display: flex;
-  width: 80px;
+  width: 130px;
   justify-content: space-between;
 }
 
-.point-length,
-.point-bedLength,
-.point-bedWidth,
+.point-width,
+.point-height,
 .point-price {
 
   input {
     display: inline-block;
     width: 100px;
   }
-}
-
-.point-mechanism {
-  display: flex;
-  width: 110px;
-  justify-content: space-between;
 }
 
 fieldset {

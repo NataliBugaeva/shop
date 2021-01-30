@@ -29,15 +29,17 @@
           margin-bottom: 5px;
           border: 1px dashed grey; }
           .orders-cent-card-products-item-img {
-            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 100px;
             min-height: 200px;
             overflow: hidden;
             padding: 10px;
             margin-right: 10px; }
             .orders-cent-card-products-item-img img {
               display: block;
-              width: 100%;
-              height: 100%; }
+              width: 100%; }
           .orders-cent-card-products-item-info {
             display: flex;
             flex-direction: column;
@@ -48,3 +50,13 @@
               margin-bottom: 5px; }
             .orders-cent-card-products-item-info p span:nth-child(1) {
               font-weight: bold; }
+
+@media screen and (max-width: 650px) {
+  .orders-cent-card-info {
+    font-size: 12px; }
+  .orders-cent-card-products-item-img {
+    padding: 5px;
+    margin-right: 3px; }
+  .orders-cent-card-products-item-info {
+    padding: 5px;
+    font-size: 12px; } }

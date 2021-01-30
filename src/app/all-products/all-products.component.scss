@@ -1,14 +1,32 @@
 .products {
+  min-width: 100%;
   display: flex;
+  position: relative;
+
+  &-menu {
+    width: 5%;
+    min-width: 50px;
+    height: 50px;
+    overflow: hidden;
+    display: none;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
 .products-filter {
-    width: 100%;
+    /*width: 100%;*/
+  width: 30%;
     max-width: 250px;
     min-width: 150px;
     padding: 10px;
     margin-bottom: 80px;
     border-right: 1px solid grey;
+  opacity: 1;
 
   button {
     margin-top: 15px;
@@ -20,69 +38,28 @@
   }
 }
 
-/*.point-type {
-  display: flex;
-  width: 80px;
-  justify-content: space-between;
-}
-
-.type,
-.mechanism,
-.length,
-.bedLength,
-.bedWidth,
-.price {
-  margin: 30px 0 10px;
-  font-weight: bold;
-}
-
-.point-length,
-.point-bedLength,
-.point-bedWidth,
-.point-price {
-
-  input {
-    display: inline-block;
-    width: 100px;
-  }
-}
-
-.point-mechanism {
-  display: flex;
-  width: 110px;
-  justify-content: space-between;
-}
-
-fieldset {
-  margin-bottom: 20px;
-}
-
-legend {
-  font-weight: bold;
-}*/
-
-.all-products {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-
-
 app-product {
   width: 32%;
 }
 
 .block-with-pagination {
-  width: 100%;
+  width: 65%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+
+.all-products {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .pagination {
-  width: 100%;
+  max-width: 80%;
   margin-bottom: 20px;
 
   ul {
@@ -102,8 +79,6 @@ app-product {
   }
 }
 
-
-
 .active {
   background-color: #15004a;
   color: white;
@@ -115,6 +90,16 @@ app-product {
   opacity: .5;
 }
 
+.show {
+  position: absolute;
+  /*top: 50px;*/
+  z-index: 3;
+  background-color: white;
+  left: 50px;
+  opacity: 1;
+  padding: 5px;
+  opacity: .95;
+}
 
 @media screen and (max-width: 800px) {
   app-product {
@@ -131,12 +116,32 @@ app-product {
 
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 640px) {
   app-product {
-    width: 100%;
+    width: 65%;
+  }
+
+.products-menu {
+  display: block;
+}
+
+  .products-filter {
+    position: absolute;
+    left: 50px;
+    opacity: 0;
   }
 
   .all-products app-product:nth-child(n) {
     margin: 0 5px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .pagination {
+    li {
+      font-size: 10px;
+      padding: 2px;
+      margin: 0 2px;
+    }
   }
 }

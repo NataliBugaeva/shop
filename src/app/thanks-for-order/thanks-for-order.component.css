@@ -3,7 +3,8 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  padding: 0 10px; }
   .thanks-for-order-cent {
     display: flex;
     flex-direction: column;

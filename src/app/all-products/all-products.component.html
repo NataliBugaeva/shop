@@ -1,15 +1,41 @@
 <div class="products">
-  <div class="products-filter">
+  <div class="products-menu" (click)="toggle()">
+    <img src="./assets/icons/menu.png" alt="" *ngIf="close">
+    <img src="./assets/icons/close.png" alt="" *ngIf="!close">
+  </div>
+
+  <div [class]="show">
     <ng-container *ngIf="path === 'sofas'">
       <app-sofas-filter
-                        [products]="products"
-                        [(pager)]="pager"
-                        [(pagedItems)]="pagedItems"
-                        [(filteredProducts)]="filteredProducts"></app-sofas-filter>
+        [(close)]="close"
+        [(show)]="show"
+        [products]="products"
+        [(pager)]="pager"
+        [(pagedItems)]="pagedItems"
+        [(filteredProducts)]="filteredProducts"></app-sofas-filter>
+    </ng-container>
+
+    <ng-container *ngIf="path === 'chairs'">
+      <app-chairs-filter
+        [(close)]="close"
+        [(show)]="show"
+        [products]="products"
+        [(pager)]="pager"
+        [(pagedItems)]="pagedItems"
+        [(filteredProducts)]="filteredProducts"></app-chairs-filter>
+    </ng-container>
+
+    <ng-container *ngIf="path === 'tables'">
+      <app-tables-filter
+        [(close)]="close"
+        [(show)]="show"
+        [products]="products"
+        [(pager)]="pager"
+        [(pagedItems)]="pagedItems"
+        [(filteredProducts)]="filteredProducts"></app-tables-filter>
     </ng-container>
 
   </div>
-
 
 
   <div class="block-with-pagination">

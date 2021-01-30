@@ -1,7 +1,8 @@
-@charset "UTF-8";
 .main {
+  max-width: 100%;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  padding: 0 5px; }
   .main-cent {
     width: 100%;
     max-width: 1200px;
@@ -10,17 +11,22 @@
   .main-image {
     display: flex;
     width: 100%;
-    background-color: blanchedalmond;
-    height: 450px;
-    background-image: url("../../assets/home/главная.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat; }
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    position: relative; }
+    .main-image img {
+      width: 100%;
+      height: 100%;
+      display: block; }
     .main-image h1 {
-      margin: 10px 60px 0 auto; }
+      margin: 10px 60px 0 auto;
+      position: absolute;
+      top: 10px;
+      left: 55px; }
   .main-caption {
     width: 100%;
-    padding: 30px 0;
+    padding: 30px 10px;
     background-color: #e2dce2;
     margin: 10px 0; }
     .main-caption h2 {
@@ -35,19 +41,17 @@
       padding: 5px 0 0 5px; }
     .main-categories-sofa, .main-categories-chair, .main-categories-table {
       width: 30%;
-      height: 300px;
-      background-position: bottom;
-      background-size: cover;
-      background-repeat: no-repeat; }
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      .main-categories-sofa img, .main-categories-chair img, .main-categories-table img {
+        width: 100%;
+        height: 100%;
+        display: block; }
       .main-categories-sofa:hover, .main-categories-chair:hover, .main-categories-table:hover {
         transform: scale(1.01);
         cursor: pointer; }
-    .main-categories-sofa {
-      background-image: url("../../assets/home/категория_диван.png"); }
-    .main-categories-chair {
-      background-image: url("../../assets/home/категория_кресло.jpg"); }
-    .main-categories-table {
-      background-image: url("../../assets/home/категория_стол.jpg"); }
 
 .js-content {
   justify-content: space-between; }

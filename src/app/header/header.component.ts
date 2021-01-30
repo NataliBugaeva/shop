@@ -3,6 +3,7 @@ import {AuthenticationService} from '../shared/authentication.service';
 import {Subscription} from 'rxjs';
 import {CommonService} from '../shared/common.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Product} from '../../model';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public userId: string;
 
   public switch = true;
+  public productsInBasket: number;
 
   public subscriptions: Subscription[] = [];
 
@@ -54,15 +56,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-
-
-    console.log(this.router.url);
     this.subscriptions.push(
       this.authenticationService.userData.subscribe(res => {
         this.userEmail = res?.email;
         this.userId = res?.uid;
-        console.log(this.userEmail, this.userId, res);
+        this.subscriptions.push(
+          this.commonService.basketProducts(this.userId).subscribe((res: {
+            info: any,
+            id: any,
+            basket: any,
+            comments: any
+          }[]) => {
+            this.productsInBasket = res[0].basket.map(i => i.info.info.find(i => i.name === 'Количество').value)
+              .reduce( (sum, current) => { return sum + current }, 0);
+          })
+        )
+        console.log(this.userEmail, this.userId);
       })
     );
   }
