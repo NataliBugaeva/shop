@@ -12,23 +12,15 @@
         HomeComfort
       </div>
 
-      <div class="search">
-        <input type="search" [hidden]="switch">
-      </div>
-
       <div class="icons" [hidden]="authenticationService.getUrl() === '/login'">
 
-        <div class="icons-search" (click)="switchSearch()">
-          <img src="./assets/icons/поиск.png"
-               alt="search"
-               title="search">
-        </div>
 
         <div class="icons-basket"
              routerLink="basket"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active"
              *ngIf="userEmail">
+
           <div class="icons-basket-amount"
                *ngIf="productsInBasket">{{productsInBasket}}</div>
 
@@ -54,8 +46,6 @@
 
   <div class="header-authentication" [hidden]="authenticationService.getUrl() === '/login'">
     <div class="cent">
-      <!--<h3 *ngIf="authenticationService.userData | async"
-          style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>-->
       <h3 *ngIf="authenticationService.userData | async"
           style="color: #5f0877">Welcome, {{ userEmail }}</h3>
 

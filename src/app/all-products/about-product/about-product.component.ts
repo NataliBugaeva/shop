@@ -21,21 +21,16 @@ export class AboutProductComponent implements OnInit, OnDestroy {
   public chosenProductType: string;
   public chosenProductPrice: string;
   public chosenProductImgLarge: string;
-
   public amount: number;
   public comparison = false;
   public switch = true;
   public subscriptions: Subscription[] = [];
   // это я получаю обьект comparison из LS
   public productsFromComparison: any;
-  // это высчитываем количество продуктов в сравнении
   public amountInComparison: number;
-  // для контроля перехода на страницу сравнения
   public rout: string;
-  // это почта пользователя, который сейчас вошел на сайт
   public email: string;
   public arrProducts: Product[];
-  //это id самого документа конкретного пользователя
   public docId: string;
   public userInfo: any;
   public userId: string;
@@ -161,3 +156,5 @@ export class AboutProductComponent implements OnInit, OnDestroy {
     });
   }
 }
+
+

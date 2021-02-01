@@ -30,11 +30,8 @@ export class ChairsFilterComponent implements OnInit {
   }
 
   setPage(page: number, products: Product[]) {
-    console.log(this.filteredProducts);
-    // возвращает объект pager Из paginationService
     this.pager = this.paginationService.getPager(products.length, page);
     this.pagerChange.emit(this.pager);
-    // массив продуктов на текущей странице пагинации
     this.pagedItems = products.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.pagedItemsChange.emit(this.pagedItems);
   }
@@ -85,9 +82,6 @@ export class ChairsFilterComponent implements OnInit {
     minChairsPrice = minChairsPrice || 0;
     maxChairsPrice = maxChairsPrice || 99999;
 
-    console.log(chairsType1, chairsType2);
-    console.log(this.products);
-
     let filteredProducts = this.products.filter(item => item.info.info.find(i => {
       if (i.name === 'Type' && (i.value === chairsType1 || i.value === chairsType2)) {
         return i;
@@ -105,18 +99,15 @@ export class ChairsFilterComponent implements OnInit {
         return i;
       }
     }));
-    console.log(filteredProducts);
     this.setPage(1, filteredProducts);
     this.filteredProducts = JSON.parse(JSON.stringify(filteredProducts));
     this.filteredProductsChange.emit(this.filteredProducts);
 
-    console.log(this.products, filteredProducts);
     this.filterChairsForm.reset();
     this.show = 'products-filter';
     this.showChange.emit(this.show);
     this.close = !this.close;
     this.closeChange.emit(this.close);
-    console.log(this.show);
   }
 
   ngOnInit(): void {

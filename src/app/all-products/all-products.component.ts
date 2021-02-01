@@ -18,7 +18,6 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   public path: string;
   public show = 'products-filter';
   public close = true;
-
   // это объект, который нам возвращает метод getPager из paginationService
   public pager: Pagination;
   // массив товаров с текущей страницы (для пагинации)
@@ -31,13 +30,8 @@ export class AllProductsComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute) {
   }
 
-  // в этот метод в качестве параметров передаем номер страницы текущей и массив продуктов
-  // (столы, либо диваны, либо стулья)
   setPage(page: number, products: Product[]) {
-    console.log(this.filteredProducts);
-    // возвращает объект pager Из paginationService
     this.pager = this.paginationService.getPager(products.length, page);
-    // массив продуктов на текущей странице пагинации
     this.pagedItems = products.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
@@ -50,13 +44,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.activatedRoute.params.subscribe(res => {
         this.path = res.category;
-        console.log(this.path);
         this.subscriptions.push(
           this.commonService.getAllProducts(this.path).subscribe((result: any[]) => {
             this.products = result;
             this.filteredProducts = this.products;
             this.setPage(1, this.products);
-            console.log(this.products);
           })
         );
       })

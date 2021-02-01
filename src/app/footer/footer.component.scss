@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $head-footer-caption-bg-color;
+  padding: 50px 0 20px 40px;
+
+  &-contacts {
+    margin-bottom: 30px;
+    span {
+      display: block;
+      line-height: 20px;
+    }
+  }
+}

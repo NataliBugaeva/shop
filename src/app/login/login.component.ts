@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from '../shared/authentication.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {CommonService} from '../shared/common.service';
 import {Subscription} from 'rxjs';
 
@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   done() {
-        this.userInfo = this.signupForm.value.info;
-        this.commonService.addNewUser(this.userId, this.userEmail, this.userInfo);
-        this.commonService.addNewOrderDocument(this.userId);
-        this.signupForm.reset();
-        this.router.navigateByUrl('/');
+    this.userInfo = this.signupForm.value.info;
+    this.commonService.addNewUser(this.userId, this.userEmail, this.userInfo);
+    this.commonService.addNewOrderDocument(this.userId);
+    this.signupForm.reset();
+    this.router.navigateByUrl('/');
   }
 
   check() {
@@ -66,12 +66,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initSignUpForm();
     this.subscriptions.push(
-      this.authenticationService.user().subscribe( res => {
+      this.authenticationService.user().subscribe(res => {
         this.userId = res?.uid;
         this.userEmail = res?.email;
         this.initSignUpForm();
       })
-    )
+    );
   }
 
   ngOnDestroy(): void {

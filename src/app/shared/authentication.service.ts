@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Observable} from 'rxjs';
-
-import {CommonService} from './common.service';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 
@@ -14,17 +12,12 @@ export class AuthenticationService {
   public userData: any;
   public err: string;
   public isLogged = false;
-
   public email: any;
   public password: any;
-
   public userEmail: any;
-
   public changePath: string;
 
-
   constructor(private angularFireAuth: AngularFireAuth,
-              private commonService: CommonService,
               public router: Router) {
     this.userData = angularFireAuth.authState;
     this.err = '';
@@ -36,18 +29,18 @@ export class AuthenticationService {
 
   // метод "Зарегистрироваться"
   SignUp(email, password): void {
-    console.log(email,password);
+    console.log(email, password);
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         this.isLogged = true;
+        this.email = res.user?.email;
         this.err = '';
-        console.log('Successfully signed up!', res);
+        this.userData = this.angularFireAuth.authState;
         this.router.navigateByUrl('/login');
       })
       .catch(error => {
         this.err = error.message;
-        console.log('Something is wrong:', error.message);
         this.router.navigateByUrl('');
       });
   }
@@ -56,16 +49,13 @@ export class AuthenticationService {
   SignIn(email: string, password: string): void {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
-      .then(res  => {
-       /* localStorage.setItem('user', JSON.stringify(res.user));*/
+      .then(res => {
         this.isLogged = true;
         this.err = '';
-       /* this.email = this.userData.email;*/
         this.email = res.user?.email;
-        console.log(res.user?.uid, this.email, this.isLogged);
+        this.userData = this.angularFireAuth.authState;
       })
       .catch(err => {
-        console.log('Something is wrong:', err.message);
         this.err = err.message;
       });
   }
@@ -74,14 +64,13 @@ export class AuthenticationService {
   SignOut(): void {
     this.angularFireAuth
       .signOut()
-      .then( res => {
+      .then(() => {
         this.isLogged = false;
-        console.log('You have signed out!');
       });
   }
 
-  user(): Observable<any>{
-  return this.angularFireAuth.user;
+  user(): Observable<any> {
+    return this.angularFireAuth.authState;
   }
 
   getId() {
@@ -89,5 +78,12 @@ export class AuthenticationService {
       map(res => !!(res?.uid))
     );
   }
+
+  getUser() {
+    return this.angularFireAuth.user.pipe(
+      map(res => ({id: res?.uid, email: res?.email}))
+    );
+  }
+
 
 }

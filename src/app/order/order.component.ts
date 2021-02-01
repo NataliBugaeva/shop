@@ -156,7 +156,6 @@ export class OrderComponent implements OnInit, OnDestroy {
             this.totalCost = this.basketProducts.map((item: Product) => item.info.info.find(i => i.name === 'Price').value *
               item.info.info.find(i => i.name === 'Amount').value)
               .reduce((sum: number, item: number) => sum + item);
-            console.log(this.userInfo);
             this.initOrderForm();
           })
         );

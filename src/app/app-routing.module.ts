@@ -5,23 +5,29 @@ import {ThanksForOrderComponent} from './thanks-for-order/thanks-for-order.compo
 import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
-  {path: '',
+  {
+    path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  {path: 'login',
+  {
+    path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
-  {path: 'order',
+  {
+    path: 'order',
     loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
   },
-  {path: 'basket',
+  {
+    path: 'basket',
     loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule)
   },
 
-  {path: 'comparison',
+  {
+    path: 'comparison',
     loadChildren: () => import('./comparison/comparison.module').then(m => m.ComparisonModule)
   },
-  {path: 'account',
+  {
+    path: 'account',
     loadChildren: () => import('./user-account/user-account.module').then(m => m.UserAccountModule)
   },
   {
@@ -29,7 +35,8 @@ const routes: Routes = [
     component: ThanksForOrderComponent,
     canActivate: [AuthGuard]
   },
-  {path: 'products/:category',
+  {
+    path: 'products/:category',
     loadChildren: () => import('./all-products/all-products.module').then(m => m.AllProductsModule)
   },
   {path: '**', component: PageNotFoundComponent}

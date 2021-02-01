@@ -17,11 +17,14 @@
   flex-shrink: 0;
   width: 30px;
   height: 30px;
+  margin-left: 5px;
   font-size: 20px; }
   .home-link img {
     display: block;
     width: 100%;
     height: 100%; }
+  .home-link:hover {
+    cursor: pointer; }
 
 .company-name {
   margin: 0 10px;
@@ -47,7 +50,8 @@
 .icons {
   display: flex;
   justify-content: flex-end;
-  align-items: center; }
+  align-items: center;
+  margin: 0 10px 0 auto; }
   .icons-basket {
     position: relative; }
     .icons-basket-amount {
@@ -71,6 +75,8 @@
       display: block;
       width: 100%;
       height: 100%; }
+    .icons-search:hover, .icons-basket:hover, .icons-compare:hover, .icons-user:hover {
+      cursor: pointer; }
 
 .header-authentication {
   width: 100%; }

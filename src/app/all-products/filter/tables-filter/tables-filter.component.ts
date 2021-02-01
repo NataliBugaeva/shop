@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../model';
 import {PaginationService} from '../../../shared/pagination.service';
@@ -8,6 +8,7 @@ import {PaginationService} from '../../../shared/pagination.service';
   templateUrl: './tables-filter.component.html',
   styleUrls: ['./tables-filter.component.css']
 })
+
 export class TablesFilterComponent implements OnInit {
 
   @Input() products: any;
@@ -26,14 +27,12 @@ export class TablesFilterComponent implements OnInit {
   public filterTablesForm: FormGroup;
 
   constructor(public fb: FormBuilder,
-              public paginationService: PaginationService) { }
+              public paginationService: PaginationService) {
+  }
 
   setPage(page: number, products: Product[]) {
-    console.log(this.filteredProducts);
-    // возвращает объект pager Из paginationService
     this.pager = this.paginationService.getPager(products.length, page);
     this.pagerChange.emit(this.pager);
-    // массив продуктов на текущей странице пагинации
     this.pagedItems = products.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.pagedItemsChange.emit(this.pagedItems);
   }
@@ -68,7 +67,7 @@ export class TablesFilterComponent implements OnInit {
     let tablesType2 = this.filterTablesForm.get('tablesTypeInfo.tablesType2').value;
     tablesType1 = (tablesType1) ? 'table-book' : '';
     tablesType2 = (tablesType2) ? 'coffee table' : '';
-    if(!tablesType1 && !tablesType2) {
+    if (!tablesType1 && !tablesType2) {
       tablesType1 = 'table-book';
       tablesType2 = 'coffee table';
     }
@@ -77,7 +76,7 @@ export class TablesFilterComponent implements OnInit {
     let tablesShape2 = this.filterTablesForm.get('tablesShapeInfo.tablesShape2').value;
     tablesShape1 = (tablesShape1) ? 'square' : '';
     tablesShape2 = (tablesShape2) ? 'round' : '';
-    if(!tablesShape1 && !tablesShape2) {
+    if (!tablesShape1 && !tablesShape2) {
       tablesShape1 = 'square';
       tablesShape2 = 'round';
     }
@@ -97,42 +96,36 @@ export class TablesFilterComponent implements OnInit {
     minTablesPrice = minTablesPrice || 0;
     maxTablesPrice = maxTablesPrice || 99999;
 
-    console.log(tablesType1,tablesType2);
-    console.log(this.products);
-
     let filteredProducts = this.products.filter(item => item.info.info.find(i => {
-      if(i.name === 'Type' && (i.value === tablesType1 || i.value === tablesType2)) {
+      if (i.name === 'Type' && (i.value === tablesType1 || i.value === tablesType2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Shape' && (i.value === tablesShape1 || i.value === tablesShape2)) {
+      if (i.name === 'Shape' && (i.value === tablesShape1 || i.value === tablesShape2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Width' && (i.value >= minTablesWidth && i.value <= maxTablesWidth)) {
+      if (i.name === 'Width' && (i.value >= minTablesWidth && i.value <= maxTablesWidth)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Height' && (i.value >= minTablesHeight && i.value <= maxTablesHeight)) {
+      if (i.name === 'Height' && (i.value >= minTablesHeight && i.value <= maxTablesHeight)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Price' && (i.value >= minTablesPrice && i.value <= maxTablesPrice)) {
+      if (i.name === 'Price' && (i.value >= minTablesPrice && i.value <= maxTablesPrice)) {
         return i;
       }
     }));
-    console.log(filteredProducts);
     this.setPage(1, filteredProducts);
     this.filteredProducts = JSON.parse(JSON.stringify(filteredProducts));
     this.filteredProductsChange.emit(this.filteredProducts);
 
-    console.log(this.products, filteredProducts);
     this.filterTablesForm.reset();
     this.show = 'products-filter';
     this.showChange.emit(this.show);
     this.close = !this.close;
     this.closeChange.emit(this.close);
-    console.log(this.show);
   }
 
   ngOnInit(): void {

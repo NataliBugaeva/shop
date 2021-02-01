@@ -39,7 +39,6 @@ export class BasketItemComponent implements OnInit, OnDestroy {
       this.commonService.getUser(this.userId).subscribe(res => {
           this.productsInBasket = res[0].info.basket.filter((i: Product) => i.id !== this.itemId);
           this.productsInBasketChange.emit(this.productsInBasket);
-          console.log(this.productsInBasket, this.userId, this.docId);
           this.commonService.addToUserBasket(this.docId, this.productsInBasket)
             .then(() => {
               console.log('продукты обновлены в корзине после удаления');
@@ -82,7 +81,6 @@ export class BasketItemComponent implements OnInit, OnDestroy {
           .reduce((sum: number, item: number) => sum + item);
         this.totalChange.emit(this.total);
         this.cdr.detectChanges();
-        console.log(this.total);
       })
     );
   }

@@ -3,12 +3,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../model';
 import {PaginationService} from '../../../shared/pagination.service';
 
-
 @Component({
   selector: 'app-sofas-filter',
   templateUrl: './sofas-filter.component.html',
   styleUrls: ['./sofas-filter.component.css']
 })
+
 export class SofasFilterComponent implements OnInit {
 
   @Input() products: any;
@@ -31,11 +31,8 @@ export class SofasFilterComponent implements OnInit {
   }
 
   setPage(page: number, products: Product[]) {
-    console.log(this.filteredProducts);
-    // возвращает объект pager Из paginationService
     this.pager = this.paginationService.getPager(products.length, page);
     this.pagerChange.emit(this.pager);
-    // массив продуктов на текущей странице пагинации
     this.pagedItems = products.slice(this.pager.startIndex, this.pager.endIndex + 1);
     this.pagedItemsChange.emit(this.pagedItems);
   }
@@ -90,8 +87,6 @@ export class SofasFilterComponent implements OnInit {
     minPrice = minPrice || 0;
     maxPrice = maxPrice || 99999;
 
-    console.log(type1, type2, mechanism1, mechanism2);
-
     let filteredProducts = this.products.filter(item => item.info.info.find(i => {
       if (i.name === 'Type' && (i.value === type1 || i.value === type2)) {
         return i;
@@ -109,18 +104,16 @@ export class SofasFilterComponent implements OnInit {
         return i;
       }
     }));
-    console.log(filteredProducts);
+
     this.setPage(1, filteredProducts);
     this.filteredProducts = JSON.parse(JSON.stringify(filteredProducts));
     this.filteredProductsChange.emit(this.filteredProducts);
 
-    console.log(this.products, filteredProducts);
     this.filterSofasForm.reset();
     this.show = 'products-filter';
     this.showChange.emit(this.show);
     this.close = !this.close;
     this.closeChange.emit(this.close);
-    console.log(this.show);
   }
 
   ngOnInit(): void {
