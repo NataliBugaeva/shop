@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public password: string;
   public path: string;
 
+  public changePath: string;
+
   public isLogged: boolean;
   public err: string;
   public userData: any;
@@ -60,6 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.authenticationService.userData.subscribe(res => {
         this.userEmail = res?.email;
         this.userId = res?.uid;
+        console.log(this.userEmail, this.userId);
         this.subscriptions.push(
           this.commonService.basketProducts(this.userId).subscribe((res: {
             info: any,
@@ -67,11 +70,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
             basket: any,
             comments: any
           }[]) => {
-            this.productsInBasket = res[0].basket.map(i => i.info.info.find(i => i.name === 'Количество').value)
+            this.productsInBasket = res[0]?.basket.map(i => i.info.info.find(i => i.name === 'Amount').value)
               .reduce( (sum, current) => { return sum + current }, 0);
           })
         )
-        console.log(this.userEmail, this.userId);
       })
     );
   }

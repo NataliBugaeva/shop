@@ -1,24 +1,25 @@
-<ng-container *ngFor="let i of item"  >
-  <ng-container *ngIf="i.name === 'Изображение'">
-    <div [ngClass]="{'comparison-item-point-img': i.name === 'Изображение' }">
-      <img [src]="i.value" alt="" >
+<ng-container *ngFor="let i of item">
+  <ng-container *ngIf="i.name === 'Image'">
+    <div [ngClass]="{'comparison-item-point-img': i.name === 'Image' }">
+      <img [src]="i.value" alt="">
     </div>
   </ng-container>
 </ng-container>
 
-<ng-container *ngFor="let i of item" >
-  <ng-container *ngIf="i.name !== 'Изображение' && i.name !== 'id'">
-    <div [ngClass]="{'comparison-item-point': i.name !== 'Изображение' }">
+<ng-container *ngFor="let i of item">
+  <ng-container *ngIf="i.name !== 'Image' && i.name !== 'id'">
+    <div [ngClass]="{'comparison-item-point': i.name !== 'Image' }">
       <div class="comparison-item-point-value">{{i.value}}</div>
     </div>
   </ng-container>
 </ng-container>
 
-<ng-container *ngFor="let i of item" >
+<ng-container *ngFor="let i of item">
   <ng-container *ngIf="i.name === 'id'">
     <div [ngClass]="{'comparison-item-point': i.name === 'id' }">
       <button class="comparison-item-point-value"
-              (click)="removeItem()">Удалить</button>
+              (click)="removeItem()">Remove
+      </button>
     </div>
   </ng-container>
 </ng-container>

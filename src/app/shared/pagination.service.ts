@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-
+import {Injectable} from '@angular/core';
 
 export class Pagination {
   public totalItems: number;
@@ -49,9 +48,10 @@ export class PaginationService {
   public endIndex: number;
   public pages: Array<number>;
 
-  constructor() { }
+  constructor() {
+  }
 
-  getPager = (totalItems: number, currentPage: number = 1, pageSize: number = 6 ): Pagination => {
+  getPager = (totalItems: number, currentPage: number = 1, pageSize: number = 6): Pagination => {
     // считаем, сколько будет страниц всего (общее кол-во продуктов делим на кол-во продуктов на странице)
     this.totalPages = Math.ceil(totalItems / pageSize);
 
@@ -100,6 +100,6 @@ export class PaginationService {
       endIndex: this.endIndex,
       pages: this.pages
     };
-  }
+  };
 
 }

@@ -4,7 +4,7 @@ import {CommonService} from '../shared/common.service';
 import {Product} from '../../model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {FilterService} from '../shared/filter.service';
+import {AuthenticationService} from '../shared/authentication.service';
 
 @Component({
   selector: 'app-all-products',
@@ -16,7 +16,6 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   public subscriptions: Subscription[] = [];
   public products: any;
   public path: string;
-
   public show = 'products-filter';
   public close = true;
 
@@ -27,8 +26,8 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   public filteredProducts: [];
 
   constructor(private commonService: CommonService,
+              private authenticationService: AuthenticationService,
               private paginationService: PaginationService,
-              private filterService: FilterService,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -48,7 +47,6 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.subscriptions.push(
       this.activatedRoute.params.subscribe(res => {
         this.path = res.category;

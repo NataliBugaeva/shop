@@ -3,74 +3,74 @@
   <fieldset formGroupName="typeInfo">
     <legend>Тип:</legend>
     <div class="point-type">
-      <label for="straight">прямой:</label>
+      <label for="straight">straight:</label>
       <input type="checkbox"
              id="straight"
              name="type"
-             value="прямой"
+             value="straight"
              formControlName="type1">
     </div>
     <div class="point-type">
-      <label for="corner">угловой:</label>
+      <label for="corner">corner:</label>
       <input type="checkbox"
              id="corner"
              name="type"
-             value="угловой"
+             value="corner"
              formControlName="type2">
     </div>
   </fieldset>
 
   <fieldset formGroupName="mechanismInfo">
-    <legend>Механизм:</legend>
+    <legend>Mechanism:</legend>
     <div class="point-mechanism">
-      <label for="eurobook">еврокнижка:</label>
+      <label for="eurobook">eurobook:</label>
       <input type="checkbox"
              id="eurobook"
              name="mechanism"
-             value="еврокнижка"
+             value="eurobook"
              formControlName="mechanism1">
     </div>
     <div class="point-mechanism">
-      <label for="rollOut">выкатной:</label>
+      <label for="rollOut">roll-out:</label>
       <input type="checkbox"
              id="rollOut"
              name="mechanism"
-             value="выкатной"
+             value="roll-out"
              formControlName="mechanism2">
     </div>
   </fieldset>
 
   <fieldset formGroupName="lengthInfo">
-    <legend>Длина, см:</legend>
+    <legend>Length, cm:</legend>
     <div class="point-length">
       <input type="text"
              id="minLength"
              name="minLength"
-             placeholder="от"
+             placeholder="from"
              formControlName="minLength">
       <input type="text"
              id="maxLength"
              name="maxLength"
-             placeholder="до"
+             placeholder="to"
              formControlName="maxLength">
     </div>
   </fieldset>
 
   <fieldset formGroupName="priceInfo">
-    <legend>Цена, руб:</legend>
+    <legend>Price, byn:</legend>
     <div class="point-price">
       <input type="text"
              id="minPrice"
              name="minPrice"
-             placeholder="от"
+             placeholder="from"
              formControlName="minPrice">
       <input type="text"
              id="maxPrice"
              name="maxPrice"
-             placeholder="до"
+             placeholder="to"
              formControlName="maxPrice">
     </div>
   </fieldset>
 
-  <button type="submit">Показать</button>
+  <button type="submit">Show</button>
 </form>

@@ -24,10 +24,11 @@
     height: 100%; }
 
 .company-name {
-  margin: 0 5px;
-  border: 1px solid green;
+  margin: 0 10px;
   font-size: 20px;
-  line-height: 25px; }
+  font-weight: bold;
+  line-height: 25px;
+  color: #595359; }
 
 .search {
   display: flex;
@@ -73,6 +74,13 @@
 
 .header-authentication {
   width: 100%; }
+  .header-authentication-form {
+    padding: 10px; }
+    .header-authentication-form input, .header-authentication-form button {
+      display: block;
+      margin: 0 10px 10px 0; }
+    .header-authentication-form-buttons {
+      display: flex; }
   .header-authentication h3 {
     padding: 9px; }
 

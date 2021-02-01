@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Product} from '../../../model';
 import {Subscription} from 'rxjs';
 import {AuthenticationService} from '../../shared/authentication.service';
 import {CommonService} from '../../shared/common.service';
@@ -18,11 +17,11 @@ export class AboutUserComponent implements OnInit, OnDestroy {
     infoEmail: '',
     infoPhone: ''
   };
-
   public subscriptions: Subscription[] = [];
 
   constructor(public authenticationService: AuthenticationService,
-              public commonService: CommonService) { }
+              public commonService: CommonService) {
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -30,12 +29,11 @@ export class AboutUserComponent implements OnInit, OnDestroy {
         this.userId = res?.uid;
         this.subscriptions.push(
           this.commonService.getUser(this.userId).subscribe(res => {
-            this.userInfo = res[0].info.info;
-            console.log(this.userInfo);
+            this.userInfo = res[0]?.info.info;
           })
-        )
+        );
       })
-    )
+    );
   }
 
   ngOnDestroy(): void {

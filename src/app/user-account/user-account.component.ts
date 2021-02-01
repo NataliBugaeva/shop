@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -9,16 +9,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class UserAccountComponent implements OnInit {
 
   constructor(public router: Router,
-              public route: ActivatedRoute) { }
-
-
+              public route: ActivatedRoute) {
+  }
 
   goToOrders() {
-    this.router.navigate(['orders'], {relativeTo: this.route} );
+    this.router.navigate(['orders'], {relativeTo: this.route});
   }
 
   goToUser() {
-    this.router.navigate(['user'], {relativeTo: this.route} );
+    this.router.navigate(['user'], {relativeTo: this.route});
   }
 
   ngOnInit(): void {

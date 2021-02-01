@@ -66,20 +66,20 @@ export class TablesFilterComponent implements OnInit {
   filterTables(): void {
     let tablesType1 = this.filterTablesForm.get('tablesTypeInfo.tablesType1').value;
     let tablesType2 = this.filterTablesForm.get('tablesTypeInfo.tablesType2').value;
-    tablesType1 = (tablesType1) ? 'стол-книга' : '';
-    tablesType2 = (tablesType2) ? 'журнальный столик' : '';
+    tablesType1 = (tablesType1) ? 'table-book' : '';
+    tablesType2 = (tablesType2) ? 'coffee table' : '';
     if(!tablesType1 && !tablesType2) {
-      tablesType1 = 'стол-книга';
-      tablesType2 = 'журнальный столик';
+      tablesType1 = 'table-book';
+      tablesType2 = 'coffee table';
     }
 
     let tablesShape1 = this.filterTablesForm.get('tablesShapeInfo.tablesShape1').value;
     let tablesShape2 = this.filterTablesForm.get('tablesShapeInfo.tablesShape2').value;
-    tablesShape1 = (tablesShape1) ? 'прямоугольная' : '';
-    tablesShape2 = (tablesShape2) ? 'круглая' : '';
+    tablesShape1 = (tablesShape1) ? 'square' : '';
+    tablesShape2 = (tablesShape2) ? 'round' : '';
     if(!tablesShape1 && !tablesShape2) {
-      tablesShape1 = 'прямоугольная';
-      tablesShape2 = 'круглая';
+      tablesShape1 = 'square';
+      tablesShape2 = 'round';
     }
 
     let minTablesWidth = this.filterTablesForm.get('tablesWidthInfo.minTablesWidth').value;
@@ -101,23 +101,23 @@ export class TablesFilterComponent implements OnInit {
     console.log(this.products);
 
     let filteredProducts = this.products.filter(item => item.info.info.find(i => {
-      if(i.name === 'Тип' && (i.value === tablesType1 || i.value === tablesType2)) {
+      if(i.name === 'Type' && (i.value === tablesType1 || i.value === tablesType2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Форма' && (i.value === tablesShape1 || i.value === tablesShape2)) {
+      if(i.name === 'Shape' && (i.value === tablesShape1 || i.value === tablesShape2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Ширина' && (i.value >= minTablesWidth && i.value <= maxTablesWidth)) {
+      if(i.name === 'Width' && (i.value >= minTablesWidth && i.value <= maxTablesWidth)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Высота' && (i.value >= minTablesHeight && i.value <= maxTablesHeight)) {
+      if(i.name === 'Height' && (i.value >= minTablesHeight && i.value <= maxTablesHeight)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Цена' && (i.value >= minTablesPrice && i.value <= maxTablesPrice)) {
+      if(i.name === 'Price' && (i.value >= minTablesPrice && i.value <= maxTablesPrice)) {
         return i;
       }
     }));

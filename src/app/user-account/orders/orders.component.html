@@ -2,8 +2,8 @@
   <div class="orders-cent">
     <div class="orders-cent-card" *ngFor="let item of orders">
       <div class="orders-cent-card-info">
-        <p>Дата заказа: {{item.info.date}}</p>
-        <p>Стоимость заказа: {{item.info.totalCost}} руб.</p>
+        <p>Order date: {{item.info.date}}</p>
+        <p>Order cost: {{item.info.totalCost}} byn.</p>
       </div>
 
       <div class="orders-cent-card-products">
@@ -24,17 +24,3 @@
 </div>
 
 
-
-<!--<dib class="order" *ngFor="let item of orders">
-  <div>Дата заказа: {{item.info.date}}</div>
-  <div>Стоимость заказа: {{item.info.totalCost}} руб.</div>
-  <div class="order-products" *ngFor="let i of item.products">
-    <div>
-      <img [src]="i.image.value" alt="">
-    </div>
-    <div><span>{{i.name.name}}</span><span>{{i.name.value}}</span></div>
-    <div><span>{{i.type.name}}</span><span>{{i.type.value}}</span></div>
-    <div><span>{{i.cost.name}}</span><span>{{i.cost.value}}</span></div>
-    <div><span>{{i.amount.name}}</span><span>{{i.amount.value}}</span></div>
-  </div>
-</dib>-->

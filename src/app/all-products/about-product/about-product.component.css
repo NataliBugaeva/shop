@@ -54,13 +54,17 @@
             cursor: pointer; }
     .about-product-main-content-img {
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       width: 700px;
-      height: 400px;
-      flex-shrink: 0; }
+      height: 500px;
+      flex-shrink: 0;
+      overflow: hidden; }
       .about-product-main-content-img img {
         display: block;
-        max-width: 100%;
+        width: 60%;
+        /* max-width: 100%;*/
         max-height: 100%; }
   .about-product-characteristics {
     margin: 30px 0; }
@@ -134,19 +138,58 @@
   .link-to-comparison:hover {
     cursor: pointer; }
 
+.unvisible {
+  display: none; }
+
+/*.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  max-width: 100%;
+  height: 100%;
+  background-color: #15004a;
+  opacity: .95;
+  top: 0;
+  left: 0;
+  line-height: 100vh;
+
+  &-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 50%;
+    height: 50%;
+    opacity: 1;
+    padding: 10px;
+    background-color: white;
+    line-height: 25px;
+
+     &-text {
+       text-align: center;
+       font-size: 20px;
+       font-weight: bold;
+       color: black;
+     }
+
+    &-img {
+      position: absolute;
+      top: -25px;
+      right: -25px;
+    }
+  }
+}*/
 @media screen and (max-width: 971px) {
   .about-product-main-content-img {
     width: 550px;
-    height: 250px; } }
+    height: 350px; } }
 
 @media screen and (max-width: 825px) {
   .about-product-main-content {
     flex-direction: column;
     align-items: center; }
-    .about-product-main-content-img {
-      width: 100%;
-      display: flex;
-      justify-content: center; }
     .about-product-main-content-info {
       text-align: center;
       margin: 10px 0; }
@@ -167,16 +210,7 @@
     font-size: 10px; }
   .about-product-main-content-img {
     width: 300px;
-    height: 150px; }
-  /* .about-sofa-characteristics-info-points {
-    flex-shrink: 0;
-  }*/ }
-
-@media screen and (max-width: 365px) {
-  /* .about-sofa-characteristics-info-points {
-    flex-shrink: 1;
-    min-width: 210px;
-  }*/ }
+    height: 200px; } }
 
 [disabled] {
   opacity: .5; }

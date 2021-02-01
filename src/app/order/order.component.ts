@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {AuthenticationService} from '../shared/authentication.service';
@@ -17,30 +17,26 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   public deliveryChecked: string;
   public paymentChecked: string;
-
   public subscriptions: Subscription[] = [];
-
   public disable: boolean;
   public dis: boolean;
-
   public orderForm: FormGroup;
-
   public basketProducts: [];
   public basketDocId: string;
   public userId: string;
-  public userInfo: {
+  public userInfo = {
     infoName: '',
     infoSurname: '',
     infoEmail: '',
     infoPhone: ''
   };
-
   public totalCost: number;
 
   constructor(private fb: FormBuilder,
               private authenticationService: AuthenticationService,
               private commonService: CommonService,
-              public router: Router) { }
+              public router: Router) {
+  }
 
   makeOrder(): void {
     let date = new Date();
@@ -58,7 +54,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       payment: this.orderForm.get('paymentInfo.payment').value,
       date: currentDate,
       totalCost: this.totalCost
-    }
+    };
 
     this.subscriptions.push(
       this.commonService.getOrders(this.userId).pipe(take(1)).subscribe(res => {
@@ -70,22 +66,23 @@ export class OrderComponent implements OnInit, OnDestroy {
           orderInfo: orderInfo,
           orderProducts: this.basketProducts
         });
-        this.commonService.addToOrders(docId, orders).then(() => console.log('добавили новый заказ в базу'));
+        this.commonService.addToOrders(docId, orders).then(() => console.log('add new order to DB'));
         this.commonService.addToUserBasket(this.basketDocId, [])
-          .then(() => console.log('корзина очищена'));
+          .then(() => console.log('basket is cleared'));
         this.orderForm.reset();
         let rout = '/thanks';
         this.router.navigateByUrl(rout);
       })
-    )
+    );
   }
 
   initOrderForm(): void {
     this.orderForm = this.fb.group({
       userInfo: this.fb.group({
-        userName: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Zа-яА-Я]+$/)]],
-        userEmail: ['', [Validators.required, Validators.email]],
-        userPhone: ['', [Validators.required, Validators.pattern(/^\+375(\s+)?(17|25|29|33|44)(\s+)?[0-9]{3}[0-9]{2}[0-9]{2}$/)]],
+        userName: [this.userInfo.infoName, [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Zа-яА-Я]+$/)]],
+        userSurname: [this.userInfo.infoSurname, [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Zа-яА-Я]+$/)]],
+        userEmail: [this.userInfo.infoEmail, [Validators.required, Validators.email]],
+        userPhone: [this.userInfo.infoPhone, [Validators.required, Validators.pattern(/^\+375(\s+)?(17|25|29|33|44)(\s+)?[0-9]{3}[0-9]{2}[0-9]{2}$/)]],
       }),
       deliveryInfo: this.fb.group({
         userAddress: ['', [Validators.required, Validators.pattern(/^[a-zA-Zа-яА-Я\s.]+?\d+/i)]],
@@ -98,25 +95,27 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   changeK(): void {
-    this.deliveryChecked = 'курьер';
+    this.deliveryChecked = 'courier';
     if (this.orderForm.controls['deliveryInfo'].get('userAddress')) {
       return;
     }
     const deliveryInfo: AbstractControl = this.orderForm.get('deliveryInfo');
     const userAddress: AbstractControl = this.fb.control('', [Validators.required, Validators.pattern(/^[а-я\s.]+?\d+/i)]);
-    (<FormGroup>deliveryInfo).addControl('userAddress', userAddress);
-    console.log(this.orderForm);
+    (<FormGroup> deliveryInfo).addControl('userAddress', userAddress);
   }
 
   changeS(): void {
-    this.deliveryChecked = 'самовывоз';
+    this.deliveryChecked = 'pickup';
     const deliveryInfo: AbstractControl = this.orderForm.get('deliveryInfo');
-    (<FormGroup>deliveryInfo).removeControl('userAddress')
-    console.log(this.orderForm);
+    (<FormGroup> deliveryInfo).removeControl('userAddress');
   }
 
   get _userName() {
     return this.orderForm.controls['userInfo'].get('userName');
+  }
+
+  get _userSurname() {
+    return this.orderForm.controls['userInfo'].get('userSurname');
   }
 
   get _userEmail() {
@@ -144,7 +143,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.initOrderForm();
 
     this.subscriptions.push(
@@ -155,18 +153,19 @@ export class OrderComponent implements OnInit, OnDestroy {
             this.basketProducts = res[0].info.basket;
             this.basketDocId = res[0].id;
             this.userInfo = res[0].info.info;
-            this.totalCost = this.basketProducts.map( (item: Product) => item.info.info.find(i => i.name === 'Цена').value *
-              item.info.info.find(i => i.name === 'Количество').value)
-              .reduce( (sum: number, item: number) => sum + item);
+            this.totalCost = this.basketProducts.map((item: Product) => item.info.info.find(i => i.name === 'Price').value *
+              item.info.info.find(i => i.name === 'Amount').value)
+              .reduce((sum: number, item: number) => sum + item);
             console.log(this.userInfo);
+            this.initOrderForm();
           })
-        )
+        );
       })
-    )
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach( (subscription) => {
+    this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
   }

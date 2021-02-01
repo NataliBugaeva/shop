@@ -39,6 +39,7 @@ app-comparison-item {
     padding: 5px;
 
     &-message {
+      margin: 0 auto;
       font-weight: bold;
       font-size: 15px;
     }
@@ -70,13 +71,13 @@ app-comparison-item {
   }
 }
 
-@media screen and (max-width: 780px){
+@media screen and (max-width: 780px) {
   .comparison-block-characteristics {
     font-size: 12px;
   }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .comparison-block-characteristics-point {
     &:nth-child(1) {
       height: 100px;
@@ -84,7 +85,7 @@ app-comparison-item {
   }
 }
 
-@media screen and (max-width: 460px){
+@media screen and (max-width: 460px) {
   .comparison-block-characteristics-point {
     height: 32px;
     font-size: 10px;

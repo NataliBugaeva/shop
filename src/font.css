@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Red Hat Display';
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/RedHatDisplay-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Unna';
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/Unna/Unna-Regular.ttf") format('truetype');
+}
+

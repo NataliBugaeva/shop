@@ -1,9 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BasketComponent} from './basket.component';
+import {AuthGuard} from '../guards/auth.guard';
 
 const routes: Routes = [
-  {path: 'basket', component: BasketComponent}
+  {
+    path: '',
+    component: BasketComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
@@ -14,6 +19,7 @@ const routes: Routes = [
     RouterModule
   ]
 })
+
 export class BasketRoutingModule {
 
 }

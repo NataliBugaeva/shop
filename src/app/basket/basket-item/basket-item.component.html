@@ -10,16 +10,19 @@
   <div class="basket-item-control">
     <div class="basket-item-control-remove"
          [id]=itemId
-         (click)="removeFromBasket()">Remove:</div>
+         (click)="removeFromBasket()">Remove:
+    </div>
 
     <div class="basket-item-control-price">Price:<br>{{itemPrice}} byn.</div>
 
     <div class="basket-item-control-amount">
       <div class="basket-item-control-amount-minus"
-           (click)="decreaseAmount()"> - </div>
+           (click)="decreaseAmount()"> -
+      </div>
       <input [(ngModel)]="itemAmount">
       <div class="basket-item-control-amount-plus"
-           (click)="enlargeAmount()"> + </div>
+           (click)="enlargeAmount()"> +
+      </div>
     </div>
   </div>
 </div>

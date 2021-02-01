@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ComparisonComponent} from './comparison.component';
 
 const routes: Routes = [
-  {path: 'comparison', component: ComparisonComponent},
+  {path: '', component: ComparisonComponent},
 ];
 
 @NgModule({

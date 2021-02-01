@@ -4,19 +4,15 @@
       <div class="home-link" routerLink=""
            [hidden]="authenticationService.getUrl() === '/login'">
         <img src="./assets/icons/домашняя.png"
-             alt="вернуться на главную"
-             title="вернуться на главную">
+             alt="back to home page"
+             title="back to home page">
       </div>
 
       <div class="company-name">
-        homeComfort
+        HomeComfort
       </div>
 
       <div class="search">
-        <!--<div class="phones-number">
-          +375(25)686-51-81 (life) <br>
-          +375(29)686-51-81 (mts)
-        </div>-->
         <input type="search" [hidden]="switch">
       </div>
 
@@ -24,8 +20,8 @@
 
         <div class="icons-search" (click)="switchSearch()">
           <img src="./assets/icons/поиск.png"
-               alt="поиск"
-               title="поиск">
+               alt="search"
+               title="search">
         </div>
 
         <div class="icons-basket"
@@ -37,8 +33,8 @@
                *ngIf="productsInBasket">{{productsInBasket}}</div>
 
           <img src="./assets/icons/корзина.png"
-               alt="корзина"
-               title="корзина">
+               alt="basket"
+               title="basket">
 
         </div>
 
@@ -48,8 +44,8 @@
              routerLinkActive="active"
              *ngIf="userEmail">
           <img src="./assets/icons/пользователь.png"
-               alt="пользователь"
-               title="пользователь">
+               alt="user"
+               title="user">
         </div>
 
       </div>
@@ -61,34 +57,37 @@
       <!--<h3 *ngIf="authenticationService.userData | async"
           style="color: #5f0877">Добро пожаловать, {{ (authenticationService.userData | async)?. email }}</h3>-->
       <h3 *ngIf="authenticationService.userData | async"
-          style="color: #5f0877">Добро пожаловать, {{ userEmail }}</h3>
+          style="color: #5f0877">Welcome, {{ userEmail }}</h3>
 
-      <div *ngIf="!(authenticationService.userData | async)">
-        <input type="text"
-               [(ngModel)]="email"
-               placeholder="email">
-        <input type="password"
-               [(ngModel)]="password"
-               placeholder="пароль">
+      <div class="header-authentication-form"
+           *ngIf="!(authenticationService.userData | async)">
 
-        <button (click)="signUp()"
-                class="button-signUp"
-                routerLink="/login"
-                [routerLinkActiveOptions]="{exact:true}"
-                routerLinkActive="active"
-                [disabled]="!email || !password">Зарегистрироваться
-        </button>
+        <div class="header-authentication-form-inputs">
+          <input type="text"
+                 [(ngModel)]="email"
+                 placeholder="email">
+          <input type="password"
+                 [(ngModel)]="password"
+                 placeholder="password">
+        </div>
 
-        <button (click)="signIn()"
-                class="button-signIn"
-                [disabled]="!email || !password">Войти
-        </button>
+        <div class="header-authentication-form-buttons">
+          <button (click)="signUp()"
+                  class="button-signUp"
+                  [disabled]="!email || !password">Sign Up
+          </button>
+
+          <button (click)="signIn()"
+                  class="button-signIn"
+                  [disabled]="!email || !password">Sign In
+          </button>
+        </div>
       </div>
 
       <button (click)="signOut()"
               *ngIf="authenticationService.userData | async"
               class="button-signOut"
-              routerLink="">Выйти
+              routerLink="">Sign Out
       </button>
 
       <h3 class="text-danger"
@@ -97,14 +96,14 @@
   </div>
 
   <nav class="header-navigation cent" [hidden]="authenticationService.getUrl() === '/login'">
-    <span routerLink="sofas"
+    <span routerLink="products/sofas"
           [routerLinkActiveOptions]="{exact:true}"
-          routerLinkActive="active">Диваны</span>
-    <span routerLink="chairs"
+          routerLinkActive="active">Sofas</span>
+    <span routerLink="products/chairs"
           [routerLinkActiveOptions]="{exact:true}"
-          routerLinkActive="active">Кресла</span>
-    <span routerLink="tables"
+          routerLinkActive="active">Chairs</span>
+    <span routerLink="products/tables"
           [routerLinkActiveOptions]="{exact:true}"
-          routerLinkActive="active">Столы</span>
+          routerLinkActive="active">Tables</span>
   </nav>
 </header>

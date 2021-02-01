@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,7 +8,8 @@ import {Router} from '@angular/router';
 })
 export class ThanksForOrderComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {
+  }
 
   goToAccount(): void {
     this.router.navigateByUrl('/account/orders');

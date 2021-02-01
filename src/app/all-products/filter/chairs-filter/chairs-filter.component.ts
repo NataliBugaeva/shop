@@ -1,4 +1,4 @@
-import { Component,  EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../../model';
 import {PaginationService} from '../../../shared/pagination.service';
@@ -26,7 +26,8 @@ export class ChairsFilterComponent implements OnInit {
   public filterChairsForm: FormGroup;
 
   constructor(public fb: FormBuilder,
-              public paginationService: PaginationService) { }
+              public paginationService: PaginationService) {
+  }
 
   setPage(page: number, products: Product[]) {
     console.log(this.filteredProducts);
@@ -62,11 +63,11 @@ export class ChairsFilterComponent implements OnInit {
   filterChairs(): void {
     let chairsType1 = this.filterChairsForm.get('chairsTypeInfo.chairsType1').value;
     let chairsType2 = this.filterChairsForm.get('chairsTypeInfo.chairsType2').value;
-    chairsType1 = (chairsType1) ? 'кресло-кровать' : '';
-    chairsType2 = (chairsType2) ? 'интерьерное' : '';
-    if(!chairsType1 && !chairsType2) {
-      chairsType1 = 'кресло-кровать';
-      chairsType2 = 'интерьерное';
+    chairsType1 = (chairsType1) ? 'chair-bed' : '';
+    chairsType2 = (chairsType2) ? 'interior' : '';
+    if (!chairsType1 && !chairsType2) {
+      chairsType1 = 'chair-bed';
+      chairsType2 = 'interior';
     }
 
     let minChairsWidth = this.filterChairsForm.get('chairsWidthInfo.minChairsWidth').value;
@@ -84,23 +85,23 @@ export class ChairsFilterComponent implements OnInit {
     minChairsPrice = minChairsPrice || 0;
     maxChairsPrice = maxChairsPrice || 99999;
 
-    console.log(chairsType1,chairsType2);
+    console.log(chairsType1, chairsType2);
     console.log(this.products);
 
     let filteredProducts = this.products.filter(item => item.info.info.find(i => {
-      if(i.name === 'Тип' && (i.value === chairsType1 || i.value === chairsType2)) {
+      if (i.name === 'Type' && (i.value === chairsType1 || i.value === chairsType2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Ширина' && (i.value >= minChairsWidth && i.value <= maxChairsWidth)) {
+      if (i.name === 'Width' && (i.value >= minChairsWidth && i.value <= maxChairsWidth)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Глубина' && (i.value >= minChairsDepth && i.value <= maxChairsDepth)) {
+      if (i.name === 'Depth' && (i.value >= minChairsDepth && i.value <= maxChairsDepth)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Цена' && (i.value >= minChairsPrice && i.value <= maxChairsPrice)) {
+      if (i.name === 'Price' && (i.value >= minChairsPrice && i.value <= maxChairsPrice)) {
         return i;
       }
     }));

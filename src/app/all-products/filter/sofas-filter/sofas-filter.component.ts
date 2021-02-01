@@ -27,7 +27,8 @@ export class SofasFilterComponent implements OnInit {
   public filterSofasForm: FormGroup;
 
   constructor(public fb: FormBuilder,
-              public paginationService: PaginationService) { }
+              public paginationService: PaginationService) {
+  }
 
   setPage(page: number, products: Product[]) {
     console.log(this.filteredProducts);
@@ -63,20 +64,20 @@ export class SofasFilterComponent implements OnInit {
   filter(): void {
     let type1 = this.filterSofasForm.get('typeInfo.type1').value;
     let type2 = this.filterSofasForm.get('typeInfo.type2').value;
-    type1 = (type1) ? 'прямой' : '';
-    type2 = (type2) ? 'угловой' : '';
-    if(!type1 && !type2) {
-      type1 = 'прямой';
-      type2 = 'угловой';
+    type1 = (type1) ? 'straight' : '';
+    type2 = (type2) ? 'corner' : '';
+    if (!type1 && !type2) {
+      type1 = 'straight';
+      type2 = 'corner';
     }
 
     let mechanism1 = this.filterSofasForm.get('mechanismInfo.mechanism1').value;
     let mechanism2 = this.filterSofasForm.get('mechanismInfo.mechanism2').value;
-    mechanism1 = (mechanism1) ? 'еврокнижка' : '';
-    mechanism2 = (mechanism2) ? 'выкатной' : '';
-    if(!mechanism1 && !mechanism2) {
-      mechanism1 = 'еврокнижка';
-      mechanism2 = 'выкатной';
+    mechanism1 = (mechanism1) ? 'eurobook' : '';
+    mechanism2 = (mechanism2) ? 'roll-out' : '';
+    if (!mechanism1 && !mechanism2) {
+      mechanism1 = 'eurobook';
+      mechanism2 = 'roll-out';
     }
 
     let minLength = this.filterSofasForm.get('lengthInfo.minLength').value;
@@ -89,22 +90,22 @@ export class SofasFilterComponent implements OnInit {
     minPrice = minPrice || 0;
     maxPrice = maxPrice || 99999;
 
-    console.log(type1,type2,mechanism1,mechanism2);
+    console.log(type1, type2, mechanism1, mechanism2);
 
     let filteredProducts = this.products.filter(item => item.info.info.find(i => {
-      if(i.name === 'Тип' && (i.value === type1 || i.value === type2)) {
+      if (i.name === 'Type' && (i.value === type1 || i.value === type2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Механизм' && (i.value === mechanism1 || i.value === mechanism2)) {
+      if (i.name === 'Mechanism' && (i.value === mechanism1 || i.value === mechanism2)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Цена' && (i.value >= minPrice && i.value <= maxPrice)) {
+      if (i.name === 'Price' && (i.value >= minPrice && i.value <= maxPrice)) {
         return i;
       }
     })).filter(item => item.info.info.find(i => {
-      if(i.name === 'Длина' && (i.value >= minLength && i.value <= maxLength)) {
+      if (i.name === 'Length' && (i.value >= minLength && i.value <= maxLength)) {
         return i;
       }
     }));

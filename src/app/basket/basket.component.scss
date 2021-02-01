@@ -17,7 +17,7 @@
     text-align: center;
 
     &-container {
-      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
       padding: 20px 5px;
 
       div {
@@ -48,22 +48,24 @@
   opacity: .5;
 }
 
-@media screen and (max-width: 600px){
- .basket-info-container {
-   line-height: 25px;
-   div {
-     font-size: 15px;
-   }
- }
+@media screen and (max-width: 600px) {
+  .basket-info-container {
+    line-height: 25px;
+
+    div {
+      font-size: 15px;
+    }
+  }
 
 }
 
-@media screen and (max-width: 450px){
+@media screen and (max-width: 450px) {
   .basket {
     font-size: 13px;
 
     &-info-container {
       line-height: 15px;
+
       div {
         font-size: 13px;
       }

@@ -33,10 +33,11 @@
 }
 
 .company-name {
-  margin: 0 5px;
-  border: 1px solid green;
+  margin: 0 10px;
   font-size: 20px;
+  font-weight: bold;
   line-height: 25px;
+  color: $caption-color;
 }
 
 .search {
@@ -82,7 +83,6 @@
     }
   }
 
-
   &-search,
   &-basket,
   &-compare,
@@ -102,6 +102,19 @@
 .header-authentication {
   width: 100%;
 
+  &-form {
+    padding: 10px;
+
+    input, button {
+      display: block;
+      margin: 0 10px 10px 0;
+    }
+
+    &-buttons {
+      display: flex;
+    }
+  }
+
   h3 {
     padding: 9px;
   }
@@ -109,8 +122,7 @@
 
 .button-signOut,
 .button-signIn,
-.button-signUp
-{
+.button-signUp {
   margin-left: 5px;
   padding: 5px;
   border: none;

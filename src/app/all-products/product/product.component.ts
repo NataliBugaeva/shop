@@ -14,7 +14,6 @@ export class ProductComponent implements OnInit {
   public productName: string;
   public productType: string;
   public productPrice: number;
-
   public productId: string;
   public productsFromComparison: {};
   public chosen: boolean;
@@ -23,9 +22,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productSmallImg = this.item.info.images.find(item => item.name === 'imgSmall').value;
-    this.productName = this.item.info.info.find(item => item.name === 'Наименование').value;
-    this.productType = this.item.info.info.find(item => item.name === 'Тип').value;
-    this.productPrice = this.item.info.info.find(item => item.name === 'Цена').value;
+    this.productName = this.item.info.info.find(item => item.name === 'Name').value;
+    this.productType = this.item.info.info.find(item => item.name === 'Type').value;
+    this.productPrice = this.item.info.info.find(item => item.name === 'Price').value;
     this.productId = this.item.id;
 
     this.productsFromComparison = JSON.parse(localStorage.getItem('comparison'));

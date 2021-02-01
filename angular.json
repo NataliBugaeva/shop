@@ -29,7 +29,8 @@
             ],
             "styles": [
               "node_modules/reset-css/reset.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/font.css"
             ],
             "scripts": []
           },

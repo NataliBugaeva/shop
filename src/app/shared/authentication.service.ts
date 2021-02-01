@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 
 import {CommonService} from './common.service';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,14 @@ export class AuthenticationService {
 
   public userData: any;
   public err: string;
-  public isLogged: boolean;
+  public isLogged = false;
+
   public email: any;
   public password: any;
 
   public userEmail: any;
+
+  public changePath: string;
 
 
   constructor(private angularFireAuth: AngularFireAuth,
@@ -38,14 +42,13 @@ export class AuthenticationService {
       .then(res => {
         this.isLogged = true;
         this.err = '';
-        console.log(res.user);
-        /*this.commonService.addNewUser(res.user?.uid, res.user?.email);
-        this.commonService.addNewOrderDocument(res.user?.uid);*/
         console.log('Successfully signed up!', res);
+        this.router.navigateByUrl('/login');
       })
       .catch(error => {
-        console.log('Something is wrong:', error.message);
         this.err = error.message;
+        console.log('Something is wrong:', error.message);
+        this.router.navigateByUrl('');
       });
   }
 
@@ -59,7 +62,7 @@ export class AuthenticationService {
         this.err = '';
        /* this.email = this.userData.email;*/
         this.email = res.user?.email;
-        console.log(res.user?.uid, this.email);
+        console.log(res.user?.uid, this.email, this.isLogged);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
@@ -79,6 +82,12 @@ export class AuthenticationService {
 
   user(): Observable<any>{
   return this.angularFireAuth.user;
+  }
+
+  getId() {
+    return this.angularFireAuth.user.pipe(
+      map(res => !!(res?.uid))
+    );
   }
 
 }

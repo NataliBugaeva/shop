@@ -4,21 +4,21 @@
     <div class="cent">
 
       <div class="about-product-links">
-        <span routerLink="../../">На главную</span>
+        <span routerLink="../../../">Home page</span>
         <span> >> </span>
         <span *ngIf="path === 'sofas'"
-              routerLink="../">Диваны</span>
+              routerLink="../">Sofas</span>
         <span *ngIf="path === 'tables'"
-              routerLink="../">Столы</span>
+              routerLink="../">Tables</span>
         <span *ngIf="path === 'chairs'"
-              routerLink="../">Кресла</span>
+              routerLink="../">Chairs</span>
         <span> >> </span>
         <span *ngIf="path === 'sofas'"
-              style="color: black">Диван {{chosenProductName}}</span>
+              style="color: black">Sofa "{{chosenProductName}}"</span>
         <span *ngIf="path === 'tables'"
-              style="color: black">Стол {{chosenProductName}}</span>
+              style="color: black">Table "{{chosenProductName}}"</span>
         <span *ngIf="path === 'chairs'"
-              style="color: black">Кресло {{chosenProductName}}</span>
+              style="color: black">Chair "{{chosenProductName}}"</span>
       </div>
 
       <div class="about-product-main-content">
@@ -29,29 +29,35 @@
         </div>
 
         <div class="about-product-main-content-info">
-          <span>{{chosenProductName}}</span>
+          <span>"{{chosenProductName}}"</span>
           <span>{{chosenProductType}}</span>
-          <span>{{chosenProductPrice}} руб.</span>
+          <span>{{chosenProductPrice}} byn.</span>
           <div class="about-product-main-content-info-buttons">
             <div class="button-switch">
               <div class="button-switch-minus"
-                   (click)="decreaseAmount()"> - </div>
+                   (click)="decreaseAmount()"> -
+              </div>
               <input [(ngModel)]="amount">
               <div class="button-switch-plus"
-                   (click)="enlargeAmount()"> + </div>
+                   (click)="enlargeAmount()"> +
+              </div>
             </div>
             <button class="button-basket"
                     (click)="addToBasket()"
-            [disabled]="!(authenticationService.userData | async)">Добавить в корзину</button>
+                    [disabled]="!(authenticationService.userData | async)">Add to basket
+            </button>
             <button class="button-compare"
                     *ngIf="!comparison"
-                    (click)="addToComparison()">Добавить в сравнение</button>
+                    (click)="addToComparison()">Add to comparison
+            </button>
             <button class="button-compare"
                     (click)="this.comparison = !this.comparison; removeFromComparison()"
-                    *ngIf="comparison">Убрать из сравнения</button>
+                    *ngIf="comparison">Remove from comparison
+            </button>
             <div class="link-to-comparison"
                  (click)="goToComparison()"
-                 [hidden]="!amountInComparison">В сравнении {{amountInComparison}} продукт(ов)</div>
+                 [hidden]="!amountInComparison">{{amountInComparison}} products in comparison
+            </div>
           </div>
         </div>
       </div>
@@ -60,10 +66,12 @@
         <div class="about-product-characteristics-buttons">
           <div class="button-characteristics"
                (click)="changeSwitch()"
-               [ngClass]="{active: this.switch}">Характеристики</div>
+               [ngClass]="{active: this.switch}">Сharacteristics
+          </div>
           <div class="button-comments"
                (click)="changeSwitch()"
-               [ngClass]="{active: !this.switch}">Отзывы</div>
+               [ngClass]="{active: !this.switch}">Comments
+          </div>
         </div>
 
         <div class="about-product-characteristics-info"
@@ -77,7 +85,16 @@
 
         <div class="about-product-characteristics-comments"
              *ngIf="!this.switch">
-          Отзывов пока нет
+          No comments yet
+        </div>
+      </div>
+    </div>
+
+    <div [class]="popupVisibility">
+      <div class="popup-message">
+        <div class="popup-message-text">{{message}}</div>
+        <div class="popup-message-img" (click)="closePopup()">
+          <img src="./assets/icons/close.png" alt="">
         </div>
       </div>
     </div>

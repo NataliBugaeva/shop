@@ -15,9 +15,30 @@
       <div *ngIf="_userName.invalid && (_userName.touched || _userName.dirty)"
            class="order-customer-info-validation">
         <span *ngIf="_userName?.errors.required">Required field!!!</span>
-        <span *ngIf="_userName?.errors.minlength">The minimum name length is {{_userName?.errors.minlength.requiredLength}} symbols!!!</span>
+        <span
+          *ngIf="_userName?.errors.minlength">The minimum name length is {{_userName?.errors.minlength.requiredLength}}
+          symbols!!!</span>
         <span *ngIf="_userName?.errors.pattern">Only letters are allowed !!!</span>
       </div>
+
+
+      <div class="order-customer-info-surname">
+        <label for="surname">Surname: </label>
+        <input id="surname"
+               type="text"
+               name="surname"
+               formControlName="userSurname">
+      </div>
+
+      <div *ngIf="_userSurname.invalid && (_userSurname.touched || _userSurname.dirty)"
+           class="order-customer-info-validation">
+        <span *ngIf="_userSurname?.errors.required">Required field!!!</span>
+        <span
+          *ngIf="_userSurname?.errors.minlength">The minimum name length is {{_userSurname?.errors.minlength.requiredLength}}
+          symbols!!!</span>
+        <span *ngIf="_userSurname?.errors.pattern">Only letters are allowed !!!</span>
+      </div>
+
 
       <div class="order-customer-info-mail">
         <label for="email">E-mail: </label>
@@ -54,15 +75,16 @@
         <input id="courier"
                type="radio"
                name="delivery"
-               value="курьер"
+               value="courier"
                formControlName="delivery"
                (click)="changeK()">
         <label for="courier">Courier</label>
       </div>
 
-      <ng-container  *ngIf="deliveryChecked === 'курьер'">
+      <ng-container *ngIf="deliveryChecked === 'courier'">
         <div class="order-delivery-courier">
-          <p>The courier delivers the goods to you, and you carefully check it. After that you can make the payment. The courier will give you a receipt.</p>
+          <p>The courier delivers the goods to you, and you carefully check it. After that you can make the payment. The
+            courier will give you a receipt.</p>
           <input type="text"
                  placeholder="enter your address"
                  name="address"
@@ -71,7 +93,8 @@
 
         <div *ngIf="_userAddress.invalid && (_userAddress.touched || _userAddress.dirty)"
              class="order-customer-info-validation">
-          <span *ngIf="_userAddress?.errors.required">Enter street and house number</span>
+          <span *ngIf="_userAddress?.errors.required">Required field!!!</span>
+          <span *ngIf="_userAddress?.errors.pattern">Enter street and house number</span>
 
         </div>
       </ng-container>
@@ -80,14 +103,14 @@
         <input id="pickup"
                type="radio"
                name="delivery"
-               value="самовывоз"
+               value="pickup"
                formControlName="delivery"
                (click)="changeS()">
         <label for="pickup">Pickup</label>
       </div>
 
-      <ng-container *ngIf="deliveryChecked === 'самовывоз'">
-          <p>Minsk, Zheleznodorozhnaya street, 35</p>
+      <ng-container *ngIf="deliveryChecked === 'pickup'">
+        <p>Minsk, Zheleznodorozhnaya street, 35</p>
       </ng-container>
     </fieldset>
 
@@ -97,25 +120,26 @@
         <input id="cash"
                type="radio"
                name="payment"
-               value="наличные"
+               value="cash"
                formControlName="payment"
-               (click)="paymentChecked = 'наличные'">
+               (click)="paymentChecked = 'cash'">
         <label for="cash">Cash</label>
       </div>
       <div class="order-pay">
         <input id="card"
                type="radio"
                name="payment"
-               value="карта"
+               value="card"
                formControlName="payment"
-               (click)="paymentChecked = 'карта'">
+               (click)="paymentChecked = 'card'">
         <label for="card">Card</label>
       </div>
     </fieldset>
 
     <button class="order-button"
             type="submit"
-            [disabled]="orderForm.invalid" >Make an order</button>
+            [disabled]="orderForm.invalid">Make an order
+    </button>
   </form>
 </div>
 
